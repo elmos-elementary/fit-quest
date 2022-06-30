@@ -4,7 +4,7 @@ const {
 } = require('../db')
 module.exports = router
 
-// api/routine/
+// api/routines/
 // GET ALL ROUTINES
 router.get('/', async(req, res, next) => {
   try {
@@ -15,7 +15,7 @@ router.get('/', async(req, res, next) => {
   }
 })
 
-// api/routine/:id
+// api/routines/:id
 // GET SPECIFIC ROUTINE BY ROUTINEID
 router.get('/:id', async(req, res, next) => {
   try {

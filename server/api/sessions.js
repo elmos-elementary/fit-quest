@@ -4,7 +4,7 @@ const {
 } = require('../db')
 module.exports = router
 
-// api/session/
+// api/sessions/
 // GET ALL SESSIONS
 router.get('/', async (req, res, next) => {
   try {
@@ -17,7 +17,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// api/session/all/:userId
+// api/sessions/all/:userId
 // GET ALL SESSION FROM USER
 router.get('/all/:userId', async (req, res, next) => {
   try {
@@ -33,7 +33,7 @@ router.get('/all/:userId', async (req, res, next) => {
   }
 })
 
-// api/session/current/:userId
+// api/sessions/current/:userId
 // GET CURRENT SESSION FROM USER
 router.get('/current/:userId', async (req, res, next) => {
   try {
@@ -50,7 +50,7 @@ router.get('/current/:userId', async (req, res, next) => {
   }
 })
 
-// api/session/new/:userId
+// api/sessions/new/:userId
 // CREATE NEW SESSION FOR USER
 // req.body needs date and routineId (example: {date: 2022-06-29, routineId: 2)
 router.post('/start/:userId', async (req, res, next) => {
@@ -83,7 +83,7 @@ router.post('/start/:userId', async (req, res, next) => {
   }
 })
 
-// api/session/complete/:userId
+// api/sessions/complete/:userId
 // COMPLETE CURRENT SESSION FOR USER
 router.put('/complete/:userId', async (req, res, next) => {
   try {
