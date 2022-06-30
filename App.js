@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// import React from 'react';
+// import * as eva from '@eva-design/eva';
+// import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+import { View, Text } from 'react-native';
+// import LandingPage from './src/LandingPage'
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+// const HomeScreen = () => (
+//   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//     <Text category="h1">HOME</Text>
+//     <Text>Sign Up</Text>
+//     <Text>Log In</Text>
+//   </Layout>
+// );
+
+const HomeScreen = () => {
+  return(
+    <View>
+      <Text>Hello World!</Text>;
     </View>
-  );
-}
+  )
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default () => (
+  // <ApplicationProvider {...eva} theme={eva.light}>
+  <HomeScreen />
+  // </ApplicationProvider>
+);
