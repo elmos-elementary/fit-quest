@@ -1,23 +1,35 @@
 import React from 'react';
 import { Layout, Text, Button, Input } from '@ui-kitten/components';
 
-const Login = ({ navigation }) => {
-  const [email, setEmail] = React.useState('');
+const SignUp = ({ navigation }) => {
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState('');
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text category="h1">Login</Text>
-      <Text category="s1">Don't have an account?</Text>
+      <Text category="h1">Create New Account</Text>
+      <Text category="s1">Already registered?</Text>
       <Text
         category="s1"
         status="primary"
         onPress={() => {
-          navigation.navigate('SignUp');
+          navigation.navigate('Login');
         }}
       >
-        Sign up here.
+        Login here.
       </Text>
+      <Input
+        placeholder="First Name"
+        value={firstName}
+        onChangeText={(nextValue) => setFirstName(nextValue)}
+      />
+      <Input
+        placeholder="Last Name"
+        value={lastName}
+        onChangeText={(nextValue) => setLastName(nextValue)}
+      />
       <Input
         placeholder="Email"
         value={email}
@@ -35,4 +47,4 @@ const Login = ({ navigation }) => {
   );
 };
 
-export default Login;
+export default SignUp;
