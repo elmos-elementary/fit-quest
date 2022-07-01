@@ -8,24 +8,26 @@ const Exercise = db.define('exercise', {
   exerciseType: {
     type: Sequelize.STRING,
     validate: {
-      isIn: [['strength', 'cardio', 'yoga']]
-    }
+      isIn: [['strength', 'cardio', 'stretching']],
+    },
   },
   bodyPart: {
     type: Sequelize.STRING,
     validate: {
-      isIn: [['chest', 'back', 'arms', 'abdominals', 'legs', 'shoulders', 'other']]
-    }
+      isIn: [
+        ['chest', 'back', 'arms', 'abdominals', 'legs', 'shoulders', 'other'],
+      ],
+    },
   },
   description: {
-    type: Sequelize.TEXT
+    type: Sequelize.TEXT,
   },
   image: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
   video: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
   },
-})
+});
 
-module.exports = Exercise
+module.exports = Exercise;
