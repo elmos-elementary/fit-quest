@@ -50,7 +50,7 @@ router.get('/current/:userId', async (req, res, next) => {
   }
 })
 
-// api/sessions/new/:userId
+// api/sessions/start/:userId
 // CREATE NEW SESSION FOR USER
 // req.body needs date and routineId (example: {date: 2022-06-29, routineId: 2)
 router.post('/start/:userId', async (req, res, next) => {
