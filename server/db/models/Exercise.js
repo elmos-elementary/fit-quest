@@ -15,7 +15,7 @@ const Exercise = db.define('exercise', {
     type: Sequelize.STRING,
     validate: {
       isIn: [
-        ['chest', 'back', 'arms', 'abdominals', 'legs', 'shoulders', 'other'],
+        ['chest', 'back', 'arms', 'abdominal', 'legs', 'shoulders', 'other'],
       ],
     },
   },

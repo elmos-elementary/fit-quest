@@ -23,6 +23,10 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    default: false,
+  },
 });
 
 module.exports = User;
