@@ -4,8 +4,9 @@ const {
   db,
   models: { User, Character, Exercise, Routine, Session, SessionExercise },
 } = require('../server/db');
-const exerciseSeed = require('./exerciseSeed');
 const userSeed = require('./userSeed');
+const characterSeed = require('./characterSeed');
+const exerciseSeed = require('./exerciseSeed');
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -19,22 +20,11 @@ async function seed() {
   );
 
   // Creating Characters
-  const characters = await Promise.all([
-    Character.create({
-      name: 'Codyman',
-      level: 40,
-      experience: 200,
-      lives: 2,
-      image: 'cody.png',
-    }),
-    Character.create({
-      name: 'Murphy the Great',
-      level: 12,
-      experience: 55,
-      lives: 1,
-      image: 'murphy.png',
-    }),
-  ]);
+  const characters = await Promise.all(
+    characterSeed.map((character) => {
+      return Character.create(character);
+    })
+  );
 
   // Creating Exercises
   const exercise = await Promise.all(
@@ -98,8 +88,9 @@ async function seed() {
   ]);
 
   // Associations
-  await users[0].setCharacter(characters[0]);
-  await users[1].setCharacter(characters[1]);
+  for (let i = 0; i < 10; i++) {
+    await users[i].setCharacter(characters[i])
+  }
   await routines[0].addExercise(exercise[0]);
   await routines[0].addExercise(exercise[1]);
   await routines[1].addExercise(exercise[2]);
