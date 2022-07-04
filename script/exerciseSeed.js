@@ -20,7 +20,7 @@ const exercise = [
     video: 'https://www.youtube.com/watch?v=vx0jZBEmZcE',
   },
   {
-    name: 'Dumbbell Flyes',
+    name: 'Dumbbell Flys',
     exerciseType: 'strength',
     bodyPart: 'chest',
     description:
@@ -31,7 +31,7 @@ const exercise = [
   },
 
   {
-    name: 'Incline dumbbell bench press',
+    name: 'Incline Dumbbell Bench Press',
     exerciseType: 'strength',
     bodyPart: 'chest',
     description:
@@ -42,7 +42,7 @@ const exercise = [
   },
 
   {
-    name: 'Low-cable cross-over',
+    name: 'Low-cable Cross-over',
     exerciseType: 'strength',
     bodyPart: 'chest',
     description:
@@ -73,7 +73,7 @@ const exercise = [
   },
 
   {
-    name: 'Reverse-grip bent-over row',
+    name: 'Reverse-grip Bent-over Row',
     exerciseType: 'strength',
     bodyPart: 'back',
     description:
@@ -84,7 +84,7 @@ const exercise = [
   },
 
   {
-    name: 'Lat pull-down',
+    name: 'Lat Pull-down',
     exerciseType: 'strength',
     bodyPart: 'back',
     description:
@@ -95,7 +95,7 @@ const exercise = [
   },
 
   {
-    name: 'Seated Cable Rows',
+    name: 'Seated Cable Row',
     exerciseType: 'strength',
     bodyPart: 'back',
     description:
@@ -128,7 +128,7 @@ const exercise = [
   },
 
   {
-    name: 'Cable V-bar push-down',
+    name: 'Cable V-bar Push-down',
     exerciseType: 'strength',
     bodyPart: 'arms',
     description:
@@ -139,7 +139,7 @@ const exercise = [
   },
 
   {
-    name: 'Hammer Curls',
+    name: 'Hammer Curl',
     exerciseType: 'strength',
     bodyPart: 'arms',
     description:
@@ -161,7 +161,7 @@ const exercise = [
   },
 
   {
-    name: 'Overhead cable curl',
+    name: 'Overhead Cable Curl',
     exerciseType: 'strength',
     bodyPart: 'arms',
     description:
@@ -226,7 +226,7 @@ const exercise = [
   },
 
   {
-    name: 'Single-leg glute bridge',
+    name: 'Single-Leg Glute Bridge',
     exerciseType: 'strength',
     bodyPart: 'legs',
     description:
@@ -237,7 +237,7 @@ const exercise = [
   },
 
   {
-    name: 'Overhead dumbbell front raise',
+    name: 'Overhead Dumbbell Front Raise',
     exerciseType: 'strength',
     bodyPart: 'shoulders',
     description:
@@ -270,7 +270,7 @@ const exercise = [
   },
 
   {
-    name: 'Clean and press',
+    name: 'Clean and Press',
     exerciseType: 'strength',
     bodyPart: 'shoulders',
     description:
@@ -281,7 +281,7 @@ const exercise = [
   },
 
   {
-    name: 'Overhead dumbbell front raise',
+    name: 'Overhead Dumbbell Front Raise',
     exerciseType: 'strength',
     bodyPart: 'shoulders',
     description:
@@ -303,7 +303,7 @@ const exercise = [
   },
 
   {
-    name: 'Standing dumbell shrug',
+    name: 'Standing Dumbell Shrug',
     exerciseType: 'strength',
     bodyPart: 'shoulders',
     description:
@@ -347,7 +347,7 @@ const exercise = [
   },
 
   {
-    name: 'Elbow-to-knee crunch',
+    name: 'Elbow-to-Knee Crunch',
     exerciseType: 'strength',
     bodyPart: 'abdominal',
     description:
@@ -358,7 +358,7 @@ const exercise = [
   },
 
   {
-    name: 'Elbow plank',
+    name: 'Elbow Plank',
     exerciseType: 'strength',
     bodyPart: 'abdominal',
     description:
@@ -380,7 +380,7 @@ const exercise = [
   },
 
   {
-    name: 'Jumping rope',
+    name: 'Jump Rope',
     exerciseType: 'cardio',
     bodyPart: 'other',
     description:
@@ -390,7 +390,7 @@ const exercise = [
     video: 'https://www.youtube.com/watch?v=qNGJDb3pdc0',
   },
   {
-    name: 'Stair climber',
+    name: 'Stair Climber',
     exerciseType: 'cardio',
     bodyPart: 'other',
     description:
@@ -400,7 +400,7 @@ const exercise = [
     video: 'https://www.youtube.com/watch?v=o-YaYGHf0g4',
   },
   {
-    name: 'Stair climber',
+    name: 'Stair Climber',
     exerciseType: 'cardio',
     bodyPart: 'other',
     description:
@@ -422,7 +422,7 @@ const exercise = [
   },
 
   {
-    name: 'Burpee',
+    name: 'Burpees',
     exerciseType: 'cardio',
     bodyPart: 'other',
     description:
@@ -486,7 +486,7 @@ const exercise = [
   },
 
   {
-    name: 'Standing Toe Touches',
+    name: 'Standing Toe Touch',
     exerciseType: 'stretching',
     bodyPart: 'other',
     description:
@@ -497,12 +497,3 @@ const exercise = [
 ];
 
 module.exports = exercise;
-
-let template = {
-  name: '',
-  exerciseType: '',
-  bodyPart: '',
-  description: '',
-  image: '',
-  video: '',
-};
