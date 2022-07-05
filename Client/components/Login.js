@@ -5,7 +5,6 @@ import { AuthContext } from '../context/AuthContext';
 const Login = ({ navigation }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  console.log('in login', useContext(AuthContext));
   const { login } = useContext(AuthContext);
 
   return (
@@ -37,7 +36,7 @@ const Login = ({ navigation }) => {
       <Button
         style={{ margin: 10 }}
         onPress={() => {
-          login();
+          login(email, password);
         }}
       >
         Log In
