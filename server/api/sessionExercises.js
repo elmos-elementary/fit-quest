@@ -17,6 +17,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// api/sessionexercises/:id
+// GET SESSION EXERCISE BY ID
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const sessionExercise = await SessionExercise.findByPk(id)
+    res.json(sessionExercise)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // api/sessionexercises/current/:userId
 // GET CURRENT SESSION EXERCISES FROM USER
 router.get('/current/:userId', async (req, res, next) => {

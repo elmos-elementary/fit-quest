@@ -17,6 +17,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// api/sessions/:id
+// GET SESSION BY ID
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const session = await Session.findByPk(id)
+    res.json(session)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // api/sessions/all/:userId
 // GET ALL SESSION FROM USER
 router.get('/all/:userId', async (req, res, next) => {
@@ -56,7 +68,7 @@ router.get('/current/:userId', async (req, res, next) => {
 })
 
 // api/sessions/start/:userId
-// CREATE NEW SESSION FOR USER
+// CREATE NEW SESSION FOR USER (NO REQ.BODY REQUIRED)
 // req.body needs date and routineId (example: {date: 2022-06-29, routineId: 2)
 router.post('/start/:userId', async (req, res, next) => {
   try {
