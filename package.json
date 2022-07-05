@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "app start": "expo start",
+    "start": "node server",
     "seed": "node script/seed.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
