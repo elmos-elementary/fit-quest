@@ -9,6 +9,7 @@ const characterSeed = require('./characterSeed');
 const exerciseSeed = require('./exerciseSeed');
 const routineSeed = require('./routineSeed')
 const sessionSeed = require('./sessionSeed')
+const sessionExerciseSeed = require('./sessionExerciseSeed')
 
 async function seed() {
   await db.sync({ force: true }); // clears db and matches models to tables
@@ -36,11 +37,13 @@ async function seed() {
   );
 
   // Creating Routines
-  const [chest, back, bicep, tricep, shoulder, lowerBody, cardio, flexability] = await Promise.all(
+  const routines = await Promise.all(
     routineSeed.map((routine) => {
       return Routine.create(routine)
     })
   );
+
+  const [chest, back, bicep, tricep, shoulder, lowerBody, cardio, flexability] = routines
 
   // Creating Sessions
   const sessions = await Promise.all(
@@ -50,36 +53,11 @@ async function seed() {
   )
 
   // Creating Session Exercises
-  const sessionExercises = await Promise.all([
-    // bench press cody
-    SessionExercise.create({
-      reps: 12,
-      sets: 5,
-      weight: 225,
-      cardioTime: null,
-    }),
-    // squats cody
-    SessionExercise.create({
-      reps: 12,
-      sets: 5,
-      weight: 315,
-      cardioTime: null,
-    }),
-    // treadmill murphy
-    SessionExercise.create({
-      reps: null,
-      sets: null,
-      weight: null,
-      cardioTime: 30,
-    }),
-    // downward dog murphy
-    SessionExercise.create({
-      reps: null,
-      sets: null,
-      weight: null,
-      cardioTime: 15,
-    }),
-  ]);
+  const sessionExercises = await Promise.all(
+    sessionExerciseSeed.map((sessionExercise) => {
+      return SessionExercise.create(sessionExercise)
+    })
+  )
 
   // Associations
   for (let i = 0; i < 10; i++) {
@@ -140,18 +118,131 @@ async function seed() {
   await users[9].addSessions(sessions[10]);
   await users[9].addSessions(sessions[11]);
 
-  await sessionExercises[0].setExercise(exercise[0]);
-  await sessionExercises[1].setExercise(exercise[1]);
-  await sessionExercises[2].setExercise(exercise[2]);
-  await sessionExercises[3].setExercise(exercise[3]);
-  await sessionExercises[0].setSession(sessions[0]);
-  await sessionExercises[1].setSession(sessions[0]);
-  await sessionExercises[2].setSession(sessions[1]);
-  await sessionExercises[3].setSession(sessions[1]);
-  await sessionExercises[0].setUser(users[0]);
-  await sessionExercises[1].setUser(users[0]);
-  await sessionExercises[2].setUser(users[1]);
-  await sessionExercises[3].setUser(users[1]);
+  // Cody Session Exercises
+  await sessionExercises[0].setExercise(exercise[4])
+  await sessionExercises[0].setSession(sessions[0])
+  await sessionExercises[0].setUser(users[0])
+  await sessionExercises[1].setExercise(exercise[5])
+  await sessionExercises[1].setSession(sessions[0])
+  await sessionExercises[1].setUser(users[0])
+  await sessionExercises[2].setExercise(exercise[3])
+  await sessionExercises[2].setSession(sessions[0])
+  await sessionExercises[2].setUser(users[0])
+  await sessionExercises[3].setExercise(exercise[7])
+  await sessionExercises[3].setSession(sessions[1])
+  await sessionExercises[3].setUser(users[0])
+  await sessionExercises[4].setExercise(exercise[8])
+  await sessionExercises[4].setSession(sessions[1])
+  await sessionExercises[4].setUser(users[0])
+  await sessionExercises[5].setExercise(exercise[9])
+  await sessionExercises[5].setSession(sessions[1])
+  await sessionExercises[5].setUser(users[0])
+  await sessionExercises[6].setExercise(exercise[17])
+  await sessionExercises[6].setSession(sessions[2])
+  await sessionExercises[6].setUser(users[0])
+  await sessionExercises[7].setExercise(exercise[19])
+  await sessionExercises[7].setSession(sessions[2])
+  await sessionExercises[7].setUser(users[0])
+  await sessionExercises[8].setExercise(exercise[21])
+  await sessionExercises[8].setSession(sessions[2])
+  await sessionExercises[8].setUser(users[0])
+  await sessionExercises[9].setExercise(exercise[22])
+  await sessionExercises[9].setSession(sessions[2])
+  await sessionExercises[9].setUser(users[0])
+  await sessionExercises[10].setExercise(exercise[4])
+  await sessionExercises[10].setSession(sessions[3])
+  await sessionExercises[10].setUser(users[0])
+  await sessionExercises[11].setExercise(exercise[5])
+  await sessionExercises[11].setSession(sessions[3])
+  await sessionExercises[11].setUser(users[0])
+  await sessionExercises[12].setExercise(exercise[3])
+  await sessionExercises[12].setSession(sessions[3])
+  await sessionExercises[12].setUser(users[0])
+  await sessionExercises[13].setExercise(exercise[7])
+  await sessionExercises[13].setSession(sessions[4])
+  await sessionExercises[13].setUser(users[0])
+  await sessionExercises[14].setExercise(exercise[8])
+  await sessionExercises[14].setSession(sessions[4])
+  await sessionExercises[14].setUser(users[0])
+  await sessionExercises[15].setExercise(exercise[9])
+  await sessionExercises[15].setSession(sessions[4])
+  await sessionExercises[15].setUser(users[0])
+  await sessionExercises[16].setExercise(exercise[17])
+  await sessionExercises[16].setSession(sessions[5])
+  await sessionExercises[16].setUser(users[0])
+  await sessionExercises[17].setExercise(exercise[19])
+  await sessionExercises[17].setSession(sessions[5])
+  await sessionExercises[17].setUser(users[0])
+  await sessionExercises[18].setExercise(exercise[21])
+  await sessionExercises[18].setSession(sessions[5])
+  await sessionExercises[18].setUser(users[0])
+  await sessionExercises[19].setExercise(exercise[22])
+  await sessionExercises[19].setSession(sessions[5])
+  await sessionExercises[19].setUser(users[0])
+
+  // Murphy Session Exercises
+  await sessionExercises[20].setExercise(exercise[35])
+  await sessionExercises[20].setSession(sessions[6])
+  await sessionExercises[20].setUser(users[1])
+  await sessionExercises[21].setExercise(exercise[36])
+  await sessionExercises[21].setSession(sessions[6])
+  await sessionExercises[21].setUser(users[1])
+  await sessionExercises[22].setExercise(exercise[37])
+  await sessionExercises[22].setSession(sessions[6])
+  await sessionExercises[22].setUser(users[1])
+  await sessionExercises[23].setExercise(exercise[40])
+  await sessionExercises[23].setSession(sessions[6])
+  await sessionExercises[23].setUser(users[1])
+  await sessionExercises[24].setExercise(exercise[35])
+  await sessionExercises[24].setSession(sessions[7])
+  await sessionExercises[24].setUser(users[1])
+  await sessionExercises[25].setExercise(exercise[36])
+  await sessionExercises[25].setSession(sessions[7])
+  await sessionExercises[25].setUser(users[1])
+  await sessionExercises[26].setExercise(exercise[37])
+  await sessionExercises[26].setSession(sessions[7])
+  await sessionExercises[26].setUser(users[1])
+  await sessionExercises[27].setExercise(exercise[40])
+  await sessionExercises[27].setSession(sessions[7])
+  await sessionExercises[27].setUser(users[1])
+
+  // Shirley Session Exercises
+  await sessionExercises[28].setExercise(exercise[43])
+  await sessionExercises[28].setSession(sessions[8])
+  await sessionExercises[28].setUser(users[9])
+  await sessionExercises[29].setExercise(exercise[45])
+  await sessionExercises[29].setSession(sessions[8])
+  await sessionExercises[29].setUser(users[9])
+  await sessionExercises[30].setExercise(exercise[44])
+  await sessionExercises[30].setSession(sessions[8])
+  await sessionExercises[30].setUser(users[9])
+
+  await sessionExercises[31].setExercise(exercise[11])
+  await sessionExercises[31].setSession(sessions[9])
+  await sessionExercises[31].setUser(users[9])
+  await sessionExercises[32].setExercise(exercise[14])
+  await sessionExercises[32].setSession(sessions[9])
+  await sessionExercises[32].setUser(users[9])
+  await sessionExercises[33].setExercise(exercise[16])
+  await sessionExercises[33].setSession(sessions[9])
+  await sessionExercises[33].setUser(users[9])
+
+  await sessionExercises[34].setExercise(exercise[12])
+  await sessionExercises[34].setSession(sessions[10])
+  await sessionExercises[34].setUser(users[9])
+  await sessionExercises[35].setExercise(exercise[13])
+  await sessionExercises[35].setSession(sessions[10])
+  await sessionExercises[35].setUser(users[9])
+
+  await sessionExercises[36].setExercise(exercise[23])
+  await sessionExercises[36].setSession(sessions[11])
+  await sessionExercises[36].setUser(users[9])
+  await sessionExercises[37].setExercise(exercise[25])
+  await sessionExercises[37].setSession(sessions[11])
+  await sessionExercises[37].setUser(users[9])
+  await sessionExercises[38].setExercise(exercise[24])
+  await sessionExercises[38].setSession(sessions[11])
+  await sessionExercises[38].setUser(users[9])
 
   console.log(`seeded successfully`);
 }
