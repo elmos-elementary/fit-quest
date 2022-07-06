@@ -1,33 +1,15 @@
-import React from 'react';
-import * as eva from '@eva-design/eva';
-import { ApplicationProvider } from '@ui-kitten/components';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React, { useContext, createContext } from 'react';
 
-//components
-import HomeScreen from './components/HomeScreen';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import { AuthProvider } from './Client/context/AuthContext';
 
-const Stack = createNativeStackNavigator();
+import AppNav from './Client/navigation/AppNav';
 
 function App() {
   return (
-    <ApplicationProvider {...eva} theme={eva.light}>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home">
-            {(props) => <HomeScreen {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="Login">
-            {(props) => <Login {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="SignUp">
-            {(props) => <SignUp {...props} />}
-          </Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
-    </ApplicationProvider>
+    <AuthProvider>
+      {/* {userToken !== null ? <AuthUser /> : <UnAuthUser />} */}
+      <AppNav />
+    </AuthProvider>
   );
 }
 

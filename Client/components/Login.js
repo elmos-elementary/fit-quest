@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Layout, Text, Button, Input } from '@ui-kitten/components';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const { login } = useContext(AuthContext);
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text category="h1">Login</Text>
       <Text category="s1">Don't have an account?</Text>
+      <Text></Text>
       <Text
         category="s1"
         status="primary"
@@ -21,7 +24,7 @@ const Login = ({ navigation }) => {
       <Input
         placeholder="Email"
         value={email}
-        onChangeText={(nextValue) => setEmail(nextValue)}
+        onChangeText={(nextValue) => setEmail(nextValue.toLowerCase())}
       />
       <Input
         placeholder="password"
@@ -30,7 +33,14 @@ const Login = ({ navigation }) => {
         onChangeText={(nextValue) => setPassword(nextValue)}
       />
 
-      <Button style={{ margin: 10 }}>Log In</Button>
+      <Button
+        style={{ margin: 10 }}
+        onPress={() => {
+          login(email, password);
+        }}
+      >
+        Log In
+      </Button>
     </Layout>
   );
 };

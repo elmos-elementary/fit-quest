@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Layout, Text, Button, Input } from '@ui-kitten/components';
+import { AuthContext } from '../context/AuthContext';
 
 const SignUp = ({ navigation }) => {
   const [firstName, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [email, setEmail] = React.useState('');
-
+  const { signUp } = useContext(AuthContext);
   return (
     <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text category="h1">Create New Account</Text>
@@ -33,7 +34,7 @@ const SignUp = ({ navigation }) => {
       <Input
         placeholder="Email"
         value={email}
-        onChangeText={(nextValue) => setEmail(nextValue)}
+        onChangeText={(nextValue) => setEmail(nextValue.toLowerCase())}
       />
       <Input
         placeholder="password"
@@ -42,7 +43,14 @@ const SignUp = ({ navigation }) => {
         onChangeText={(nextValue) => setPassword(nextValue)}
       />
 
-      <Button style={{ margin: 10 }}>Log In</Button>
+      <Button
+        style={{ margin: 10 }}
+        onPress={() => {
+          signUp(email, password, firstName, lastName);
+        }}
+      >
+        Log In
+      </Button>
     </Layout>
   );
 };
