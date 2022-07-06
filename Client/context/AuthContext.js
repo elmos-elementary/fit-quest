@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     setIsLoading(true);
 
     const { data } = await axios.post(
-      'http://192.168.0.102:8080/api/auth/login',
+      'https://fitquestapp.herokuapp.com/api/auth/login',
       { email, password }
     );
     let foundUser = data;
@@ -23,9 +23,12 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.setItem('userToken', foundUser.token);
     // console.log(data.token);
     axios.defaults.headers.common['Authorization'] = foundUser.token;
-    const user = await axios.get('http://192.168.0.102:8080/api/auth/me', {
-      token: data.token,
-    });
+    const user = await axios.get(
+      'https://fitquestapp.herokuapp.com/api/auth/me',
+      {
+        token: data.token,
+      }
+    );
 
     setIsLoading(false);
   };
@@ -33,18 +36,23 @@ export const AuthProvider = ({ children }) => {
   const signUp = async (email, password, firstName, lastName) => {
     setIsLoading(true);
     const { data } = await axios.post(
-      'http://192.168.0.102:8080/api/auth/signup',
+      'https://fitquestapp.herokuapp.com/api/auth/signup',
       { email, password, firstName, lastName }
     );
     let foundUser = data;
     console.log('data :>> ', data);
+    setUserInfo(foundUser);
+    setUserToken(foundUser.token);
     AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
     AsyncStorage.setItem('userToken', foundUser.token);
     axios.defaults.headers.common['Authorization'] = foundUser.token;
-    const user = await axios.get('http://192.168.0.102:8080/api/auth/me', {
-      token: data.token,
-    });
- 
+    const user = await axios.get(
+      'https://fitquestapp.herokuapp.com/api/auth/me',
+      {
+        token: data.token,
+      }
+    );
+
     //TODO User needs to signup and then only be able to see the logged in user screens. Seems like it's not reading the token. Also needs to handle if
     //someone tries to signup with the same email address.
     setIsLoading(false);
