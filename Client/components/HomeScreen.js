@@ -1,4 +1,5 @@
 import { Layout, Text, Button } from '@ui-kitten/components';
+import React from 'react';
 
 const HomeScreen = ({ navigation }) => (
   <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
