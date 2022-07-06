@@ -11,22 +11,6 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     setIsLoading(true);
-    // await axios
-    //   .post('http://192.168.0.102:8080/api/auth/login', { email, password })
-    //   .then((res) => {
-    //     let foundUser = res.data;
-    //     setUserInfo(foundUser);
-    //     setUserToken(foundUser.token);
-    //     AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
-    //     AsyncStorage.setItem('userToken', foundUser.token);
-
-    //     return axios.get('http://192.168.0.102:8080/api/auth/me', {
-    //       token: foundUser.token,
-    //     });
-    //   })
-    //   .catch((e) => {
-    //     console.log(`Login error ${e}`);
-    //   });
 
     const { data } = await axios.post(
       'http://192.168.0.102:8080/api/auth/login',
@@ -42,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     const user = await axios.get('http://192.168.0.102:8080/api/auth/me', {
       token: data.token,
     });
-    // console.log('user :>> ', user.data);
+
     setIsLoading(false);
   };
 
@@ -60,7 +44,7 @@ export const AuthProvider = ({ children }) => {
     const user = await axios.get('http://192.168.0.102:8080/api/auth/me', {
       token: data.token,
     });
-    // console.log('user.data :>> ', user.data);
+ 
     //TODO User needs to signup and then only be able to see the logged in user screens. Seems like it's not reading the token. Also needs to handle if
     //someone tries to signup with the same email address.
     setIsLoading(false);
