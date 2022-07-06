@@ -24,7 +24,7 @@ const Login = ({ navigation }) => {
       <Input
         placeholder="Email"
         value={email}
-        onChangeText={(nextValue) => setEmail(nextValue)}
+        onChangeText={(nextValue) => setEmail(nextValue.toLowerCase())}
       />
       <Input
         placeholder="password"
