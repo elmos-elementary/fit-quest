@@ -141,6 +141,11 @@ router.put('/complete/:userId', async (req, res, next) => {
       include: [{ model: Routine, include: [Exercise] }],
     })
 
+    // Checks if there is a current session
+    if (!session) {
+      res.send("User has no active session!")
+    }
+
     // Find all exercise types used in session
     const exerciseTypes = {
       chest: 0,
