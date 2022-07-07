@@ -64,12 +64,14 @@ const SignUp = ({ navigation }) => {
         />
 
         <Button
-          title="Sign Up"
           style={{ margin: 10 }}
           onPress={() => {
-            onTouch(email, password, firstName, lastName);
+            signUp(email, password, firstName, lastName);
+            navigation.navigate('Login');
           }}
-        />
+        >
+          Sign Up
+        </Button>
       </ImageBackground>
     </Layout>
   );

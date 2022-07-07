@@ -3,9 +3,8 @@ import { View, Text, Button } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
-// import StartWork from '../components/StartWorkout';
-import MainTabScreen from '../components/MainTabScreen';
-import SingleRoutine from '../components/SingleExercise';
+import UserHome from '../components/UserHome';
+import StartWorkout from '../components/StartWorkout';
 
 const AuthUser = () => {
   return (
