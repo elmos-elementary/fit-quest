@@ -6,13 +6,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../components/HomeScreen';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
+import CreateCharacter from '../components/CreateCharacter';
 import { View, Text } from 'react-native';
 const Stack = createNativeStackNavigator();
 
 function UnAuthUser() {
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home">
           {(props) => <HomeScreen {...props} />}
         </Stack.Screen>
@@ -21,6 +22,9 @@ function UnAuthUser() {
         </Stack.Screen>
         <Stack.Screen name="SignUp">
           {(props) => <SignUp {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="CreateCharacter">
+          {(props) => <CreateCharacter {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </ApplicationProvider>

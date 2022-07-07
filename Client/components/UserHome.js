@@ -14,7 +14,7 @@ import { ProgressBar, MD3Colors } from 'react-native-paper';
 const image = {
   uri: 'https://imgur.com/rJ1GVWj.jpg',
 };
-const AuthUser = ({ navigation }) => {
+const UserHome = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
 
   return (
@@ -104,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AuthUser;
+export default UserHome;
