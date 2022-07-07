@@ -42,6 +42,17 @@ router.put('/:id', async (req, res, next) => {
   }
 });
 
+// router.put('/exp/:id', async (req, res, next) => {
+//   try {
+//     const updateCharacter = await Character.findByPk(req.params.id);
+//     const charLevel = updateCharacter.currentLevel
+
+//     const expGain =
+//   } catch (error) {
+//     next(error)
+//   }
+// })
+
 router.delete('/:id', async (req, res, next) => {
   try {
     const deleteCharacter = await Character.findByPk(req.params.id);
