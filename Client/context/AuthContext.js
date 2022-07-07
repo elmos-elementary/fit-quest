@@ -44,6 +44,14 @@ export const AuthProvider = ({ children }) => {
 
     console.log('userInfo :>> ', userInfo);
     console.log('userToken :>> ', userToken);
+    setUserToken(foundUser.token);
+    AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
+    AsyncStorage.setItem('userToken', foundUser.token);
+    axios.defaults.headers.common['Authorization'] = foundUser.token;
+
+    const user = await axios.get(
+      'https://fitquestapp.herokuapp.com/api/auth/me'
+    );
 
     setIsLoading(false);
   };
