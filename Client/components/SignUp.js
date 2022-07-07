@@ -49,7 +49,7 @@ const SignUp = ({ navigation }) => {
           signUp(email, password, firstName, lastName);
         }}
       >
-        Log In
+        Sign Up
       </Button>
     </Layout>
   );
