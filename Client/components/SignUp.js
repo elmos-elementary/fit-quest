@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { Layout, Text, Button, Input } from '@ui-kitten/components';
+import { Layout, Text, Input } from '@ui-kitten/components';
 import { AuthContext } from '../context/AuthContext';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, Button } from 'react-native';
 
 const image = {
   uri: 'https://imgur.com/rJ1GVWj.jpg',
@@ -16,7 +16,7 @@ const SignUp = ({ navigation }) => {
 
   const onTouch = async (email, password, firstName, lastName) => {
     await signUp(email.toLowerCase(), password, firstName, lastName);
-    await navigation.navigate('CreateCharacter');
+    navigation.navigate('CreateCharacter');
     console.log('line 15');
   };
 
@@ -64,13 +64,12 @@ const SignUp = ({ navigation }) => {
         />
 
         <Button
+          title="Sign Up"
           style={{ margin: 10 }}
           onPress={() => {
             onTouch(email, password, firstName, lastName);
           }}
-        >
-          Sign Up
-        </Button>
+        />
       </ImageBackground>
     </Layout>
   );

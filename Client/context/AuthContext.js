@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [routine, setRoutine] = useState(null);
+  const [singleRoutine, setSingleRoutine] = useState(null);
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -60,10 +61,19 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getExercises = async () => {
-    const exercises = await axios.get(
+    const { data } = await axios.get(
       'https://fitquestapp.herokuapp.com/api/routines'
     );
-    setRoutine(exercises.data);
+    setRoutine(data);
+  };
+
+  const getSingleRoutine = async (id) => {
+    const { data } = await axios.get(
+      `https://fitquestapp.herokuapp.com/api/routines/${id}`
+    );
+    setSingleRoutine(data);
+    console.log('data :>> ', data);
+    console.log('singleExercise :>> ', singleRoutine);
   };
 
   const logout = () => {
@@ -99,7 +109,17 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ login, logout, isLoading, userToken, signUp, routine, getMe }}
+      value={{
+        login,
+        logout,
+        isLoading,
+        userToken,
+        signUp,
+        routine,
+        getMe,
+        getSingleRoutine,
+        singleRoutine,
+      }}
     >
       {children}
     </AuthContext.Provider>

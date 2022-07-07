@@ -11,7 +11,7 @@ import {
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
 
-const image = {
+export const image = {
   uri: 'https://imgur.com/rJ1GVWj.jpg',
 };
 const UserHome = ({ navigation }) => {

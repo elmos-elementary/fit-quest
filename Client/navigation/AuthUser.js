@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 // import StartWork from '../components/StartWorkout';
 import MainTabScreen from '../components/MainTabScreen';
+import SingleRoutine from '../components/SingleExercise';
 
 const AuthUser = () => {
   return (
@@ -12,9 +13,9 @@ const AuthUser = () => {
       <Stack.Screen name="Home">
         {(props) => <MainTabScreen {...props} />}
       </Stack.Screen>
-      {/* <Stack.Screen name="StartWorkout">
-        {(props) => <StartWorkout {...props} />}
-      </Stack.Screen> */}
+      <Stack.Screen name="SingleRoutine">
+        {(props) => <SingleRoutine {...props} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };
