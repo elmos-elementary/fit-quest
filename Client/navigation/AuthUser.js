@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 import UserHome from '../components/UserHome';
-import StartWork from '../components/StartWorkout';
+import StartWorkout from '../components/StartWorkout';
 
 const AuthUser = () => {
   return (

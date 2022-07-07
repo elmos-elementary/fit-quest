@@ -10,8 +10,9 @@ import {
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
+import StartWorkout from './StartWorkout';
 
-const image = {
+export const image = {
   uri: 'https://imgur.com/rJ1GVWj.jpg',
 };
 const AuthUser = ({ navigation }) => {
@@ -67,7 +68,7 @@ const AuthUser = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },

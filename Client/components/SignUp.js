@@ -47,6 +47,7 @@ const SignUp = ({ navigation }) => {
         style={{ margin: 10 }}
         onPress={() => {
           signUp(email, password, firstName, lastName);
+          navigation.navigate('Login');
         }}
       >
         Sign Up
