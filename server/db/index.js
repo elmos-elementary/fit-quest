@@ -8,6 +8,8 @@ const Exercise = require('./models/Exercise');
 const Routine = require('./models/Routine');
 const Session = require('./models/Session');
 const SessionExercise = require('./models/SessionExercise');
+const Opponent = require('./models/Opponent')
+const Item = require('./models/Item')
 
 //associations could go here!
 Character.hasOne(User);
@@ -22,9 +24,12 @@ Exercise.hasMany(SessionExercise);
 SessionExercise.belongsTo(Exercise);
 Session.hasMany(SessionExercise);
 SessionExercise.belongsTo(Session);
-// Maybe
 User.hasMany(SessionExercise);
 SessionExercise.belongsTo(User);
+Character.belongsToMany(Item, {through: 'CharacterItem'})
+Item.belongsToMany(Character, {through: 'CharacterItem'})
+Opponent.belongsTo(Character)
+Character.hasMany(Opponent)
 
 module.exports = {
   db,
@@ -35,5 +40,7 @@ module.exports = {
     Routine,
     Session,
     SessionExercise,
+    Opponent,
+    Item
   },
 };
