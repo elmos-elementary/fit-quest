@@ -17,6 +17,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// api/sessions/:id
+// GET SESSION BY ID
+router.get('/:id', async (req, res, next) => {
+  try {
+    const id = req.params.id
+    const session = await Session.findByPk(id)
+    res.json(session)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // api/sessions/all/:userId
 // GET ALL SESSION FROM USER
 router.get('/all/:userId', async (req, res, next) => {
@@ -26,6 +38,7 @@ router.get('/all/:userId', async (req, res, next) => {
       where: {
         userId: userId,
       },
+      include: [Routine, SessionExercise],
     })
     res.json(sessions)
   } catch (err) {
@@ -44,7 +57,11 @@ router.get('/current/:userId', async (req, res, next) => {
         complete: false,
       },
     })
-    res.json(session)
+    if (!session) {
+      res.send("User has no active session!")
+    } else {
+      res.json(session)
+    }
   } catch (err) {
     next(err)
   }
@@ -70,10 +87,14 @@ router.post('/start/:userId', async (req, res, next) => {
       const user = await User.findByPk(userId)
       const date = req.body.date
       const routineId = req.body.routineId
-      const session = await Session.create({date, routineId})
-      const routine = await Routine.findByPk(routineId, {include: [Exercise]})
+      const session = await Session.create({ date, routineId })
+      const routine = await Routine.findByPk(routineId, { include: [Exercise] })
       for (let i = 0; i < routine.exercises.length; i++) {
-        await SessionExercise.create({exerciseId: routine.exercises[i].id, userId, sessionId: session.id})
+        await SessionExercise.create({
+          exerciseId: routine.exercises[i].id,
+          userId,
+          sessionId: session.id,
+        })
       }
       await user.addSession(session)
       res.json(session)

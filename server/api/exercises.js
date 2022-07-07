@@ -2,7 +2,6 @@ const router = require('express').Router();
 const {
   models: { Exercise },
 } = require('../db');
-const sequelize = require('sequelize');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
