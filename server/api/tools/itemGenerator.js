@@ -78,8 +78,13 @@ const generateItem = (rarity, characterLevel) => {
       combatSkill = Math.ceil(itemLevel * ((Math.random() * 0.1 - 0.11) + 1))
       break
     case 'uncommon':
-      combatSkill = Math.ceil(itemLevel * ((Math.random() * 0.05 + 0.05) + 1))
+      combatSkill = Math.floor(itemLevel * ((Math.random() * 0.06 + 0.05) + 1))
       break
+    case 'legendary':
+      combatSkill = Math.floor(itemLevel * ((Math.random() * 0.06 + 0.1) + 1))
+      break
+    case 'godly':
+      combatSkill = Math.floor(itemLevel * ((Math.random() * 0.16 + 0.15) + 1))
   }
 
   return {
