@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User },
+  models: { User, Character },
 } = require('../db');
 module.exports = router;
 
@@ -20,6 +20,7 @@ router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
     const user = await User.findByPk(id, {
       attributes: ['id', 'firstName', 'lastName', 'characterId'],
+      include: [Character],
     });
     res.json(user);
   } catch (error) {

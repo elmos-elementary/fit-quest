@@ -89,6 +89,7 @@ router.get('/current/:userId', async (req, res, next) => {
         userId: userId,
         complete: false,
       },
+      include: [{ model: SessionExercise, include: [Exercise] }],
     })
     if (!session) {
       res.send('User has no active session!')
