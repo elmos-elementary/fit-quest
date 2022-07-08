@@ -1,75 +1,72 @@
-import { Text, View, Button, StyleSheet, ImageBackground } from 'react-native';
+import { CurrentRenderContext } from '@react-navigation/native';
+import { Layout } from '@ui-kitten/components';
 import React from 'react';
+<<<<<<< HEAD
 
+=======
+import { ImageBackground } from 'react-native';
+import { View, StyleSheet, Text, Button } from 'react-native';
+>>>>>>> screen
 import { image } from './UserHome';
 
-const HomeScreen = ({ navigation }) => {
-  return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={image}
-        resizeMode="cover"
-        style={styles.backgroundImage}
-      >
-        <View>
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>FIT QUEST</Text>
-          </View>
-          <View style={styles.button}>
-            <Button
-              title="Get Started"
-              color="black"
-              onPress={() => {
-                navigation.navigate('SignUp');
-              }}
-            />
-          </View>
+const HomeScreen = ({ navigation }) => (
+  <Layout style={{ flex: 1, justifyContent: 'center' }}>
+    <ImageBackground
+      source={require('../../src/assets/background.jpeg')}
+      resizeMode="cover"
+      style={styles.backgroundImage}
+    >
+      <View style={styles.textContainer}>
+        <Text style={styles.text} category="h1">
+          FIT QUEST
+        </Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <View style={styles.button}>
+          <Button
+            title="Get Started"
+            color="black"
+            onPress={() => {
+              navigation.navigate('SignUp');
+            }}
+          />
         </View>
-      </ImageBackground>
-    </View>
-  );
-};
+      </View>
+    </ImageBackground>
+  </Layout>
+);
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',
   },
   textContainer: {
-    alignItems: 'center',
-    margin: 70,
-  },
-  button: {
-    borderWidth: 1,
-    borderColor: '#3D3D3D',
-    backgroundColor: '#7E7E7E',
-    borderRadius: 10,
-    width: '60%',
-    marginRight: 8,
-    marginTop: 8,
-    padding: 3,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inputContainer: {
-    flex: 1,
+  buttonContainer: {
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 80,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    opacity: 0.8,
   },
   text: {
     fontSize: 30,
-    borderRadius: 5,
-    borderColor: '#3D3D3D',
-    borderWidth: 1,
-    padding: 4,
-    margin: 5,
+    fontFamily: 'Palatino-Bold',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    overflow: 'hidden',
+    padding: 15,
+    opacity: 0.7,
+  },
+  button: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    width: '40%',
+    padding: 1,
+    opacity: 0.8,
   },
 });
+
 export default HomeScreen;
