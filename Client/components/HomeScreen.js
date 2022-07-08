@@ -1,6 +1,6 @@
 import { Text, View, Button, StyleSheet, ImageBackground } from 'react-native';
 import React from 'react';
-import { ImageBackground } from 'react-native';
+
 import { image } from './UserHome';
 
 const HomeScreen = ({ navigation }) => {
