@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import * as Font from 'expo-font';
 
 export const AuthContext = createContext();
 
@@ -12,84 +13,99 @@ export const AuthProvider = ({ children }) => {
   const [singleRoutine, setSingleRoutine] = useState(null);
 
   const login = async (email, password) => {
-    setIsLoading(true);
+    try {
+      setIsLoading(true);
 
-    const { data } = await axios.post(
-      'https://fitquestapp.herokuapp.com/api/auth/login',
-      { email, password }
-    );
-    let foundUser = data;
-    setUserInfo(foundUser);
-    setUserToken(foundUser.token);
-    AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
-    AsyncStorage.setItem('userToken', foundUser.token);
-    // console.log(data.token);
-    axios.defaults.headers.common['Authorization'] = foundUser.token;
-    const user = await axios.get(
-      'https://fitquestapp.herokuapp.com/api/auth/me'
-    );
-    setIsLoading(false);
+      const { data } = await axios.post(
+        'https://fitquestapp.herokuapp.com/api/auth/login',
+        {
+          email,
+          password,
+        }
+      );
+
+      let foundUser = data;
+      setUserInfo(foundUser);
+      setUserToken(foundUser.token);
+      AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
+      AsyncStorage.setItem('userToken', foundUser.token);
+      axios.defaults.headers.common['Authorization'] = foundUser.token;
+      const user = await axios.get(
+        'https://fitquestapp.herokuapp.com/api/auth/me'
+      );
+
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const signUp = async (email, password, firstName, lastName) => {
-    setIsLoading(true);
-    const { data } = await axios.post(
-      'https://fitquestapp.herokuapp.com/api/auth/signup',
-      { email, password, firstName, lastName }
-    );
-    console.log('data :>> ', data);
-    let foundUser = data;
+    try {
+      setIsLoading(true);
+      const { data } = await axios.post(
+        'https://fitquestapp.herokuapp.com/api/auth/signup',
+        {
+          email,
+          password,
+          firstName,
+          lastName,
+        }
+      );
+      let foundUser = data;
 
-    setUserInfo(foundUser);
+      setUserInfo(foundUser);
+      setUserToken(foundUser.token);
+      AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
+      AsyncStorage.setItem('userToken', foundUser.token);
+      axios.defaults.headers.common['Authorization'] = foundUser.token;
 
-    console.log('userInfo :>> ', userInfo);
-    console.log('userToken :>> ', userToken);
-    setUserToken(foundUser.token);
-    AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
-    AsyncStorage.setItem('userToken', foundUser.token);
-    axios.defaults.headers.common['Authorization'] = foundUser.token;
+      const user = await axios.get(
+        'https://fitquestapp.herokuapp.com/api/auth/me'
+      );
 
-    const user = await axios.get(
-      'https://fitquestapp.herokuapp.com/api/auth/me'
-    );
-
-    setIsLoading(false);
+      setIsLoading(false);
+      return user;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const getMe = async () => {
-    setIsLoading(true);
-    AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
-    AsyncStorage.setItem('userToken', userToken);
-    axios.defaults.headers.common['Authorization'] = userToken;
-    const user = await axios.get(
-      'https://fitquestapp.herokuapp.com/api/auth/me'
-    );
-    console.log(user);
-    setIsLoading(false);
-  };
+  const getRoutine = async () => {
+    try {
+      const { data } = await axios.get(
+        'https://fitquestapp.herokuapp.com/api/routines'
+      );
 
-  const getExercises = async () => {
-    const { data } = await axios.get(
-      'https://fitquestapp.herokuapp.com/api/routines'
-    );
-    setRoutine(data);
+      setRoutine(data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const getSingleRoutine = async (id) => {
-    const { data } = await axios.get(
-      `https://fitquestapp.herokuapp.com/api/routines/${id}`
-    );
-    setSingleRoutine(data);
-    console.log('data :>> ', data);
-    console.log('singleExercise :>> ', singleRoutine);
+    try {
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/routines/${id}`
+      );
+
+      setSingleRoutine(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const logout = () => {
-    setIsLoading(true);
-    setUserToken(null);
-    AsyncStorage.removeItem('userInfo');
-    AsyncStorage.removeItem('userToken');
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      setUserToken(null);
+      AsyncStorage.removeItem('userInfo');
+      AsyncStorage.removeItem('userToken');
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const isLoggedIn = async () => {
@@ -98,6 +114,7 @@ export const AuthProvider = ({ children }) => {
       let foundUser = await AsyncStorage.getItem('userInfo');
       let userToken = await AsyncStorage.getItem('userToken');
       foundUser = JSON.parse(foundUser);
+      // await Font.loadAsync(Helvetica);
 
       if (foundUser) {
         setUserToken(userToken);
@@ -112,7 +129,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     isLoggedIn();
-    getExercises();
+    getRoutine();
   }, []);
 
   return (
@@ -124,9 +141,10 @@ export const AuthProvider = ({ children }) => {
         userToken,
         signUp,
         routine,
-        getMe,
+
         getSingleRoutine,
         singleRoutine,
+        getRoutine,
       }}
     >
       {children}

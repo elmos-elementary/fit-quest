@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
+import * as Font from 'expo-font';
 
 export const image = {
   uri: 'https://imgur.com/rJ1GVWj.jpg',
@@ -28,11 +29,13 @@ const UserHome = ({ navigation }) => {
           <Image source={require('../../src/assets/favicon.png')} />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={{ fontSize: 20, fontFamily: 'Helvetica' }}>
+          <Text style={{ fontSize: 20, fontFamily: Font.helvetica }}>
             Username
           </Text>
-          <Text style={{ fontSize: 18, fontFamily: 'Helvetica' }}>Class</Text>
-          <Text style={{ fontSize: 15, fontFamily: 'Helvetica' }}>
+          <Text style={{ fontSize: 18, fontFamily: Font.helvetica }}>
+            Class
+          </Text>
+          <Text style={{ fontSize: 15, fontFamily: Font.helvetica }}>
             Level 99
           </Text>
           <ProgressBar progress={0.5} />

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,9 +10,8 @@ import {
 } from 'react-native';
 import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
-import { FlatList } from 'react-native';
 
-const StartWorkout = ({ navigation }) => {
+const SingleRoutine = ({ navigation }) => {
   const { singleRoutine } = useContext(AuthContext);
   return (
     <View style={styles.container}>
@@ -62,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartWorkout;
+export default SingleRoutine;
