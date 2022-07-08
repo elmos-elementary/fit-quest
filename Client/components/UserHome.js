@@ -16,16 +16,10 @@ export const image = {
   uri: 'https://imgur.com/rJ1GVWj.jpg',
 };
 const UserHome = ({ navigation }) => {
-  const { logout, user, getUser, userToken } = useContext(AuthContext);
-  console.log('user1 :>> ', user);
-  // console.log('userToken :>> ', userToken);
-
-  const [singleUser, setSingleUser] = useState(null);
-
-  // useEffect((setSingleUser(getUser(userToken))) => {}, []);
+  const { logout, user } = useContext(AuthContext);
 
   return (
-    <View>
+    <View style={styles.container}>
       {user ? (
         <View style={styles.container}>
           <ImageBackground
@@ -76,7 +70,9 @@ const UserHome = ({ navigation }) => {
           </ImageBackground>
         </View>
       ) : (
-        <View></View>
+        <View>
+          <Text>Some Text HERE</Text>
+        </View>
       )}
     </View>
   );
