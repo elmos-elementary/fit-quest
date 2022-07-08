@@ -8,6 +8,8 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [userToken, setUserToken] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const [routine, setRoutine] = useState(null);
+  const [singleRoutine, setSingleRoutine] = useState(null);
 
   const login = async (email, password) => {
     setIsLoading(true);
@@ -24,12 +26,8 @@ export const AuthProvider = ({ children }) => {
     // console.log(data.token);
     axios.defaults.headers.common['Authorization'] = foundUser.token;
     const user = await axios.get(
-      'https://fitquestapp.herokuapp.com/api/auth/me',
-      {
-        token: data.token,
-      }
+      'https://fitquestapp.herokuapp.com/api/auth/me'
     );
-
     setIsLoading(false);
   };
 
@@ -39,23 +37,51 @@ export const AuthProvider = ({ children }) => {
       'https://fitquestapp.herokuapp.com/api/auth/signup',
       { email, password, firstName, lastName }
     );
-    let foundUser = data;
     console.log('data :>> ', data);
+    let foundUser = data;
+
     setUserInfo(foundUser);
+
+    console.log('userInfo :>> ', userInfo);
+    console.log('userToken :>> ', userToken);
     setUserToken(foundUser.token);
     AsyncStorage.setItem('userInfo', JSON.stringify(foundUser));
     AsyncStorage.setItem('userToken', foundUser.token);
     axios.defaults.headers.common['Authorization'] = foundUser.token;
+
     const user = await axios.get(
-      'https://fitquestapp.herokuapp.com/api/auth/me',
-      {
-        token: data.token,
-      }
+      'https://fitquestapp.herokuapp.com/api/auth/me'
     );
 
-    //TODO User needs to signup and then only be able to see the logged in user screens. Seems like it's not reading the token. Also needs to handle if
-    //someone tries to signup with the same email address.
     setIsLoading(false);
+  };
+
+  const getMe = async () => {
+    setIsLoading(true);
+    AsyncStorage.setItem('userInfo', JSON.stringify(userInfo));
+    AsyncStorage.setItem('userToken', userToken);
+    axios.defaults.headers.common['Authorization'] = userToken;
+    const user = await axios.get(
+      'https://fitquestapp.herokuapp.com/api/auth/me'
+    );
+    console.log(user);
+    setIsLoading(false);
+  };
+
+  const getExercises = async () => {
+    const { data } = await axios.get(
+      'https://fitquestapp.herokuapp.com/api/routines'
+    );
+    setRoutine(data);
+  };
+
+  const getSingleRoutine = async (id) => {
+    const { data } = await axios.get(
+      `https://fitquestapp.herokuapp.com/api/routines/${id}`
+    );
+    setSingleRoutine(data);
+    console.log('data :>> ', data);
+    console.log('singleExercise :>> ', singleRoutine);
   };
 
   const logout = () => {
@@ -86,11 +112,22 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     isLoggedIn();
+    getExercises();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{ login, logout, isLoading, userToken, signUp }}
+      value={{
+        login,
+        logout,
+        isLoading,
+        userToken,
+        signUp,
+        routine,
+        getMe,
+        getSingleRoutine,
+        singleRoutine,
+      }}
     >
       {children}
     </AuthContext.Provider>
