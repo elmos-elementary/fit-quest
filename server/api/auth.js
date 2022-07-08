@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const {
-  models: { User, Character },
+  models: { User, Character, Opponent},
 } = require('../db');
 module.exports = router;
+const generateName = require('./tools/opponentNameGenerator')
 
 router.post('/login', async (req, res, next) => {
   try {
@@ -15,8 +16,18 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body);
+    // Create character for user
     const character = await Character.create({name: user.firstName})
     user.setCharacter(character)
+    // Create initial opponent for user
+    const opponent = await Opponent.create({
+      name: generateName(),
+      totalHealth: 3,
+      currentHealth: 3,
+      level: 1,
+    })
+    opponent.setCharacter(character)
+    // Token stuff
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {

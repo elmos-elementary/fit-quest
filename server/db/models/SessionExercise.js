@@ -3,10 +3,12 @@ const db = require('../db');
 
 const SessionExercise = db.define('sessionExercise', {
   reps: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
   sets: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 3
   },
   weight: {
     type: Sequelize.FLOAT

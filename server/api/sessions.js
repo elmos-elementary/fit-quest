@@ -1,8 +1,17 @@
 const router = require('express').Router()
 const {
-  models: { Session, Character, Routine, Exercise, User, SessionExercise },
+  models: {
+    Session,
+    Character,
+    Routine,
+    Exercise,
+    User,
+    SessionExercise,
+    Opponent,
+  },
 } = require('../db')
 module.exports = router
+const generateName = require('./tools/opponentNameGenerator')
 
 // Character Level Experience Table
 let levelCounter = 10
@@ -143,7 +152,7 @@ router.put('/complete/:userId', async (req, res, next) => {
 
     // Checks if there is a current session
     if (!session) {
-      res.send("User has no active session!")
+      res.send('User has no active session!')
     }
 
     // Find all exercise types used in session
@@ -307,6 +316,48 @@ router.put('/complete/:userId', async (req, res, next) => {
         newStretchingExp - skillLevelExp[newStretchingCurrentLevel]
     }
 
+    // Deal damage to opponent. If defeated, give rewards and create new monster
+    const currentOpponent = await Opponent.findOne({
+      where: {
+        characterId: characterId,
+        alive: true
+      }
+    })
+    let currentOpponentHealth = currentOpponent.currentHealth
+    currentOpponentHealth -= character.currentLevel // USING CURRENT LEVEL TO DAMAGE, CHANGE LATER
+    let coins = character.coins
+    if (currentOpponentHealth <= 0) {
+      await currentOpponent.update({alive: false, currentHealth: 0})
+      // Give item
+      switch (currentOpponent.type) {
+        case 'common':
+          break
+        case 'uncommon':
+          break
+        case 'legendary':
+          break
+        case 'godly':
+          break
+      }
+
+      // Give coins
+      coins += Math.ceil(character.currentLevel * ((Math.random() * 0.1 - 0.05) + 1))
+
+      // Create new opponent
+      const name = generateName()
+      let totalHealth = character.currentLevel + (Math.ceil(Math.random() * 5) - 3)
+      totalHealth > 0 ? totalHealth : totalHealth = 1
+      const opponent = await Opponent.create({
+        name,
+        totalHealth: totalHealth,
+        currentHealth: totalHealth,
+        level: character.currentLevel
+      })
+      opponent.setCharacter(character)
+    } else {
+      await currentOpponent.update({currentHealth: currentOpponentHealth})
+    }
+
     // Add exp gain to character, level up if needed and set currentlLevelExp
     let newCharacterExp = expGain + character.characterExp
     let newCurrentLevel = character.currentLevel
@@ -342,6 +393,7 @@ router.put('/complete/:userId', async (req, res, next) => {
       stretchingExp: newStretchingExp,
       stretchingCurrentLevelExp: newStretchingCurrentLevelExp,
       stretchingCurrentLevel: newStretchingCurrentLevel,
+      coins
     })
 
     // Assign session as completed
