@@ -10,18 +10,14 @@ import {
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
-import StartWorkout from './StartWorkout';
 
-export const image = {
-  uri: 'https://imgur.com/rJ1GVWj.jpg',
-};
 const UserHome = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={image}
+        source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
         style={styles.backgroundImage}
       >
