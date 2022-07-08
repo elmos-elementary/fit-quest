@@ -12,6 +12,8 @@ export const AuthProvider = ({ children }) => {
   const [routine, setRoutine] = useState(null);
   const [singleRoutine, setSingleRoutine] = useState(null);
   const [user, setUser] = useState(null);
+  const [sessionExercise, setSessionExercise] = useState(null);
+  const [userHistory, setUserHistory] = useState(null);
 
   const login = async (email, password) => {
     try {
@@ -109,13 +111,42 @@ export const AuthProvider = ({ children }) => {
   const getSingleRoutine = async (userId, routineId) => {
     try {
       console.log('get single routine ran');
-      const { data } = await axios.post(
+      await axios.post(
         `https://fitquestapp.herokuapp.com/api/sessions/start/${userId}`,
         { date: new Date(), routineId }
       );
-      console.log('data is here', data);
+
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/sessions/current/${userId}`
+      );
 
       setSingleRoutine(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getSessionExercise = async (id) => {
+    try {
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/sessionexercises/${id}`
+      );
+      setSessionExercise(data);
+      console.log('data inside get session exercise :>> ', data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const getUserHistory = async (id) => {
+    try {
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/sessions/all/${id}`
+      );
+      // data.sort((a, b) => a.date - b.date);
+      setUserHistory(data);
       return data;
     } catch (err) {
       console.error(err);
@@ -183,6 +214,10 @@ export const AuthProvider = ({ children }) => {
         getSingleRoutine,
         singleRoutine,
         getRoutine,
+        getSessionExercise,
+        sessionExercise,
+        getUserHistory,
+        userHistory,
       }}
     >
       {children}

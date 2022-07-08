@@ -16,7 +16,14 @@ export const image = {
   uri: 'https://imgur.com/rJ1GVWj.jpg',
 };
 const UserHome = ({ navigation }) => {
-  const { logout, user } = useContext(AuthContext);
+  const { logout, user, getUserHistory } = useContext(AuthContext);
+  console.log('user1 :>> ', user);
+
+  const findUserHistory = () => {
+    getUserHistory(user.id).then(() => {
+      navigation.navigate('UserHistory');
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -51,7 +58,13 @@ const UserHome = ({ navigation }) => {
                 />
               </View>
               <View style={styles.button}>
-                <Button color="black" title="History" />
+                <Button
+                  color="black"
+                  title="History"
+                  onPress={() => {
+                    findUserHistory();
+                  }}
+                />
               </View>
               <View style={styles.button}>
                 <Button color="black" title="Character" />

@@ -6,6 +6,8 @@ const Stack = createNativeStackNavigator();
 // import StartWork from '../components/StartWorkout';
 import MainTabScreen from '../components/MainTabScreen';
 import SingleRoutine from '../components/SingleRoutine';
+import SessionExercise from '../components/SessionExercise';
+import UserHistory from '../components/UserHistory';
 
 const AuthUser = () => {
   return (
@@ -15,6 +17,12 @@ const AuthUser = () => {
       </Stack.Screen>
       <Stack.Screen name="SingleRoutine">
         {(props) => <SingleRoutine {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name="SessionExercise">
+        {(props) => <SessionExercise {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name="UserHistory">
+        {(props) => <UserHistory {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

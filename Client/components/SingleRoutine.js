@@ -7,13 +7,22 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const SingleRoutine = ({ navigation }) => {
-  const { singleRoutine } = useContext(AuthContext);
-  console.log(singleRoutine);
+  const { singleRoutine, getSessionExercise } = useContext(AuthContext);
+  // console.log('inside single routine ', singleRoutine.sessionExercises);
+
+  const onTouch = (id) => {
+    getSessionExercise(id).then(() => {
+      navigation.navigate('SessionExercise');
+      console.log('in on touch');
+    });
+  };
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -24,13 +33,53 @@ const SingleRoutine = ({ navigation }) => {
         <View style={styles.textContainer}>
           <Text style={styles.text}>Current Routine: {singleRoutine.date}</Text>
           <ScrollView>
-            {/* {singleRoutine.exercises.map((exercise) => {
+            {singleRoutine.sessionExercises.map((exercise) => {
+              // console.log('exercise :>> ', exercise);
               return (
-                <View key={exercise.id}>
-                  <Text>{exercise.name}</Text>
+                <View key={exercise.id} style={{ margin: 20 }}>
+                  <Text>{exercise.exercise.name}</Text>
+                  <View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <Text>Set 1</Text>
+                      <TextInput>Reps</TextInput>
+                      <TextInput>Weight</TextInput>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <Text>Set 2</Text>
+                      <TextInput>Reps</TextInput>
+                      <TextInput>Weight</TextInput>
+                    </View>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <Text>Set 3</Text>
+                      <TextInput>Reps</TextInput>
+                      <TextInput>Weight</TextInput>
+                    </View>
+                    <Button
+                      title="Record Exercise =>"
+                      onPress={() => {
+                        onTouch(exercise.exerciseId);
+                      }}
+                    />
+                  </View>
                 </View>
               );
-            })} */}
+            })}
+            <Button title="Complete Workout" />
           </ScrollView>
         </View>
       </ImageBackground>
