@@ -8,6 +8,8 @@ const {
     User,
     SessionExercise,
     Opponent,
+    Item,
+    CharacterItem
   },
 } = require('../db')
 module.exports = router
@@ -181,7 +183,7 @@ router.put('/complete/:userId', async (req, res, next) => {
     // Calculate total exp gain based on character level and skill levels, does not include item bonus
     const user = await User.findByPk(userId)
     const characterId = user.characterId
-    const character = await Character.findByPk(characterId)
+    const character = await Character.findByPk(characterId, {include: [Item]})
     const charLevel = character.currentLevel
     let expGain = 0
     expGain =
@@ -322,14 +324,14 @@ router.put('/complete/:userId', async (req, res, next) => {
     const currentOpponent = await Opponent.findOne({
       where: {
         characterId: characterId,
-        alive: true
-      }
+        alive: true,
+      },
     })
     let currentOpponentHealth = currentOpponent.currentHealth
     currentOpponentHealth -= character.currentLevel // USING CURRENT LEVEL TO DAMAGE, CHANGE LATER
     let coins = character.coins
     if (currentOpponentHealth <= 0) {
-      await currentOpponent.update({alive: false, currentHealth: 0})
+      await currentOpponent.update({ alive: false, currentHealth: 0 })
       // Give item
       switch (currentOpponent.type) {
         case 'common':
@@ -343,21 +345,37 @@ router.put('/complete/:userId', async (req, res, next) => {
       }
 
       // Give coins
-      coins += Math.ceil(character.currentLevel * ((Math.random() * 0.1 - 0.05) + 1))
+      coins += Math.ceil(
+        character.currentLevel * (Math.random() * 0.1 - 0.05 + 1)
+      )
+
+      // Roll for item
+      const currentItems = character.items
+      // If character has no item, give an item. Else 25% chance of item
+      if (currentItems.length === 0) {
+        const newItem = await Item.create(generateItem(character.currentLevel))
+        character.addItem(newItem)
+      } else {
+        if (Math.ceil(Math.random() * 4) === 4) {
+          const newItem = await Item.create(generateItem(character.currentLevel))
+          character.addItem(newItem)
+        }
+      }
 
       // Create new opponent
       const name = generateOpponentName()
-      let totalHealth = character.currentLevel + (Math.ceil(Math.random() * 5) - 3)
-      totalHealth > 0 ? totalHealth : totalHealth = 1
+      let totalHealth =
+        character.currentLevel + (Math.ceil(Math.random() * 5) - 3)
+      totalHealth > 0 ? totalHealth : (totalHealth = 1)
       const opponent = await Opponent.create({
         name,
         totalHealth: totalHealth,
         currentHealth: totalHealth,
-        level: character.currentLevel
+        level: character.currentLevel,
       })
       opponent.setCharacter(character)
     } else {
-      await currentOpponent.update({currentHealth: currentOpponentHealth})
+      await currentOpponent.update({ currentHealth: currentOpponentHealth })
     }
 
     // Add exp gain to character, level up if needed and set currentlLevelExp
@@ -365,6 +383,11 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newCurrentLevel = character.currentLevel
     while (newCharacterExp >= levelExp[Number(newCurrentLevel) + 1]) {
       newCurrentLevel++
+      // Roll for item every level up
+      if (Math.ceil(Math.random() * 4) === 4) {
+        const newItem = await Item.create(generateItem(character.currentLevel))
+        character.addItem(newItem)
+      }
     }
     let newCurrentLevelExp = newCharacterExp - levelExp[newCurrentLevel]
     await character.update({
@@ -395,7 +418,7 @@ router.put('/complete/:userId', async (req, res, next) => {
       stretchingExp: newStretchingExp,
       stretchingCurrentLevelExp: newStretchingCurrentLevelExp,
       stretchingCurrentLevel: newStretchingCurrentLevel,
-      coins
+      coins,
     })
 
     // Assign session as completed
