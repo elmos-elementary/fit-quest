@@ -3,7 +3,7 @@ const {
   models: { User, Character, Opponent},
 } = require('../db');
 module.exports = router;
-const generateName = require('./tools/opponentNameGenerator')
+const generateOpponentName = require('./tools/opponentNameGenerator')
 
 router.post('/login', async (req, res, next) => {
   try {
@@ -21,7 +21,7 @@ router.post('/signup', async (req, res, next) => {
     user.setCharacter(character)
     // Create initial opponent for user
     const opponent = await Opponent.create({
-      name: generateName(),
+      name: generateOpponentName(),
       totalHealth: 3,
       currentHealth: 3,
       level: 1,

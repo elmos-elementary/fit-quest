@@ -11,7 +11,7 @@ const {
   },
 } = require('../db')
 module.exports = router
-const generateName = require('./tools/opponentNameGenerator')
+const generateOpponentName = require('./tools/opponentNameGenerator')
 
 // Character Level Experience Table
 let levelCounter = 10
@@ -345,7 +345,7 @@ router.put('/complete/:userId', async (req, res, next) => {
       coins += Math.ceil(character.currentLevel * ((Math.random() * 0.1 - 0.05) + 1))
 
       // Create new opponent
-      const name = generateName()
+      const name = generateOpponentName()
       let totalHealth = character.currentLevel + (Math.ceil(Math.random() * 5) - 3)
       totalHealth > 0 ? totalHealth : totalHealth = 1
       const opponent = await Opponent.create({

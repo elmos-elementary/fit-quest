@@ -1,4 +1,4 @@
-const generateName = () => {
+const generateOpponentName = () => {
   const adjectives = [
     'Absurd',
     'Enchanted',
@@ -38,4 +38,4 @@ const generateName = () => {
   }`
 }
 
-module.exports = generateName
+module.exports = generateOpponentName
