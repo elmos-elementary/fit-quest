@@ -12,10 +12,10 @@ import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const AllRoutines = ({ navigation }) => {
-  const { routine, getSingleRoutine } = useContext(AuthContext);
+  const { routine, getSingleRoutine, user } = useContext(AuthContext);
 
   const onTouch = (id) => {
-    getSingleRoutine(id).then(() => {
+    getSingleRoutine(user.id, id).then(() => {
       navigation.navigate('SingleRoutine');
     });
   };

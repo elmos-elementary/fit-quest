@@ -11,9 +11,11 @@ export const AuthProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState(null);
   const [routine, setRoutine] = useState(null);
   const [singleRoutine, setSingleRoutine] = useState(null);
+  const [user, setUser] = useState(null);
 
   const login = async (email, password) => {
     try {
+      console.log('login ran');
       setIsLoading(true);
 
       const { data } = await axios.post(
@@ -33,7 +35,7 @@ export const AuthProvider = ({ children }) => {
       const user = await axios.get(
         'https://fitquestapp.herokuapp.com/api/auth/me'
       );
-
+      setUser(user.data);
       setIsLoading(false);
     } catch (err) {
       console.error(err);
@@ -42,6 +44,7 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (email, password, firstName, lastName) => {
     try {
+      console.log('signup ran');
       setIsLoading(true);
       const { data } = await axios.post(
         'https://fitquestapp.herokuapp.com/api/auth/signup',
@@ -63,6 +66,7 @@ export const AuthProvider = ({ children }) => {
       const user = await axios.get(
         'https://fitquestapp.herokuapp.com/api/auth/me'
       );
+      setUser(user.data);
 
       setIsLoading(false);
       return user;
@@ -71,8 +75,27 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getUser = async (token) => {
+    try {
+      console.log('getuser ran');
+      setIsLoading(true);
+      axios.defaults.headers.common['Authorization'] = token;
+      const { data } = await axios.get(
+        'https://fitquestapp.herokuapp.com/api/auth/me'
+      );
+      setUser(data);
+
+      setIsLoading(false);
+      return data;
+    } catch (err) {
+      console.log('error in getUser');
+      console.error(err);
+    }
+  };
+
   const getRoutine = async () => {
     try {
+      console.log('get routine ran');
       const { data } = await axios.get(
         'https://fitquestapp.herokuapp.com/api/routines'
       );
@@ -83,11 +106,14 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const getSingleRoutine = async (id) => {
+  const getSingleRoutine = async (userId, routineId) => {
     try {
-      const { data } = await axios.get(
-        `https://fitquestapp.herokuapp.com/api/routines/${id}`
+      console.log('get single routine ran');
+      const { data } = await axios.post(
+        `https://fitquestapp.herokuapp.com/api/sessions/start/${userId}`,
+        { date: new Date(), routineId }
       );
+      console.log('data is here', data);
 
       setSingleRoutine(data);
       return data;
@@ -98,6 +124,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     try {
+      console.log('logout ran');
       setIsLoading(true);
       setUserToken(null);
       AsyncStorage.removeItem('userInfo');
@@ -110,15 +137,16 @@ export const AuthProvider = ({ children }) => {
 
   const isLoggedIn = async () => {
     try {
+      console.log('is logged in  ran');
       setIsLoading(true);
       let foundUser = await AsyncStorage.getItem('userInfo');
       let userToken = await AsyncStorage.getItem('userToken');
       foundUser = JSON.parse(foundUser);
-      // await Font.loadAsync(Helvetica);
 
       if (foundUser) {
         setUserToken(userToken);
         setUserInfo(foundUser);
+        getUser(userToken);
       }
 
       setIsLoading(false);
@@ -128,7 +156,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    // function fetchData() {
+    //   AsyncStorage.getItem('userToken').then((response) => {
+    //     getUser(response);
+    //   });
+    // }
+    console.log('use effect ran');
     isLoggedIn();
+    // fetchData();
+
     getRoutine();
   }, []);
 
@@ -141,7 +177,9 @@ export const AuthProvider = ({ children }) => {
         userToken,
         signUp,
         routine,
-
+        userInfo,
+        user,
+        getUser,
         getSingleRoutine,
         singleRoutine,
         getRoutine,

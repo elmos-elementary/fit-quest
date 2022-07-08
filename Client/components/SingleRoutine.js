@@ -13,6 +13,7 @@ import { AuthContext } from '../context/AuthContext';
 
 const SingleRoutine = ({ navigation }) => {
   const { singleRoutine } = useContext(AuthContext);
+  console.log(singleRoutine);
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -21,15 +22,15 @@ const SingleRoutine = ({ navigation }) => {
         style={styles.backgroundImage}
       >
         <View style={styles.textContainer}>
-          <Text style={styles.text}>{singleRoutine.name}</Text>
+          <Text style={styles.text}>Current Routine: {singleRoutine.date}</Text>
           <ScrollView>
-            {singleRoutine.exercises.map((exercise) => {
+            {/* {singleRoutine.exercises.map((exercise) => {
               return (
                 <View key={exercise.id}>
                   <Text>{exercise.name}</Text>
                 </View>
               );
-            })}
+            })} */}
           </ScrollView>
         </View>
       </ImageBackground>

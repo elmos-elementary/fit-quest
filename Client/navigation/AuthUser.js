@@ -5,7 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 // import StartWork from '../components/StartWorkout';
 import MainTabScreen from '../components/MainTabScreen';
-import SingleRoutine from '../components/SingleExercise';
+import SingleRoutine from '../components/SingleRoutine';
 
 const AuthUser = () => {
   return (
