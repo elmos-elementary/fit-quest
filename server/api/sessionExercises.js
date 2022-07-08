@@ -22,7 +22,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id
-    const sessionExercise = await SessionExercise.findByPk(id)
+    const sessionExercise = await SessionExercise.findByPk(id, {include: [Exercise]})
     res.json(sessionExercise)
   } catch (err) {
     next(err)
@@ -80,12 +80,15 @@ router.get('/all/:userId', async (req, res, next) => {
 // MODIFY SESSION EXERCISE
 router.put('/:sessionExerciseId', async (req, res, next) => {
   try {
-    const reps = req.body.reps
-    const sets = req.body.sets
-    const weight = req.body.weight
+    const set1 = req.body.set1
+    const set2 = req.body.set2
+    const set3 = req.body.set3
+    const weight1 = req.body.weight1
+    const weight2 = req.body.weight2
+    const weight3 = req.body.weight3
     const sessionExerciseId = req.params.sessionExerciseId
-    const sessionExercise = await SessionExercise.findByPk(sessionExerciseId)
-    await sessionExercise.update({ reps, sets, weight })
+    const sessionExercise = await SessionExercise.findByPk(sessionExerciseId, {include: [Exercise]})
+    await sessionExercise.update({ set1, set2, set3, weight1, weight2, weight3 })
     res.json(sessionExercise)
   } catch (err) {
     next(err)

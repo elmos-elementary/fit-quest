@@ -2,14 +2,29 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 
 const SessionExercise = db.define('sessionExercise', {
-  reps: {
-    type: Sequelize.INTEGER
+  set1: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
-  sets: {
-    type: Sequelize.INTEGER
+  set2: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   },
-  weight: {
-    type: Sequelize.FLOAT
+  set3: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
+  weight1: {
+    type: Sequelize.FLOAT,
+    defaultValue: 0
+  },
+  weight2: {
+    type: Sequelize.FLOAT,
+    defaultValue: 0
+  },
+  weight3: {
+    type: Sequelize.FLOAT,
+    defaultValue: 0
   },
   cardioTime: {
     type: Sequelize.INTEGER
