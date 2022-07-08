@@ -12,6 +12,7 @@ const {
 } = require('../db')
 module.exports = router
 const generateOpponentName = require('./tools/opponentNameGenerator')
+const generateItem = require('./tools/itemGenerator')
 
 // Character Level Experience Table
 let levelCounter = 10
