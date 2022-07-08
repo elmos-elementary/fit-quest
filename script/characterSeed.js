@@ -29,39 +29,15 @@ const character = [
     stretchingExp: 0,
     stretchingCurrentLevelExp: 0,
     stretchingCurrentLevel: 1,
-    weapon: 0,
-    head: 0,
-    chest: 0,
-    leg: 0,
-    ring: 0,
+    weapon: null,
+    head: null,
+    chest: null,
+    leg: null,
+    ring: null,
     image: 'https://png.pngtree.com/png-vector/20201228/ourmid/pngtree-a-warrior-boy-clipart-png-image_2659449.jpg'
   },
   {
     name: 'Murphy the Legend',
-  },
-  {
-    name: 'SuperMilo',
-  },
-  {
-    name: 'Allie X',
-  },
-  {
-    name: 'Richie Rich',
-  },
-  {
-    name: 'Matt Attack',
-  },
-  {
-    name: 'Queen Katherine',
-  },
-  {
-    name: 'King Manny',
-  },
-  {
-    name: 'Nate the Great',
-  },
-  {
-    name: 'Boss Shirley',
   },
 ]
 

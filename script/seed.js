@@ -60,7 +60,7 @@ async function seed() {
   )
 
   // Associations
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 2; i++) {
     await users[i].setCharacter(characters[i])
   }
 
@@ -100,10 +100,6 @@ async function seed() {
   await sessions[5].setRoutine(lowerBody);
   await sessions[6].setRoutine(cardio);
   await sessions[7].setRoutine(cardio);
-  await sessions[8].setRoutine(flexability);
-  await sessions[9].setRoutine(bicep);
-  await sessions[10].setRoutine(tricep);
-  await sessions[11].setRoutine(shoulder);
 
   await users[0].addSessions(sessions[0]);
   await users[0].addSessions(sessions[1]);
@@ -113,10 +109,6 @@ async function seed() {
   await users[0].addSessions(sessions[5]);
   await users[1].addSessions(sessions[6]);
   await users[1].addSessions(sessions[7]);
-  await users[9].addSessions(sessions[8]);
-  await users[9].addSessions(sessions[9]);
-  await users[9].addSessions(sessions[10]);
-  await users[9].addSessions(sessions[11]);
 
   // Cody Session Exercises
   await sessionExercises[0].setExercise(exercise[4])
@@ -205,44 +197,6 @@ async function seed() {
   await sessionExercises[27].setExercise(exercise[40])
   await sessionExercises[27].setSession(sessions[7])
   await sessionExercises[27].setUser(users[1])
-
-  // Shirley Session Exercises
-  await sessionExercises[28].setExercise(exercise[43])
-  await sessionExercises[28].setSession(sessions[8])
-  await sessionExercises[28].setUser(users[9])
-  await sessionExercises[29].setExercise(exercise[45])
-  await sessionExercises[29].setSession(sessions[8])
-  await sessionExercises[29].setUser(users[9])
-  await sessionExercises[30].setExercise(exercise[44])
-  await sessionExercises[30].setSession(sessions[8])
-  await sessionExercises[30].setUser(users[9])
-
-  await sessionExercises[31].setExercise(exercise[11])
-  await sessionExercises[31].setSession(sessions[9])
-  await sessionExercises[31].setUser(users[9])
-  await sessionExercises[32].setExercise(exercise[14])
-  await sessionExercises[32].setSession(sessions[9])
-  await sessionExercises[32].setUser(users[9])
-  await sessionExercises[33].setExercise(exercise[16])
-  await sessionExercises[33].setSession(sessions[9])
-  await sessionExercises[33].setUser(users[9])
-
-  await sessionExercises[34].setExercise(exercise[12])
-  await sessionExercises[34].setSession(sessions[10])
-  await sessionExercises[34].setUser(users[9])
-  await sessionExercises[35].setExercise(exercise[13])
-  await sessionExercises[35].setSession(sessions[10])
-  await sessionExercises[35].setUser(users[9])
-
-  await sessionExercises[36].setExercise(exercise[23])
-  await sessionExercises[36].setSession(sessions[11])
-  await sessionExercises[36].setUser(users[9])
-  await sessionExercises[37].setExercise(exercise[25])
-  await sessionExercises[37].setSession(sessions[11])
-  await sessionExercises[37].setUser(users[9])
-  await sessionExercises[38].setExercise(exercise[24])
-  await sessionExercises[38].setSession(sessions[11])
-  await sessionExercises[38].setUser(users[9])
 
   console.log(`seeded successfully`);
 }
