@@ -138,7 +138,8 @@ const Character = db.define('character', {
     defaultValue: null
   },
   image: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: 'https://png.pngtree.com/png-vector/20201228/ourmid/pngtree-a-warrior-boy-clipart-png-image_2659449.jpg'
   }
 })
 
