@@ -12,7 +12,7 @@ import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const AllRoutines = ({ navigation }) => {
-  const { routine, getSingleRoutine, user } = useContext(AuthContext);
+  const { routine, getSingleRoutine, user, logout } = useContext(AuthContext);
 
   const onTouch = (id) => {
     getSingleRoutine(user.id, id).then(() => {
@@ -29,6 +29,12 @@ const AllRoutines = ({ navigation }) => {
       >
         <View style={styles.textContainer}>
           <Text style={styles.text}>Choose Routine</Text>
+          <Button
+            title="logout"
+            onPress={() => {
+              logout();
+            }}
+          />
           <ScrollView>
             {routine ? (
               routine.map((routine) => {
