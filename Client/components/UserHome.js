@@ -11,16 +11,13 @@ import {
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
 
-export const image = {
-  uri: 'https://imgur.com/rJ1GVWj.jpg',
-};
 const UserHome = ({ navigation }) => {
   const { logout } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={image}
+        source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
         style={styles.backgroundImage}
       >
@@ -67,7 +64,7 @@ const UserHome = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
