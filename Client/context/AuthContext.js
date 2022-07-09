@@ -100,14 +100,14 @@ export const AuthProvider = ({ children }) => {
 
   const getRoutine = async () => {
     try {
-      setIsLoading(true);
+
       console.log('get routine ran');
       const { data } = await axios.get(
         'https://fitquestapp.herokuapp.com/api/routines'
       );
 
       setRoutine(data);
-      setIsLoading(false);
+
     } catch (err) {
       console.error(err);
     }
@@ -115,7 +115,6 @@ export const AuthProvider = ({ children }) => {
 
   const getSingleRoutine = async (userId, routineId) => {
     try {
-      setIsLoading(true);
       console.log('get single routine ran');
       await axios.post(
         `https://fitquestapp.herokuapp.com/api/sessions/start/${userId}`,
@@ -127,7 +126,7 @@ export const AuthProvider = ({ children }) => {
       );
 
       setSingleRoutine(data);
-      setIsLoading(false);
+
       return data;
     } catch (err) {
       console.error(err);
@@ -136,13 +135,13 @@ export const AuthProvider = ({ children }) => {
 
   const getSessionExercise = async (id) => {
     try {
-      setIsLoading(true);
+
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessionexercises/${id}`
       );
       setSessionExercise(data);
       console.log('data inside get session exercise :>> ', data);
-      setIsLoading(false);
+
       return data;
     } catch (err) {
       console.error(err);
@@ -151,13 +150,13 @@ export const AuthProvider = ({ children }) => {
 
   const getUserHistory = async (id) => {
     try {
-      setIsLoading(true);
+
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessions/all/${id}`
       );
       // data.sort((a, b) => a.date - b.date);
       setUserHistory(data);
-      setIsLoading(false);
+    
       return data;
     } catch (err) {
       console.error(err);

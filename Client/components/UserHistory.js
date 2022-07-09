@@ -27,11 +27,12 @@ const UserHistory = ({ navigation }) => {
           <Text style={styles.text}>UserHistory Page</Text>
           <ScrollView>
             {userHistory.map((history) => {
-              console.log('history :>> ', history);
+              console.log('history :>> ', history.sessionExercises);
               return (
                 <View>
-                  {/* <Text>{history.routine.name}</Text> */}
-                  <Text>{history.date}</Text>;
+                  {/* <Text>{history.routine}</Text> */}
+                  <Text>{history.routine.name}</Text>
+                  {/* <Text>{history.routineId}</Text>; */}
                 </View>
               );
             })}

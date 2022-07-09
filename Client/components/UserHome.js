@@ -69,7 +69,6 @@ const UserHome = ({ navigation }) => {
               <View style={styles.button}>
                 <Button color="black" title="Character" />
               </View>
-
               <View>
                 <Button
                   title="logout"
@@ -77,7 +76,7 @@ const UserHome = ({ navigation }) => {
                   onPress={() => {
                     logout();
                   }}
-                ></Button>
+                />
               </View>
             </View>
           </ImageBackground>
