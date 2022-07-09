@@ -1,12 +1,8 @@
 import { CurrentRenderContext } from '@react-navigation/native';
 import { Layout } from '@ui-kitten/components';
 import React from 'react';
-<<<<<<< HEAD
-
-=======
 import { ImageBackground } from 'react-native';
 import { View, StyleSheet, Text, Button } from 'react-native';
->>>>>>> screen
 import { image } from './UserHome';
 
 const HomeScreen = ({ navigation }) => (
