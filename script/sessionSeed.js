@@ -38,11 +38,7 @@ const session = [
     date: '2022-07-01',
     complete: true
     // Murphy cardio
-<<<<<<< HEAD
-  },
-=======
   }
->>>>>>> main
 ]
 
 module.exports = session

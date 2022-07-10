@@ -9,7 +9,6 @@ const {
     SessionExercise,
     Opponent,
     Item,
-    CharacterItem
   },
 } = require('../db')
 module.exports = router
