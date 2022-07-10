@@ -8,7 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { image } from './UserHome';
+
 import { AuthContext } from '../context/AuthContext';
 import { FlatList } from 'react-native';
 
@@ -17,7 +17,7 @@ const StartWorkout = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={image}
+        source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
         style={styles.backgroundImage}
       >

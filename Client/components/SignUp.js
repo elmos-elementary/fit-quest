@@ -1,78 +1,134 @@
-import React, { useContext } from 'react';
-import { Layout, Text, Input } from '@ui-kitten/components';
+import React, { useContext, useState } from 'react';
+import { Layout, Text } from '@ui-kitten/components';
 import { AuthContext } from '../context/AuthContext';
-import { ImageBackground, Button } from 'react-native';
-
-const image = {
-  uri: 'https://imgur.com/rJ1GVWj.jpg',
-};
+import {
+  View,
+  ImageBackground,
+  StyleSheet,
+  Button,
+  TextInput,
+} from 'react-native';
 
 const SignUp = ({ navigation }) => {
-  const [firstName, setFirstName] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [email, setEmail] = React.useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const { signUp } = useContext(AuthContext);
-
-  const onTouch = async (email, password, firstName, lastName) => {
-    await signUp(email.toLowerCase(), password, firstName, lastName);
-    navigation.navigate('CreateCharacter');
-    console.log('line 15');
-  };
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'center' }}>
       <ImageBackground
-        source={image}
+        source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-        }}
+        imageStyle={{ opacity: 0.9 }}
+        style={styles.backgroundImage}
       >
-        <Text category="h1">Create New Account</Text>
-        <Text category="s1">Already registered?</Text>
-        <Text
-          category="s1"
-          status="primary"
-          onPress={() => {
-            navigation.navigate('Login');
-          }}
-        >
-          Login here.
-        </Text>
-        <Input
-          placeholder="First Name"
-          value={firstName}
-          onChangeText={(nextValue) => setFirstName(nextValue)}
-        />
-        <Input
-          placeholder="Last Name"
-          value={lastName}
-          onChangeText={(nextValue) => setLastName(nextValue)}
-        />
-        <Input
-          placeholder="Email"
-          value={email}
-          onChangeText={(nextValue) => setEmail(nextValue)}
-        />
-        <Input
-          placeholder="password"
-          value={password}
-          secureTextEntry={true}
-          onChangeText={(nextValue) => setPassword(nextValue)}
-        />
+        <View style={styles.headerContainer}>
+          <Text style={styles.text1}>Create new Account</Text>
+          <Text category="s1">Already Registered?</Text>
+          <Text
+            category="s1"
+            status="primary"
+            onPress={() => {
+              navigation.navigate('Login');
+            }}
+          >
+            log in here.
+          </Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.inputHeader}>FIRST NAME</Text>
 
-        <Button
-          title="Sign Up"
-          style={{ margin: 10 }}
-          onPress={() => {
-            onTouch(email, password, firstName, lastName);
-          }}
-        />
+          <TextInput
+            placeholder="John"
+            style={styles.textInput}
+            value={firstName}
+            onChangeText={(nextValue) => setFirstName(nextValue)}
+          />
+          <Text style={styles.inputHeader}>LAST NAME</Text>
+          <TextInput
+            placeholder="Doe"
+            style={styles.textInput}
+            value={lastName}
+            onChangeText={(nextValue) => setLastName(nextValue)}
+          />
+          <Text style={styles.inputHeader}>EMAIL</Text>
+          <TextInput
+            placeholder="hello@reallygreatsite.com"
+            style={styles.textInput}
+            value={email}
+            onChangeText={(nextValue) => setEmail(nextValue.toLowerCase())}
+          />
+
+          <Text style={styles.inputHeader}>PASSWORD</Text>
+
+          <TextInput
+            placeholder="****"
+            style={styles.textInput}
+            value={password}
+            secureTextEntry={true}
+            onChangeText={(nextValue) => setPassword(nextValue)}
+          />
+
+          <View>
+            <View style={styles.button}>
+              <Button
+                title="sign up"
+                color="white"
+                onPress={() => {
+                  signUp(email, password, firstName, lastName);
+                  navigation.navigate('Login');
+                }}
+              />
+            </View>
+          </View>
+        </View>
       </ImageBackground>
     </Layout>
   );
 };
 
+export const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 70,
+    opacity: 0.8,
+    borderRadius: 20,
+    width: '60%',
+    height: '20%',
+  },
+
+  inputContainer: {
+    flex: 2,
+  },
+
+  text1: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
+  textInput: {
+    height: 45,
+    margin: 12,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 2,
+  },
+  inputHeader: {
+    fontWeight: 'bold',
+    paddingLeft: 10,
+  },
+  button: {
+    backgroundColor: 'black',
+    padding: 1,
+    margin: 20,
+  },
+});
 export default SignUp;
