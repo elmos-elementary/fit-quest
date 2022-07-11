@@ -12,7 +12,8 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const SingleRoutine = ({ navigation }) => {
-  const { singleRoutine, getSessionExercise } = useContext(AuthContext);
+  const { singleRoutine, getSessionExercise, completeSession, user } =
+    useContext(AuthContext);
 
   const onTouch = (id) => {
     getSessionExercise(id).then(() => {
@@ -85,7 +86,13 @@ const SingleRoutine = ({ navigation }) => {
 
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
-            <Button title="Complete Workout" color="white" />
+            <Button
+              title="Complete Workout"
+              color="white"
+              onPress={() => {
+                completeSession(user.id);
+              }}
+            />
           </View>
         </View>
       </ImageBackground>
