@@ -14,6 +14,10 @@ const SignUp = ({ navigation }) => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [firstNameErrorMessage, setFirstNameErrorMessage] = useState('');
+  const [lastNameErrorMessage, setLastNameErrorMessage] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const { signUp } = useContext(AuthContext);
 
   return (
@@ -47,6 +51,7 @@ const SignUp = ({ navigation }) => {
             value={firstName}
             onChangeText={(nextValue) => setFirstName(nextValue)}
           />
+          <Text style={styles.errorMessage}>{firstNameErrorMessage}</Text>
           <Text style={styles.inputHeader}>LAST NAME</Text>
           <TextInput
             placeholder="Doe"
@@ -54,6 +59,7 @@ const SignUp = ({ navigation }) => {
             value={lastName}
             onChangeText={(nextValue) => setLastName(nextValue)}
           />
+          <Text style={styles.errorMessage}>{lastNameErrorMessage}</Text>
           <Text style={styles.inputHeader}>EMAIL</Text>
           <TextInput
             placeholder="hello@reallygreatsite.com"
@@ -61,7 +67,7 @@ const SignUp = ({ navigation }) => {
             value={email}
             onChangeText={(nextValue) => setEmail(nextValue.toLowerCase())}
           />
-
+          <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
           <Text style={styles.inputHeader}>PASSWORD</Text>
 
           <TextInput
@@ -71,6 +77,8 @@ const SignUp = ({ navigation }) => {
             secureTextEntry={true}
             onChangeText={(nextValue) => setPassword(nextValue)}
           />
+
+          <Text style={styles.errorMessage}>{passwordErrorMessage}</Text>
         </View>
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
@@ -78,8 +86,28 @@ const SignUp = ({ navigation }) => {
               title="sign up"
               color="white"
               onPress={() => {
-                signUp(email, password, firstName, lastName);
-                navigation.navigate('Login');
+                if (
+                  firstName === '' ||
+                  lastName === '' ||
+                  email === '' ||
+                  password === ''
+                ) {
+                  if (firstName === '') {
+                    setFirstNameErrorMessage('Please input first name');
+                  }
+                  if (lastName === '') {
+                    setLastNameErrorMessage('Please input last name');
+                  }
+                  if (email === '') {
+                    setEmailErrorMessage('Please input email');
+                  }
+                  if (password === '') {
+                    setPasswordErrorMessage('Please input Password');
+                  }
+                } else {
+                  signUp(email, password, firstName, lastName);
+                  navigation.navigate('Login');
+                }
               }}
             />
           </View>
@@ -111,6 +139,7 @@ export const styles = StyleSheet.create({
     opacity: 0.8,
     borderRadius: 15,
     margin: 30,
+    paddingTop: 0,
   },
 
   text1: {
@@ -138,6 +167,12 @@ export const styles = StyleSheet.create({
     backgroundColor: 'black',
     padding: 1,
     margin: 30,
+  },
+
+  errorMessage: {
+    color: 'red',
+    paddingLeft: 20,
+    paddingBottom: 10,
   },
 });
 export default SignUp;

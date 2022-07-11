@@ -14,7 +14,8 @@ import { AuthContext } from '../context/AuthContext';
 
 const UserHistory = ({ navigation }) => {
   const { userHistory } = useContext(AuthContext);
-
+  console.log('userHistory :>> ', userHistory);
+  // console.log('userHistory :>> ', userHistory.length);
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -25,10 +26,11 @@ const UserHistory = ({ navigation }) => {
         <View style={styles.textContainer}>
           <Text style={styles.text}>UserHistory Page</Text>
           <ScrollView>
-            {userHistory.map((history) => {
-              console.log('history :>> ', history.sessionExercises);
+            {userHistory.map((history, i) => {
+              // console.log('history inside map :>> ', history.sessionExercises);
               return (
-                <View>
+                <View key={i}>
+                  {/* <Text>{history.routine}</Text> */}
                   <Text>{history.routine.name}</Text>
                 </View>
               );

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    fontFamily: 'Palatino-Bold',
+    // fontFamily: 'Palatino-Bold',
     backgroundColor: 'white',
     borderRadius: 20,
     overflow: 'hidden',

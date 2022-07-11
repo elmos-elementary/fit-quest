@@ -17,6 +17,10 @@ const Character = db.define('character', {
     type: Sequelize.INTEGER,
     defaultValue: 1
   },
+  combatSkill: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1
+  },
   coins: {
     type: Sequelize.INTEGER,
     defaultValue: 0
