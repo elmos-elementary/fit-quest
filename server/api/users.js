@@ -1,13 +1,13 @@
 const router = require('express').Router();
 const {
-  models: { User, Character },
+  models: { User },
 } = require('../db');
 module.exports = router;
 
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['id', 'firstName', 'lastName', 'characterId'],
+      attributes: ['id', 'firstName', 'lastName'],
     });
     res.json(users);
   } catch (error) {
@@ -19,8 +19,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findByPk(id, {
-      attributes: ['id', 'firstName', 'lastName', 'characterId'],
-      include: [Character]
+      attributes: ['id', 'firstName', 'lastName'],
     });
     res.json(user);
   } catch (error) {

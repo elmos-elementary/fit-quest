@@ -2,7 +2,6 @@ const router = require('express').Router()
 const {
   models: {
     Session,
-    Character,
     Routine,
     Exercise,
     User,
@@ -179,13 +178,11 @@ router.put('/complete/:userId', async (req, res, next) => {
       exerciseTypes[type] = 1
     }
 
-    // Calculate total exp gain based on character level and skill levels, does not include item bonus
-    const user = await User.findByPk(userId)
-    const characterId = user.characterId
-    const character = await Character.findByPk(characterId, { include: [Item] })
+    // Calculate total exp gain based on user level and skill levels, does not include item bonus
+    const user = await User.findByPk(userId, { include: [Item] })
     let expGain = 0
     expGain =
-      character.currentLevel *
+      user.currentLevel *
       (exerciseTypes.chest +
         exerciseTypes.back +
         exerciseTypes.arms +
@@ -196,13 +193,13 @@ router.put('/complete/:userId', async (req, res, next) => {
         exerciseTypes.stretching)
 
     // Chest Skill exp
-    let newChestExp = character.chestExp
-    let newChestCurrentLevel = character.chestCurrentLevel
-    let newChestCurrentLevelExp = character.chestCurrentLevelExp
+    let newChestExp = user.chestExp
+    let newChestCurrentLevel = user.chestCurrentLevel
+    let newChestCurrentLevelExp = user.chestCurrentLevelExp
     if (exerciseTypes.chest > 0) {
-      let chestExpGain = character.chestCurrentLevel
-      newChestExp = character.chestExp + chestExpGain
-      newChestCurrentLevel = character.chestCurrentLevel
+      let chestExpGain = user.chestCurrentLevel
+      newChestExp = user.chestExp + chestExpGain
+      newChestCurrentLevel = user.chestCurrentLevel
       while (newChestExp >= skillLevelExp[Number(newChestCurrentLevel) + 1]) {
         newChestCurrentLevel++
       }
@@ -211,13 +208,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     }
 
     // Back Skill exp
-    let newBackExp = character.backExp
-    let newBackCurrentLevel = character.backCurrentLevel
-    let newBackCurrentLevelExp = character.backCurrentLevelExp
+    let newBackExp = user.backExp
+    let newBackCurrentLevel = user.backCurrentLevel
+    let newBackCurrentLevelExp = user.backCurrentLevelExp
     if (exerciseTypes.back > 0) {
-      let backExpGain = character.backCurrentLevel
-      newBackExp = character.backExp + backExpGain
-      newBackCurrentLevel = character.backCurrentLevel
+      let backExpGain = user.backCurrentLevel
+      newBackExp = user.backExp + backExpGain
+      newBackCurrentLevel = user.backCurrentLevel
       while (newBackExp >= skillLevelExp[Number(newBackCurrentLevel) + 1]) {
         newBackCurrentLevel++
       }
@@ -225,13 +222,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     }
 
     // Arms Skill exp
-    let newArmsExp = character.armsExp
-    let newArmsCurrentLevel = character.armsCurrentLevel
-    let newArmsCurrentLevelExp = character.armsCurrentLevelExp
+    let newArmsExp = user.armsExp
+    let newArmsCurrentLevel = user.armsCurrentLevel
+    let newArmsCurrentLevelExp = user.armsCurrentLevelExp
     if (exerciseTypes.arms > 0) {
-      let armsExpGain = character.armsCurrentLevel
-      newArmsExp = character.armsExp + armsExpGain
-      newArmsCurrentLevel = character.armsCurrentLevel
+      let armsExpGain = user.armsCurrentLevel
+      newArmsExp = user.armsExp + armsExpGain
+      newArmsCurrentLevel = user.armsCurrentLevel
       while (newArmsExp >= skillLevelExp[Number(newArmsCurrentLevel) + 1]) {
         newArmsCurrentLevel++
       }
@@ -239,13 +236,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     }
 
     // Abdominals Skill exp
-    let newAbdominalsExp = character.abdominalsExp
-    let newAbdominalsCurrentLevel = character.abdominalsCurrentLevel
-    let newAbdominalsCurrentLevelExp = character.abdominalsCurrentLevelExp
+    let newAbdominalsExp = user.abdominalsExp
+    let newAbdominalsCurrentLevel = user.abdominalsCurrentLevel
+    let newAbdominalsCurrentLevelExp = user.abdominalsCurrentLevelExp
     if (exerciseTypes.abdominal > 0) {
-      let abdominalsExpGain = character.abdominalsCurrentLevel
-      newAbdominalsExp = character.abdominalsExp + abdominalsExpGain
-      newAbdominalsCurrentLevel = character.abdominalsCurrentLevel
+      let abdominalsExpGain = user.abdominalsCurrentLevel
+      newAbdominalsExp = user.abdominalsExp + abdominalsExpGain
+      newAbdominalsCurrentLevel = user.abdominalsCurrentLevel
       while (
         newAbdominalsExp >= skillLevelExp[Number(newAbdominalsCurrentLevel) + 1]
       ) {
@@ -256,13 +253,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     }
 
     // Legs Skill exp
-    let newLegsExp = character.legsExp
-    let newLegsCurrentLevel = character.legsCurrentLevel
-    let newLegsCurrentLevelExp = character.legsCurrentLevelExp
+    let newLegsExp = user.legsExp
+    let newLegsCurrentLevel = user.legsCurrentLevel
+    let newLegsCurrentLevelExp = user.legsCurrentLevelExp
     if (exerciseTypes.legs > 0) {
-      let legsExpGain = character.legsCurrentLevel
-      newLegsExp = character.legsExp + legsExpGain
-      newLegsCurrentLevel = character.legsCurrentLevel
+      let legsExpGain = user.legsCurrentLevel
+      newLegsExp = user.legsExp + legsExpGain
+      newLegsCurrentLevel = user.legsCurrentLevel
       while (newLegsExp >= skillLevelExp[Number(newLegsCurrentLevel) + 1]) {
         newLegsCurrentLevel++
       }
@@ -270,13 +267,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     }
 
     // Shoulders Skill exp
-    let newShouldersExp = character.shouldersExp
-    let newShouldersCurrentLevel = character.shouldersCurrentLevel
-    let newShouldersCurrentLevelExp = character.shouldersCurrentLevelExp
+    let newShouldersExp = user.shouldersExp
+    let newShouldersCurrentLevel = user.shouldersCurrentLevel
+    let newShouldersCurrentLevelExp = user.shouldersCurrentLevelExp
     if (exerciseTypes.shoulders > 0) {
-      let shouldersExpGain = character.shouldersCurrentLevel
-      newShouldersExp = character.shouldersExp + shouldersExpGain
-      newShouldersCurrentLevel = character.shouldersCurrentLevel
+      let shouldersExpGain = user.shouldersCurrentLevel
+      newShouldersExp = user.shouldersExp + shouldersExpGain
+      newShouldersCurrentLevel = user.shouldersCurrentLevel
       while (
         newShouldersExp >= skillLevelExp[Number(newShouldersCurrentLevel) + 1]
       ) {
@@ -287,13 +284,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     }
 
     // Cardio Skill exp
-    let newCardioExp = character.cardioExp
-    let newCardioCurrentLevel = character.cardioCurrentLevel
-    let newCardioCurrentLevelExp = character.cardioCurrentLevelExp
+    let newCardioExp = user.cardioExp
+    let newCardioCurrentLevel = user.cardioCurrentLevel
+    let newCardioCurrentLevelExp = user.cardioCurrentLevelExp
     if (exerciseTypes.cardio > 0) {
-      let cardioExpGain = character.cardioCurrentLevel
-      newCardioExp = character.cardioExp + cardioExpGain
-      newCardioCurrentLevel = character.cardioCurrentLevel
+      let cardioExpGain = user.cardioCurrentLevel
+      newCardioExp = user.cardioExp + cardioExpGain
+      newCardioCurrentLevel = user.cardioCurrentLevel
       while (newCardioExp >= skillLevelExp[Number(newCardioCurrentLevel) + 1]) {
         newCardioCurrentLevel++
       }
@@ -302,13 +299,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     }
 
     // Stretching Skill exp
-    let newStretchingExp = character.stretchingExp
-    let newStretchingCurrentLevel = character.stretchingCurrentLevel
-    let newStretchingCurrentLevelExp = character.stretchingCurrentLevelExp
+    let newStretchingExp = user.stretchingExp
+    let newStretchingCurrentLevel = user.stretchingCurrentLevel
+    let newStretchingCurrentLevelExp = user.stretchingCurrentLevelExp
     if (exerciseTypes.stretching > 0) {
-      let stretchingExpGain = character.stretchingCurrentLevel
-      newStretchingExp = character.stretchingExp + stretchingExpGain
-      newStretchingCurrentLevel = character.stretchingCurrentLevel
+      let stretchingExpGain = user.stretchingCurrentLevel
+      newStretchingExp = user.stretchingExp + stretchingExpGain
+      newStretchingCurrentLevel = user.stretchingCurrentLevel
       while (
         newStretchingExp >= skillLevelExp[Number(newStretchingCurrentLevel) + 1]
       ) {
@@ -321,67 +318,67 @@ router.put('/complete/:userId', async (req, res, next) => {
     // Deal damage to opponent. If defeated, give rewards and create new monster
     const currentOpponent = await Opponent.findOne({
       where: {
-        characterId: characterId,
+        userId: userId,
         alive: true,
       },
     })
     let currentOpponentHealth = currentOpponent.currentHealth
-    currentOpponentHealth -= character.combatSkill
-    let coins = character.coins
+    currentOpponentHealth -= user.combatSkill
+    let coins = user.coins
     if (currentOpponentHealth <= 0) {
       await currentOpponent.update({ alive: false, currentHealth: 0 })
 
       // Give coins
       coins += Math.ceil(
-        character.currentLevel * (Math.random() * 0.1 - 0.05 + 1)
+        user.currentLevel * (Math.random() * 0.1 - 0.05 + 1)
       )
 
       // Roll for item
-      const currentItems = character.items
-      // If character has no item, give an item. Else 25% chance of item
+      const currentItems = user.items
+      // If user has no item, give an item. Else 25% chance of item
       if (currentItems.length === 0) {
-        const newItem = await Item.create(generateItem(character.currentLevel))
-        character.addItem(newItem)
+        const newItem = await Item.create(generateItem(user.currentLevel))
+        user.addItem(newItem)
       } else {
         if (Math.ceil(Math.random() * 4) === 4) {
           const newItem = await Item.create(
-            generateItem(character.currentLevel)
+            generateItem(user.currentLevel)
           )
-          character.addItem(newItem)
+          user.addItem(newItem)
         }
       }
 
       // Create new opponent
       const name = generateOpponentName()
       let totalHealth =
-        character.currentLevel + (Math.ceil(Math.random() * 5) - 3)
+      user.currentLevel + (Math.ceil(Math.random() * 5) - 3)
       totalHealth > 0 ? totalHealth : (totalHealth = 1)
       const opponent = await Opponent.create({
         name,
         totalHealth: totalHealth,
         currentHealth: totalHealth,
-        level: character.currentLevel,
+        level: user.currentLevel,
       })
-      opponent.setCharacter(character)
+      opponent.setCharacter(user)
     } else {
       await currentOpponent.update({ currentHealth: currentOpponentHealth })
     }
 
-    // Add exp gain to character, level up if needed and set currentlLevelExp
-    let newCharacterExp = expGain + character.characterExp
-    let newCurrentLevel = character.currentLevel
-    let newCombatSkill = character.combatSkill
+    // Add exp gain to user, level up if needed and set currentlLevelExp
+    let newCharacterExp = expGain + user.characterExp
+    let newCurrentLevel = user.currentLevel
+    let newCombatSkill = user.combatSkill
     while (newCharacterExp >= levelExp[Number(newCurrentLevel) + 1]) {
       newCurrentLevel++
       newCombatSkill++
       // Roll for item every level up
       if (Math.ceil(Math.random() * 4) === 4) {
-        const newItem = await Item.create(generateItem(character.currentLevel))
-        character.addItem(newItem)
+        const newItem = await Item.create(generateItem(user.currentLevel))
+        user.addItem(newItem)
       }
     }
     let newCurrentLevelExp = newCharacterExp - levelExp[newCurrentLevel]
-    await character.update({
+    await user.update({
       characterExp: newCharacterExp,
       currentLevel: newCurrentLevel,
       currentLevelExp: newCurrentLevelExp,

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  models: { User, Character, Opponent},
+  models: { User, Opponent},
 } = require('../db');
 module.exports = router;
 const generateOpponentName = require('./tools/opponentNameGenerator')
@@ -16,9 +16,6 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body);
-    // Create character for user
-    const character = await Character.create({name: user.firstName})
-    user.setCharacter(character)
     // Create initial opponent for user
     const opponent = await Opponent.create({
       name: generateOpponentName(),
@@ -26,7 +23,7 @@ router.post('/signup', async (req, res, next) => {
       currentHealth: 3,
       level: 1,
     })
-    opponent.setCharacter(character)
+    opponent.setCharacter(user)
     // Token stuff
     res.send({ token: await user.generateToken() });
   } catch (err) {
