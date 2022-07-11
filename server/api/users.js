@@ -7,7 +7,7 @@ module.exports = router;
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: ['id', 'firstName', 'lastName'],
+      attributes: { exclude: ['password'] },
     });
     res.json(users);
   } catch (error) {
@@ -19,7 +19,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const user = await User.findByPk(id, {
-      attributes: ['id', 'firstName', 'lastName'],
+      attributes: { exclude: ['password'] },
     });
     res.json(user);
   } catch (error) {

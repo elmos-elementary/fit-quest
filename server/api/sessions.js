@@ -14,7 +14,7 @@ module.exports = router
 const generateOpponentName = require('./tools/opponentNameGenerator')
 const generateItem = require('./tools/itemGenerator')
 
-// Character Level Experience Table
+// User Level Experience Table
 let levelCounter = 10
 const levelExp = {}
 for (let i = 1; i <= 100; i++) {
@@ -116,7 +116,7 @@ router.post('/start/:userId', async (req, res, next) => {
     })
     // Check if there is a current session for user. If so, return session
     if (check) {
-      res.json(check)
+      res.send("User already has a current session")
     } else {
       // If no current session for user, create session along with session exercises, then returns it
       const user = await User.findByPk(userId)
@@ -359,7 +359,7 @@ router.put('/complete/:userId', async (req, res, next) => {
         currentHealth: totalHealth,
         level: user.currentLevel,
       })
-      opponent.setCharacter(user)
+      opponent.setUser(user)
     } else {
       await currentOpponent.update({ currentHealth: currentOpponentHealth })
     }
