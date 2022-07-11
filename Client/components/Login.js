@@ -55,7 +55,7 @@ const Login = ({ navigation }) => {
             secureTextEntry={true}
             onChangeText={(nextValue) => setPassword(nextValue)}
           />
-          <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
+          <Text style={styles.errorMessage}>{passwordErrorMessage}</Text>
         </View>
 
         <View>
