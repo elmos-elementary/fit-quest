@@ -3,7 +3,7 @@ module.exports = router;
 
 router.use('/auth', require('./auth'));
 router.use('/users', require('./users'));
-router.use('/characters', require('./characters'));
+// router.use('/characters', require('./characters'));
 router.use('/exercises', require('./exercises'));
 router.use('/routines', require('./routines'));
 router.use('/sessions', require('./sessions'));

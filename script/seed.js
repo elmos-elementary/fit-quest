@@ -2,10 +2,10 @@
 
 const {
   db,
-  models: { User, Character, Exercise, Routine, Session, SessionExercise, Opponent },
+  models: { User, Exercise, Routine, Session, SessionExercise, Opponent },
 } = require('../server/db');
 const userSeed = require('./userSeed');
-const characterSeed = require('./characterSeed');
+// const characterSeed = require('./characterSeed');
 const exerciseSeed = require('./exerciseSeed');
 const routineSeed = require('./routineSeed')
 const sessionSeed = require('./sessionSeed')
@@ -20,13 +20,6 @@ async function seed() {
   const users = await Promise.all(
     userSeed.map((user) => {
       return User.create(user);
-    })
-  );
-
-  // Creating Characters
-  const characters = await Promise.all(
-    characterSeed.map((character) => {
-      return Character.create(character);
     })
   );
 
@@ -69,8 +62,7 @@ async function seed() {
 
   // Associations
   for (let i = 0; i < 2; i++) {
-    await users[i].setCharacter(characters[i])
-    await opponents[i].setCharacter(characters[i])
+    await opponents[i].setUser(users[i])
   }
 
   // Routine Exercises
