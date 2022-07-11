@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   const [singleRoutine, setSingleRoutine] = useState(null);
   const [user, setUser] = useState(null);
   const [sessionExercise, setSessionExercise] = useState(null);
-  const [userHistory, setUserHistory] = useState(null);
+  const [userHistory, setUserHistory] = useState([]);
   const [exerciseHistory, setExerciseHistory] = useState([]);
 
   const login = async (email, password) => {

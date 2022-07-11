@@ -19,7 +19,7 @@ const UserHistory = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={image}
+        source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
         style={styles.backgroundImage}
       >

@@ -4,6 +4,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import UserHome from './UserHome';
 import AllRoutines from './AllRoutines';
 import SingleRoutine from './SingleRoutine';
+import UserHistory from './UserHistory';
 import { AuthContext } from '../context/AuthContext';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -27,22 +28,36 @@ function MainTabScreen() {
           ),
         }}
       />
+
       <Tab.Screen
-        name="AllRoutines"
-        component={AllRoutines}
+        name="SingleRoutine"
+        component={SingleRoutine}
         options={{
-          tabBarLabel: 'Workouts',
+          tabBarLabel: 'Current Session',
           tabBarColor: '#1f65ff',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="bell" color={color} size={26} />
           ),
         }}
       />
+
       <Tab.Screen
-        name="SingleRoutine"
-        component={SingleRoutine}
+        name="AllRoutines"
+        component={AllRoutines}
         options={{
-          tabBarLabel: 'Current Session',
+          tabBarLabel: 'All Routines',
+          tabBarColor: '#1f65ff',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="UserHistory"
+        component={UserHistory}
+        options={{
+          tabBarLabel: 'User History',
           tabBarColor: '#1f65ff',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="bell" color={color} size={26} />
