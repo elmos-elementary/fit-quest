@@ -39,6 +39,7 @@ const SingleRoutine = ({ navigation }) => {
 
         <ScrollView>
           {singleRoutine.sessionExercises.map((exercise) => {
+            // console.log('exercise :>> ', exercise);
             return (
               <View key={exercise.id} style={{ margin: 20 }}>
                 <View style={styles.routineContainer}>
@@ -75,7 +76,7 @@ const SingleRoutine = ({ navigation }) => {
                     title="+"
                     style={styles.addRoutine}
                     onPress={() => {
-                      onTouch(exercise.exerciseId);
+                      onTouch(exercise.id);
                     }}
                   />
                 </View>

@@ -137,7 +137,7 @@ export const AuthProvider = ({ children }) => {
         `https://fitquestapp.herokuapp.com/api/sessionexercises/${id}`
       );
       setSessionExercise(data);
-      console.log('data inside get session exercise :>> ', data);
+      // console.log('data inside get session exercise :>> ', data);
 
       return data;
     } catch (err) {
