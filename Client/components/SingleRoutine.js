@@ -32,7 +32,7 @@ const SingleRoutine = ({ navigation }) => {
       >
         <View style={styles.headerContainer}>
           <Text style={styles.text}>Current Routine: </Text>
-          <Text>{new Date().toUTCString()}</Text>
+          <Text>{new Date().toLocaleString()}</Text>
         </View>
 
         <ScrollView>
