@@ -10,9 +10,16 @@ import {
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
+import * as Font from 'expo-font';
 
 const UserHome = ({ navigation }) => {
-  const { logout } = useContext(AuthContext);
+  const { logout, user, getUserHistory } = useContext(AuthContext);
+
+  const findUserHistory = () => {
+    getUserHistory(user.id).then(() => {
+      navigation.navigate('UserHistory');
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -25,11 +32,13 @@ const UserHome = ({ navigation }) => {
           <Image source={require('../../src/assets/favicon.png')} />
         </View>
         <View style={styles.inputContainer}>
-          <Text style={{ fontSize: 20, fontFamily: 'Helvetica' }}>
+          <Text style={{ fontSize: 20, fontFamily: Font.helvetica }}>
             Username
           </Text>
-          <Text style={{ fontSize: 18, fontFamily: 'Helvetica' }}>Class</Text>
-          <Text style={{ fontSize: 15, fontFamily: 'Helvetica' }}>
+          <Text style={{ fontSize: 18, fontFamily: Font.helvetica }}>
+            Class
+          </Text>
+          <Text style={{ fontSize: 15, fontFamily: Font.helvetica }}>
             Level 99
           </Text>
           <ProgressBar progress={0.5} />
@@ -38,12 +47,18 @@ const UserHome = ({ navigation }) => {
               color="black"
               title="Start Workout"
               onPress={() => {
-                navigation.navigate('StartWorkout');
+                navigation.navigate('AllRoutines');
               }}
             />
           </View>
           <View style={styles.button}>
-            <Button color="black" title="History" />
+            <Button
+              color="black"
+              title="History"
+              onPress={() => {
+                findUserHistory();
+              }}
+            />
           </View>
           <View style={styles.button}>
             <Button color="black" title="Character" />

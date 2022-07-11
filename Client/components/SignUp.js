@@ -37,6 +37,7 @@ const SignUp = ({ navigation }) => {
             log in here.
           </Text>
         </View>
+
         <View style={styles.inputContainer}>
           <Text style={styles.inputHeader}>FIRST NAME</Text>
 
@@ -70,18 +71,17 @@ const SignUp = ({ navigation }) => {
             secureTextEntry={true}
             onChangeText={(nextValue) => setPassword(nextValue)}
           />
-
-          <View>
-            <View style={styles.button}>
-              <Button
-                title="sign up"
-                color="white"
-                onPress={() => {
-                  signUp(email, password, firstName, lastName);
-                  navigation.navigate('Login');
-                }}
-              />
-            </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button
+              title="sign up"
+              color="white"
+              onPress={() => {
+                signUp(email, password, firstName, lastName);
+                navigation.navigate('Login');
+              }}
+            />
           </View>
         </View>
       </ImageBackground>
@@ -95,18 +95,22 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
     margin: 70,
     opacity: 0.8,
-    borderRadius: 20,
+    borderRadius: 15,
     width: '60%',
     height: '20%',
   },
 
   inputContainer: {
-    flex: 2,
+    backgroundColor: 'white',
+    opacity: 0.8,
+    borderRadius: 15,
+    margin: 30,
   },
 
   text1: {
@@ -116,19 +120,24 @@ export const styles = StyleSheet.create({
 
   textInput: {
     height: 45,
-    margin: 12,
+    margin: 15,
     padding: 10,
     backgroundColor: 'white',
     borderRadius: 2,
+    borderWidth: 2,
   },
   inputHeader: {
     fontWeight: 'bold',
     paddingLeft: 10,
   },
+  buttonContainer: {
+    flex: 1,
+  },
+
   button: {
     backgroundColor: 'black',
     padding: 1,
-    margin: 20,
+    margin: 30,
   },
 });
 export default SignUp;

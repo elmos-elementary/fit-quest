@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,27 +7,32 @@ import {
   ImageBackground,
   ScrollView,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
-
+import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
-import { FlatList } from 'react-native';
 
-const StartWorkout = ({ navigation }) => {
-  const { singleRoutine } = useContext(AuthContext);
+const UserHistory = ({ navigation }) => {
+  const { userHistory } = useContext(AuthContext);
+  // console.log('userHistory :>> ', userHistory);
+  // console.log('userHistory :>> ', userHistory.length);
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../src/assets/background.jpeg')}
+        source={image}
         resizeMode="cover"
         style={styles.backgroundImage}
       >
         <View style={styles.textContainer}>
-          <Text style={styles.text}>{singleRoutine.name}</Text>
+          <Text style={styles.text}>UserHistory Page</Text>
           <ScrollView>
-            {singleRoutine.exercises.map((exercise) => {
+            {userHistory.map((history) => {
+              console.log('history :>> ', history.sessionExercises);
               return (
-                <View key={exercise.id}>
-                  <Text>{exercise.name}</Text>
+                <View>
+                  {/* <Text>{history.routine}</Text> */}
+                  <Text>{history.routine.name}</Text>
+                  {/* <Text>{history.routineId}</Text>; */}
                 </View>
               );
             })}
@@ -62,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartWorkout;
+export default UserHistory;

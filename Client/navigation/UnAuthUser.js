@@ -6,7 +6,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../components/HomeScreen';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
-import CreateCharacter from '../components/CreateCharacter';
 import PasswordRecovery from '../components/PasswordRecovery';
 import { View, Text } from 'react-native';
 const Stack = createNativeStackNavigator();

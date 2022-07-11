@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { View, ImageBackground, TextInput, Button } from 'react-native';
+import { View, ImageBackground, TextInput, Button, Alert } from 'react-native';
 import { Layout, Text } from '@ui-kitten/components';
-import SignUp, { styles } from './SignUp';
+import { styles } from './Login';
 import { AuthContext } from '../context/AuthContext';
 
-const PasswordRecovery = () => {
+const PasswordRecovery = ({ navigation }) => {
   const [newPassword, setNewPassword] = useState('');
   const { signUp } = useContext(AuthContext);
 
@@ -20,6 +20,7 @@ const PasswordRecovery = () => {
           <Text style={styles.text1}>Forgot Password</Text>
           <Text category="s1">New Password</Text>
         </View>
+
         <View style={styles.inputContainer}>
           <Text style={styles.inputHeader}>EMAIL</Text>
 
@@ -27,20 +28,21 @@ const PasswordRecovery = () => {
             placeholder="hello@reallygreatsite.com"
             style={styles.textInput}
             value={newPassword}
-            onChangeText={(nextValue) => setNewPassword(nextValue)}
+            onChangeText={(nextValue) =>
+              setNewPassword(nextValue.toLowerCase())
+            }
           />
-
-          <View>
-            <View style={styles.button}>
-              <Button
-                title="send"
-                color="white"
-                onPress={() => {
-                  signUp(newPassword);
-                  navigation.navigate('Login');
-                }}
-              />
-            </View>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button
+              title="send"
+              color="white"
+              onPress={() => {
+                Alert.alert("Don't be Dumb!!!");
+                navigation.navigate('SignUp');
+              }}
+            />
           </View>
         </View>
       </ImageBackground>
