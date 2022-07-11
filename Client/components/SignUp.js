@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Button,
   TextInput,
-  Alert,
 } from 'react-native';
 
 const SignUp = ({ navigation }) => {
@@ -15,7 +14,6 @@ const SignUp = ({ navigation }) => {
   const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [firstNameErrorMessage, setFirstNameErrorMessage] = useState('');
   const [lastNameErrorMessage, setLastNameErrorMessage] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
