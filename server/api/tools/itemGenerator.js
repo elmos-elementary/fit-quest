@@ -260,12 +260,30 @@ const generateItem = (characterLevel) => {
       break
   }
 
+  // Min Skill Requirements, currently not used
+  const minChestLevel = 1
+  const minBackLevel = 1
+  const minArmsLevel = 1
+  const minAbdominalsLevel = 1
+  const minLegsLevel = 1
+  const minShouldersLevel = 1
+  const minCardioLevel = 1
+  const minStretchingLevel = 1
+
   return {
     tier,
     name: `${item} of ${adjectives[Math.floor(Math.random() * 22)]}`,
     price,
     type: itemType,
     level: itemLevel,
+    minChestLevel,
+    minBackLevel,
+    minArmsLevel,
+    minAbdominalsLevel,
+    minLegsLevel,
+    minShouldersLevel,
+    minCardioLevel,
+    minStretchingLevel,
     combatSkill,
     expBonus,
     coinBonus,
