@@ -1,7 +1,7 @@
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserHome from './UserHome';
-import StartWorkout from './StartWorkout';
+import AllRoutines from './AllRoutines';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -25,7 +25,7 @@ function MainTabScreen() {
       />
       <Tab.Screen
         name="StartWorkout"
-        component={StartWorkout}
+        component={AllRoutines}
         options={{
           tabBarLabel: 'Workouts',
           tabBarColor: '#1f65ff',
