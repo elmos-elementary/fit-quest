@@ -16,11 +16,11 @@ const Opponent = db.define('opponent', {
   },
   tier: {
     type: Sequelize.ENUM('common', 'uncommon', 'legendary', 'godly'),
-    default: 'common'
+    defaultValue: 'common'
   },
   alive: {
     type: Sequelize.BOOLEAN,
-    default: true
+    defaultValue: true
   }
 })
 
