@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [sessionExercise, setSessionExercise] = useState(null);
   const [userHistory, setUserHistory] = useState(null);
+  const [opponent, setOpponent] = useState(null)
 
   const login = async (email, password) => {
     try {
@@ -150,7 +151,7 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessions/current/${userId}`
       );
-     
+
       data.sessionExercises.sort((a, b) => a.exerciseId - b.exerciseId);
       setSingleRoutine(data);
       return data;
