@@ -10,10 +10,16 @@ import {
 } from 'react-native';
 
 import { AuthContext } from '../context/AuthContext';
-import { FlatList } from 'react-native';
 
-const StartWorkout = ({ navigation }) => {
-  const { routine, getSingleRoutine, singleRoutine } = useContext(AuthContext);
+const AllRoutines = ({ navigation }) => {
+  const { routine, getSingleRoutine, singleRoutine, user, logout } =
+    useContext(AuthContext);
+
+  const onTouch = (id) => {
+    getSingleRoutine(user.id, id).then(() => {
+      navigation.navigate('SingleRoutine');
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -25,32 +31,44 @@ const StartWorkout = ({ navigation }) => {
       >
         <View style={styles.textContainer}>
           <Text style={styles.text}>Choose Routine</Text>
+          {/* <Button
+            title="logout"
+            onPress={() => {
+              logout();
+            }}
+          /> */}
           <View>
             <View style={styles.routineContainer}>
               <ScrollView>
-                {routine.map((routine) => {
-                  return (
-                    <TouchableOpacity
-                      key={routine.id}
-                      style={styles.routine}
-                      onPress={() => {}}
-                    >
-                      <Text
-                        style={{
-                          textAlign: 'center',
-                          fontSize: 20,
-                          fontWeight: 'bold',
+                {routine ? (
+                  routine.map((routine) => {
+                    return (
+                      <TouchableOpacity
+                        key={routine.id}
+                        style={styles.routine}
+                        onPress={() => {
+                          onTouch(routine.id);
                         }}
                       >
-                        {routine.name}
-                      </Text>
+                        <Text
+                          style={{
+                            textAlign: 'center',
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                          }}
+                        >
+                          {routine.name}
+                        </Text>
 
-                      {routine.exercises.map((exercise) => {
-                        return <Text key={exercise.id}>{exercise.name}</Text>;
-                      })}
-                    </TouchableOpacity>
-                  );
-                })}
+                        {routine.exercises.map((exercise) => {
+                          return <Text key={exercise.id}>{exercise.name}</Text>;
+                        })}
+                      </TouchableOpacity>
+                    );
+                  })
+                ) : (
+                  <Text>No Routines</Text>
+                )}
               </ScrollView>
             </View>
           </View>
@@ -98,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StartWorkout;
+export default AllRoutines;

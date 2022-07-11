@@ -1,53 +1,53 @@
 const routine = [
   {
-    name: 'Chest'
+    name: 'Chest',
     // incline dumbbell bench press
     // low-cable cross-over
     // dumbbell flys
   },
   {
-    name: 'Back'
+    name: 'Back',
     // seated cable row
     // reverse-grip bent-over rows
     // lat pull-down
   },
   {
-    name: 'Bicep'
+    name: 'Bicep',
     // dumbbell bicep curl
     // hammer curls
     // overhead cable curl
   },
   {
-    name: 'Tricep'
+    name: 'Tricep',
     // tricep dumbbell kickback
     // cable v-bar push-down
   },
   {
-    name: 'Shoulder'
+    name: 'Shoulder',
     // overhead dumbbell front raise
     // military press
     // seated dumbbell press
   },
   {
-    name: 'Lower Body'
+    name: 'Leg',
     // bodyweight squat
     // leg press
     // seated calf raise
     // single-leg glute bridge
   },
   {
-    name: 'Cardio'
+    name: 'Cardio',
     // treadmill
     // jump rope
     // stair climber
     // burpee
   },
   {
-    name: 'Flexability'
+    name: 'Flexibility',
     // windmills
     // lower back curl
     // leg-up hamstring stretch
-  }
-]
+  },
+];
 
-module.exports = routine
+module.exports = routine;

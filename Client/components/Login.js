@@ -1,8 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { Layout, Text } from '@ui-kitten/components';
-import { ImageBackground, View, Button, TextInput } from 'react-native';
+import {
+  ImageBackground,
+  View,
+  Button,
+  TextInput,
+  StyleSheet,
+} from 'react-native';
 import { AuthContext } from '../context/AuthContext';
-import { styles } from './SignUp';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -14,7 +19,7 @@ const Login = ({ navigation }) => {
       <ImageBackground
         source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
-        imageStyle={{ opacity: 0.9 }}
+        imageStyle={{ opacity: 0.8 }}
         style={styles.backgroundImage}
       >
         <View style={styles.headerContainer}>
@@ -47,29 +52,29 @@ const Login = ({ navigation }) => {
             secureTextEntry={true}
             onChangeText={(nextValue) => setPassword(nextValue)}
           />
-          <View>
-            <Text
-              category="s1"
-              status="primary"
-              style={{ textAlign: 'right', margin: 2 }}
-              onPress={() => {
-                navigation.navigate('PasswordRecovery');
-              }}
-            >
-              forgot password?
-            </Text>
-          </View>
+        </View>
 
-          <View>
-            <View style={styles.button}>
-              <Button
-                title="Log In"
-                color="white"
-                onPress={() => {
-                  login(email.toLowerCase(), password);
-                }}
-              />
-            </View>
+        <View>
+          <Text
+            category="s1"
+            status="primary"
+            style={{ textAlign: 'right', margin: 2 }}
+            onPress={() => {
+              navigation.navigate('PasswordRecovery');
+            }}
+          >
+            forgot password?
+          </Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button
+              title="Log In"
+              color="white"
+              onPress={() => {
+                login(email.toLowerCase(), password);
+              }}
+            />
           </View>
         </View>
       </ImageBackground>
@@ -77,4 +82,53 @@ const Login = ({ navigation }) => {
   );
 };
 
+export const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  headerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 80,
+    opacity: 0.8,
+    borderRadius: 15,
+  },
+
+  inputContainer: {
+    backgroundColor: 'white',
+    opacity: 0.8,
+    borderRadius: 15,
+    margin: 20,
+  },
+
+  text1: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
+  textInput: {
+    height: 45,
+    margin: 15,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 2,
+    borderWidth: 2,
+  },
+  inputHeader: {
+    fontWeight: 'bold',
+    paddingLeft: 10,
+  },
+  buttonContainer: {
+    flex: 2,
+  },
+
+  button: {
+    backgroundColor: 'black',
+    padding: 1,
+    margin: 30,
+  },
+});
 export default Login;
