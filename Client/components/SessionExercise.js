@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -14,10 +14,33 @@ import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const SessionExercise = ({ navigation }) => {
-  const onTouch = () => {};
-
-  const { sessionExercise } = useContext(AuthContext);
+  const { sessionExercise, updateSessionExercise, user, getSession } =
+    useContext(AuthContext);
   console.log('sessionExercise :>> ', sessionExercise);
+
+  const [weight1, setWeight1] = useState(sessionExercise.weight1);
+  const [weight2, setWeight2] = useState(sessionExercise.weight2);
+  const [weight3, setWeight3] = useState(sessionExercise.weight3);
+  const [set1, setSet1] = useState(sessionExercise.set1);
+  const [set2, setSet2] = useState(sessionExercise.set2);
+  const [set3, setSet3] = useState(sessionExercise.set3);
+
+  const onTouch = (id) => {
+    updateSessionExercise(id, {
+      weight1,
+      weight2,
+      weight3,
+      set1,
+      set2,
+      set3,
+    })
+      .then(() => {
+        getSession(user.id);
+      })
+      .then(() => {
+        navigation.navigate('SingleRoutine');
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -44,16 +67,34 @@ const SessionExercise = ({ navigation }) => {
           </View>
           <View style={{ alignItems: 'center' }}>
             <Text>Weight (lbs)</Text>
-            <TextInput>{sessionExercise.weight1}</TextInput>
-            <TextInput>{sessionExercise.weight2}</TextInput>
-            <TextInput>{sessionExercise.weight3}</TextInput>
+            <TextInput onChangeText={(nextValue) => setWeight1(nextValue)}>
+              {sessionExercise.weight1}
+            </TextInput>
+            <TextInput onChangeText={(nextValue) => setWeight2(nextValue)}>
+              {sessionExercise.weight2}
+            </TextInput>
+            <TextInput onChangeText={(nextValue) => setWeight3(nextValue)}>
+              {sessionExercise.weight3}
+            </TextInput>
           </View>
           <View style={{ alignItems: 'center', padding: 2 }}>
             <Text>Reps</Text>
-            <TextInput>{sessionExercise.set1}</TextInput>
-            <TextInput>{sessionExercise.set2}</TextInput>
-            <TextInput>{sessionExercise.set3}</TextInput>
+            <TextInput onChangeText={(nextValue) => setSet1(nextValue)}>
+              {sessionExercise.set1}
+            </TextInput>
+            <TextInput onChangeText={(nextValue) => setSet2(nextValue)}>
+              {sessionExercise.set2}
+            </TextInput>
+            <TextInput onChangeText={(nextValue) => setSet3(nextValue)}>
+              {sessionExercise.set3}
+            </TextInput>
           </View>
+          <Button
+            title="Record Exercise"
+            onPress={() => {
+              onTouch(sessionExercise.id);
+            }}
+          />
         </View>
 
         <ScrollView>

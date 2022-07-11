@@ -12,8 +12,13 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const SingleRoutine = ({ navigation }) => {
-  const { singleRoutine, getSessionExercise, completeSession, user } =
-    useContext(AuthContext);
+  const {
+    singleRoutine,
+    getSessionExercise,
+    completeSession,
+    user,
+    getSession,
+  } = useContext(AuthContext);
 
   const onTouch = (id) => {
     getSessionExercise(id).then(() => {
@@ -21,8 +26,6 @@ const SingleRoutine = ({ navigation }) => {
       console.log('in on touch');
     });
   };
-
-  console.log(singleRoutine);
 
   return (
     <View style={styles.container}>
@@ -39,7 +42,6 @@ const SingleRoutine = ({ navigation }) => {
 
         <ScrollView>
           {singleRoutine.sessionExercises.map((exercise) => {
-            // console.log('exercise :>> ', exercise);
             return (
               <View key={exercise.id} style={{ margin: 20 }}>
                 <View style={styles.routineContainer}>
@@ -54,21 +56,21 @@ const SingleRoutine = ({ navigation }) => {
                   >
                     <View>
                       <Text style={{ fontSize: 15 }}>Set</Text>
-                      <TextInput>1</TextInput>
-                      <TextInput>2</TextInput>
-                      <TextInput>3</TextInput>
+                      <Text>1</Text>
+                      <Text>2</Text>
+                      <Text>3</Text>
                     </View>
                     <View style={{ alignItems: 'center' }}>
                       <Text>Weight (lbs)</Text>
-                      <TextInput>{exercise.weight1}</TextInput>
-                      <TextInput>{exercise.weight2}</TextInput>
-                      <TextInput>{exercise.weight3}</TextInput>
+                      <Text>{exercise.weight1}</Text>
+                      <Text>{exercise.weight2}</Text>
+                      <Text>{exercise.weight3}</Text>
                     </View>
                     <View style={{ alignItems: 'center', padding: 2 }}>
                       <Text>Reps</Text>
-                      <TextInput>{exercise.set1}</TextInput>
-                      <TextInput>{exercise.set2}</TextInput>
-                      <TextInput>{exercise.set3}</TextInput>
+                      <Text>{exercise.set1}</Text>
+                      <Text>{exercise.set2}</Text>
+                      <Text>{exercise.set3}</Text>
                     </View>
                   </View>
 
