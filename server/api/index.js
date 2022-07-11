@@ -9,6 +9,7 @@ router.use('/routines', require('./routines'));
 router.use('/sessions', require('./sessions'));
 router.use('/sessionExercises', require('./sessionExercises'));
 router.use('/items', require('./items'));
+router.use('/opponents', require('./opponents'));
 
 router.use((req, res, next) => {
   const error = new Error('Not Found');
