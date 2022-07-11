@@ -144,6 +144,7 @@ router.post('/start/:userId', async (req, res, next) => {
           sessionId: session.id,
         });
       }
+      await user.update({currentSession: true})
       await user.addSession(session);
       res.json(session);
     }
@@ -421,6 +422,7 @@ router.put('/complete/:userId', async (req, res, next) => {
       stretchingCurrentLevelExp: newStretchingCurrentLevelExp,
       stretchingCurrentLevel: newStretchingCurrentLevel,
       coins,
+      currentSession: false
     });
 
     // Assign session as completed

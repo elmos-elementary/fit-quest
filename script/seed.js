@@ -66,31 +66,32 @@ async function seed() {
   }
 
   // Routine Exercises
-  await chest.addExercise(exercise[4]) // Incline Dumbbell Bench Press
-  await chest.addExercise(exercise[5]) // Low-cable Cross-over
-  await chest.addExercise(exercise[3]) // Dumbbell Flys
-  await back.addExercise(exercise[7]) // Seated Cable Row
-  await back.addExercise(exercise[8]) // Reverse-grip Bent-over Row
-  await back.addExercise(exercise[9]) // Lat Pull-down
-  await bicep.addExercise(exercise[11]) // Dumbbell Bicep Curl
-  await bicep.addExercise(exercise[14]) // Hammer Curl
-  await bicep.addExercise(exercise[16]) // Overhead Cable Curl
-  await tricep.addExercise(exercise[12]) // Tricep Dumbbell Kickback
-  await tricep.addExercise(exercise[13]) // Cable V-bar Push-down
-  await shoulder.addExercise(exercise[23]) // Overhead Dumbbell Front Raise
-  await shoulder.addExercise(exercise[25]) // Military Press
-  await shoulder.addExercise(exercise[24]) // Seated Dumbbell Press
-  await lowerBody.addExercise(exercise[17]) // Bodyweight Squat
-  await lowerBody.addExercise(exercise[19]) // Leg Press
-  await lowerBody.addExercise(exercise[21]) // Seated Calf Raise
-  await lowerBody.addExercise(exercise[22]) // Single-leg Glute Bridge
-  await cardio.addExercise(exercise[35]) // Treadmill
-  await cardio.addExercise(exercise[36]) // Jump Rope
-  await cardio.addExercise(exercise[37]) // Stair Climber
-  await cardio.addExercise(exercise[40]) // Burpee
-  await flexability.addExercise(exercise[43]) // Windmill
-  await flexability.addExercise(exercise[45]) // Lower Back Curl
-  await flexability.addExercise(exercise[44]) // Leg-up Hamstring Stretch
+  await chest.addExercise(exercise[3]) // Incline Dumbbell Bench Press
+  await chest.addExercise(exercise[4]) // Low-cable Cross-over
+  await chest.addExercise(exercise[2]) // Dumbbell Flys
+  await back.addExercise(exercise[6]) // Seated Cable Row
+  await back.addExercise(exercise[7]) // Reverse-grip Bent-over Row
+  await back.addExercise(exercise[8]) // Lat Pull-down
+  await bicep.addExercise(exercise[10]) // Dumbbell Bicep Curl
+  await bicep.addExercise(exercise[13]) // Hammer Curl
+  await bicep.addExercise(exercise[15]) // Overhead Cable Curl
+  await tricep.addExercise(exercise[11]) // Tricep Dumbbell Kickback
+  await tricep.addExercise(exercise[12]) // Cable V-bar Push-down
+  await tricep.addExercise(exercise[46]) // Seated Triceps Press
+  await shoulder.addExercise(exercise[22]) // Overhead Dumbbell Front Raise
+  await shoulder.addExercise(exercise[24]) // Military Press
+  await shoulder.addExercise(exercise[23]) // Seated Dumbbell Press
+  await lowerBody.addExercise(exercise[16]) // Bodyweight Squat
+  await lowerBody.addExercise(exercise[18]) // Leg Press
+  await lowerBody.addExercise(exercise[20]) // Seated Calf Raise
+  await lowerBody.addExercise(exercise[21]) // Single-leg Glute Bridge
+  await cardio.addExercise(exercise[34]) // Treadmill
+  await cardio.addExercise(exercise[35]) // Jump Rope
+  await cardio.addExercise(exercise[36]) // Stair Climber
+  await cardio.addExercise(exercise[39]) // Burpee
+  await flexability.addExercise(exercise[42]) // Windmill
+  await flexability.addExercise(exercise[44]) // Lower Back Curl
+  await flexability.addExercise(exercise[43]) // Leg-up Hamstring Stretch
 
   // Sessions
   await sessions[0].setRoutine(chest);
@@ -112,90 +113,90 @@ async function seed() {
   await users[1].addSessions(sessions[7]);
 
   // Cody Session Exercises
-  await sessionExercises[0].setExercise(exercise[4])
+  await sessionExercises[0].setExercise(exercise[3])
   await sessionExercises[0].setSession(sessions[0])
   await sessionExercises[0].setUser(users[0])
-  await sessionExercises[1].setExercise(exercise[5])
+  await sessionExercises[1].setExercise(exercise[4])
   await sessionExercises[1].setSession(sessions[0])
   await sessionExercises[1].setUser(users[0])
-  await sessionExercises[2].setExercise(exercise[3])
+  await sessionExercises[2].setExercise(exercise[2])
   await sessionExercises[2].setSession(sessions[0])
   await sessionExercises[2].setUser(users[0])
-  await sessionExercises[3].setExercise(exercise[7])
+  await sessionExercises[3].setExercise(exercise[6])
   await sessionExercises[3].setSession(sessions[1])
   await sessionExercises[3].setUser(users[0])
-  await sessionExercises[4].setExercise(exercise[8])
+  await sessionExercises[4].setExercise(exercise[7])
   await sessionExercises[4].setSession(sessions[1])
   await sessionExercises[4].setUser(users[0])
-  await sessionExercises[5].setExercise(exercise[9])
+  await sessionExercises[5].setExercise(exercise[8])
   await sessionExercises[5].setSession(sessions[1])
   await sessionExercises[5].setUser(users[0])
-  await sessionExercises[6].setExercise(exercise[17])
+  await sessionExercises[6].setExercise(exercise[16])
   await sessionExercises[6].setSession(sessions[2])
   await sessionExercises[6].setUser(users[0])
-  await sessionExercises[7].setExercise(exercise[19])
+  await sessionExercises[7].setExercise(exercise[18])
   await sessionExercises[7].setSession(sessions[2])
   await sessionExercises[7].setUser(users[0])
-  await sessionExercises[8].setExercise(exercise[21])
+  await sessionExercises[8].setExercise(exercise[20])
   await sessionExercises[8].setSession(sessions[2])
   await sessionExercises[8].setUser(users[0])
-  await sessionExercises[9].setExercise(exercise[22])
+  await sessionExercises[9].setExercise(exercise[21])
   await sessionExercises[9].setSession(sessions[2])
   await sessionExercises[9].setUser(users[0])
-  await sessionExercises[10].setExercise(exercise[4])
+  await sessionExercises[10].setExercise(exercise[3])
   await sessionExercises[10].setSession(sessions[3])
   await sessionExercises[10].setUser(users[0])
-  await sessionExercises[11].setExercise(exercise[5])
+  await sessionExercises[11].setExercise(exercise[4])
   await sessionExercises[11].setSession(sessions[3])
   await sessionExercises[11].setUser(users[0])
-  await sessionExercises[12].setExercise(exercise[3])
+  await sessionExercises[12].setExercise(exercise[2])
   await sessionExercises[12].setSession(sessions[3])
   await sessionExercises[12].setUser(users[0])
-  await sessionExercises[13].setExercise(exercise[7])
+  await sessionExercises[13].setExercise(exercise[6])
   await sessionExercises[13].setSession(sessions[4])
   await sessionExercises[13].setUser(users[0])
-  await sessionExercises[14].setExercise(exercise[8])
+  await sessionExercises[14].setExercise(exercise[7])
   await sessionExercises[14].setSession(sessions[4])
   await sessionExercises[14].setUser(users[0])
-  await sessionExercises[15].setExercise(exercise[9])
+  await sessionExercises[15].setExercise(exercise[8])
   await sessionExercises[15].setSession(sessions[4])
   await sessionExercises[15].setUser(users[0])
-  await sessionExercises[16].setExercise(exercise[17])
+  await sessionExercises[16].setExercise(exercise[16])
   await sessionExercises[16].setSession(sessions[5])
   await sessionExercises[16].setUser(users[0])
-  await sessionExercises[17].setExercise(exercise[19])
+  await sessionExercises[17].setExercise(exercise[18])
   await sessionExercises[17].setSession(sessions[5])
   await sessionExercises[17].setUser(users[0])
-  await sessionExercises[18].setExercise(exercise[21])
+  await sessionExercises[18].setExercise(exercise[20])
   await sessionExercises[18].setSession(sessions[5])
   await sessionExercises[18].setUser(users[0])
-  await sessionExercises[19].setExercise(exercise[22])
+  await sessionExercises[19].setExercise(exercise[21])
   await sessionExercises[19].setSession(sessions[5])
   await sessionExercises[19].setUser(users[0])
 
   // Murphy Session Exercises
-  await sessionExercises[20].setExercise(exercise[35])
+  await sessionExercises[20].setExercise(exercise[34])
   await sessionExercises[20].setSession(sessions[6])
   await sessionExercises[20].setUser(users[1])
-  await sessionExercises[21].setExercise(exercise[36])
+  await sessionExercises[21].setExercise(exercise[35])
   await sessionExercises[21].setSession(sessions[6])
   await sessionExercises[21].setUser(users[1])
-  await sessionExercises[22].setExercise(exercise[37])
+  await sessionExercises[22].setExercise(exercise[36])
   await sessionExercises[22].setSession(sessions[6])
   await sessionExercises[22].setUser(users[1])
-  await sessionExercises[23].setExercise(exercise[40])
+  await sessionExercises[23].setExercise(exercise[39])
   await sessionExercises[23].setSession(sessions[6])
   await sessionExercises[23].setUser(users[1])
-  await sessionExercises[24].setExercise(exercise[35])
+  await sessionExercises[24].setExercise(exercise[34])
   await sessionExercises[24].setSession(sessions[7])
   await sessionExercises[24].setUser(users[1])
-  await sessionExercises[25].setExercise(exercise[36])
+  await sessionExercises[25].setExercise(exercise[35])
   await sessionExercises[25].setSession(sessions[7])
   await sessionExercises[25].setUser(users[1])
-  await sessionExercises[26].setExercise(exercise[37])
+  await sessionExercises[26].setExercise(exercise[36])
   await sessionExercises[26].setSession(sessions[7])
   await sessionExercises[26].setUser(users[1])
-  await sessionExercises[27].setExercise(exercise[40])
+  await sessionExercises[27].setExercise(exercise[39])
   await sessionExercises[27].setSession(sessions[7])
   await sessionExercises[27].setUser(users[1])
 
