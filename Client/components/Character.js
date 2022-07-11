@@ -38,9 +38,10 @@ const Character = ({ navigation }) => {
       skillCounter += 11;
     }
   }
-
-  console.log(useContext(AuthContext));
+  let currentLevelString = user.currentLevel.toString();
   console.log(getSession);
+  console.log(levelExp);
+  console.log(levelExp[currentLevelString]);
   // console.log(user);
   return (
     <View style={styles.container}>
@@ -62,7 +63,19 @@ const Character = ({ navigation }) => {
             <View style={styles.topTextBox}>
               <Text>{user.name}</Text>
               <Text>Level: {user.currentLevel}</Text>
-              <Bar progress={user.currentLevelExp / 10} />
+              <Bar
+                progress={user.currentLevelExp / levelExp[currentLevelString]}
+              />
+              <Text>
+                {user.currentLevelExp} / {levelExp[currentLevelString]} XP
+              </Text>
+            </View>
+          </View>
+          <View style={styles.allSkillsContainer}>
+            <View style={styles.skillsContainer}>
+              <Text>Chest</Text>
+              <Text>Level</Text>
+              <Bar progress={8 / 10} width={200} height={16} />
             </View>
           </View>
         </View>
@@ -80,20 +93,32 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   main: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
   },
   top: {
     flexDirection: 'row',
     backgroundColor: 'white',
     borderRadius: 20,
     opacity: 0.8,
+    margin: 10,
+    padding: 10,
   },
   topTextBox: {
     justifyContent: 'center',
     alignItems: 'flex-start',
-    flexBasis: 300,
+    flexBasis: 250,
     paddingLeft: 20,
+  },
+  allSkillsContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    opacity: 0.8,
+    margin: 10,
+    padding: 10,
+  },
+  skillsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 
