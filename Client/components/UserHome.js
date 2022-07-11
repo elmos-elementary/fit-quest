@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -23,58 +23,65 @@ const UserHome = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={require('../../src/assets/background.jpeg')}
-        resizeMode="cover"
-        style={styles.backgroundImage}
-      >
-        <View style={styles.image}>
-          <Image source={require('../../src/assets/favicon.png')} />
+      {user ? (
+        <View style={styles.container}>
+          <ImageBackground
+            source={require('../../src/assets/background.jpeg')}
+            resizeMode="cover"
+            style={styles.backgroundImage}
+          >
+            <View style={styles.image}>
+              <Image source={require('../../src/assets/favicon.png')} />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text style={{ fontSize: 20, fontFamily: Font.helvetica }}>
+                Username
+              </Text>
+              <Text style={{ fontSize: 18, fontFamily: Font.helvetica }}>
+                Class
+              </Text>
+              <Text style={{ fontSize: 15, fontFamily: Font.helvetica }}>
+                Level 99
+              </Text>
+              <ProgressBar progress={0.5} />
+              <View style={styles.button}>
+                <Button
+                  color="black"
+                  title="Start Workout"
+                  onPress={() => {
+                    navigation.navigate('StartWorkout');
+                  }}
+                />
+              </View>
+              <View style={styles.button}>
+                <Button
+                  color="black"
+                  title="History"
+                  onPress={() => {
+                    findUserHistory();
+                  }}
+                />
+              </View>
+              <View style={styles.button}>
+                <Button color="black" title="Character" />
+              </View>
+              <View>
+                <Button
+                  title="logout"
+                  style={{ margin: 10 }}
+                  onPress={() => {
+                    logout();
+                  }}
+                />
+              </View>
+            </View>
+          </ImageBackground>
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={{ fontSize: 20, fontFamily: Font.helvetica }}>
-            Username
-          </Text>
-          <Text style={{ fontSize: 18, fontFamily: Font.helvetica }}>
-            Class
-          </Text>
-          <Text style={{ fontSize: 15, fontFamily: Font.helvetica }}>
-            Level 99
-          </Text>
-          <ProgressBar progress={0.5} />
-          <View style={styles.button}>
-            <Button
-              color="black"
-              title="Start Workout"
-              onPress={() => {
-                navigation.navigate('AllRoutines');
-              }}
-            />
-          </View>
-          <View style={styles.button}>
-            <Button
-              color="black"
-              title="History"
-              onPress={() => {
-                findUserHistory();
-              }}
-            />
-          </View>
-          <View style={styles.button}>
-            <Button color="black" title="Character" />
-          </View>
-
-          <View>
-            <Button
-              title="logout"
-              style={{ margin: 10 }}
-              onPress={() => {
-                logout();
-              }}
-            ></Button>
-          </View>
+      ) : (
+        <View>
+          <Text>Some Text HERE</Text>
         </View>
-      </ImageBackground>
+      )}
     </View>
   );
 };
