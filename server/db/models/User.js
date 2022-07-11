@@ -27,6 +27,10 @@ const User = db.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  currentSession: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+  },
   // Character Information
   name: {
     type: Sequelize.STRING,
