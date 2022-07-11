@@ -73,7 +73,7 @@ router.get('/all/:userId', async (req, res, next) => {
       where: {
         userId: userId,
       },
-      include: [Routine, SessionExercise],
+      include: [Routine, { model: SessionExercise, include: [{ model: Exercise, attributes: ['name'] }] }],
     })
     res.json(sessions)
   } catch (err) {
@@ -91,7 +91,7 @@ router.get('/current/:userId', async (req, res, next) => {
         userId: userId,
         complete: false,
       },
-      include: [{ model: SessionExercise, include: [Exercise] }],
+      include: [{ model: SessionExercise, include: [{ model: Exercise, attributes: ['name'] }] }],
     })
     if (!session) {
       res.send('User has no active session!')
