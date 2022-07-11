@@ -12,12 +12,8 @@ import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
 import * as Font from 'expo-font';
 
-export const image = {
-  uri: 'https://imgur.com/rJ1GVWj.jpg',
-};
 const UserHome = ({ navigation }) => {
   const { logout, user, getUserHistory } = useContext(AuthContext);
-  console.log('user1 :>> ', user);
 
   const findUserHistory = () => {
     getUserHistory(user.id).then(() => {
@@ -30,7 +26,7 @@ const UserHome = ({ navigation }) => {
       {user ? (
         <View style={styles.container}>
           <ImageBackground
-            source={image}
+            source={require('../../src/assets/background.jpeg')}
             resizeMode="cover"
             style={styles.backgroundImage}
           >
@@ -90,7 +86,7 @@ const UserHome = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },

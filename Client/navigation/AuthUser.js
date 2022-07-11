@@ -3,11 +3,11 @@ import { View, Text, Button } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
-// import StartWork from '../components/StartWorkout';
 import MainTabScreen from '../components/MainTabScreen';
 import SingleRoutine from '../components/SingleRoutine';
 import SessionExercise from '../components/SessionExercise';
 import UserHistory from '../components/UserHistory';
+import AllRoutines from '../components/AllRoutines';
 
 const AuthUser = () => {
   return (
@@ -23,6 +23,9 @@ const AuthUser = () => {
       </Stack.Screen>
       <Stack.Screen name="UserHistory">
         {(props) => <UserHistory {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name="AllRoutines">
+        {(props) => <AllRoutines {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

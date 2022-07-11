@@ -27,7 +27,8 @@ const SessionExercise = db.define('sessionExercise', {
     defaultValue: 0
   },
   cardioTime: {
-    type: Sequelize.INTEGER
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 

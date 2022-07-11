@@ -27,7 +27,7 @@ const UserHistory = ({ navigation }) => {
           <Text style={styles.text}>UserHistory Page</Text>
           <ScrollView>
             {userHistory.map((history, i) => {
-              console.log('history :>> ', history);
+              console.log('history :>> ', history.sessionExercises);
               return (
                 <View key={i}>
                   {/* <Text>{history.routine}</Text> */}

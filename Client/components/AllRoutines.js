@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import {
   View,
   Text,
@@ -8,11 +8,12 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { image } from './UserHome';
+
 import { AuthContext } from '../context/AuthContext';
 
 const AllRoutines = ({ navigation }) => {
-  const { routine, getSingleRoutine, user, logout,  } = useContext(AuthContext);
+  const { routine, getSingleRoutine, singleRoutine, user, logout } =
+    useContext(AuthContext);
 
   const onTouch = (id) => {
     getSingleRoutine(user.id, id).then(() => {
@@ -23,45 +24,54 @@ const AllRoutines = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={image}
+        source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
+        imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
         <View style={styles.textContainer}>
           <Text style={styles.text}>Choose Routine</Text>
-          <Button
+          {/* <Button
             title="logout"
             onPress={() => {
               logout();
             }}
-          />
-          <ScrollView>
-            {routine ? (
-              routine.map((routine) => {
-                return (
-                  <TouchableOpacity
-                    key={routine.id}
-                    style={{
-                      margin: 10,
-                      backgroundColor: 'white',
-                      opacity: 0.8,
-                    }}
-                    onPress={() => {
-                      onTouch(routine.id);
-                    }}
-                  >
-                    <Text>{routine.name}</Text>
-                    <Text>{routine.id}</Text>
-                    {routine.exercises.map((exercise) => {
-                      return <Text key={exercise.id}>{exercise.name}</Text>;
-                    })}
-                  </TouchableOpacity>
-                );
-              })
-            ) : (
-              <Text>No Routines</Text>
-            )}
-          </ScrollView>
+          /> */}
+          <View>
+            <View style={styles.routineContainer}>
+              <ScrollView>
+                {routine ? (
+                  routine.map((routine) => {
+                    return (
+                      <TouchableOpacity
+                        key={routine.id}
+                        style={styles.routine}
+                        onPress={() => {
+                          onTouch(routine.id);
+                        }}
+                      >
+                        <Text
+                          style={{
+                            textAlign: 'center',
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                          }}
+                        >
+                          {routine.name}
+                        </Text>
+
+                        {routine.exercises.map((exercise) => {
+                          return <Text key={exercise.id}>{exercise.name}</Text>;
+                        })}
+                      </TouchableOpacity>
+                    );
+                  })
+                ) : (
+                  <Text>No Routines</Text>
+                )}
+              </ScrollView>
+            </View>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -71,6 +81,7 @@ const AllRoutines = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
   },
   backgroundImage: {
     flex: 1,
@@ -82,13 +93,26 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   text: {
-    fontSize: 30,
-
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 30,
+    opacity: 0.8,
     borderRadius: 5,
-    borderColor: '#3D3D3D',
-    borderWidth: 1,
-    padding: 4,
-    margin: 5,
+    overflow: 'hidden',
+    fontSize: 40,
+    padding: 10,
+  },
+  routineContainer: {
+    flex: 1,
+  },
+  routine: {
+    margin: 10,
+    backgroundColor: 'white',
+    opacity: 0.8,
+    borderRadius: 5,
+    alignItems: 'center',
+    padding: 15,
   },
 });
 

@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from '../components/HomeScreen';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
-import CreateCharacter from '../components/CreateCharacter';
+import PasswordRecovery from '../components/PasswordRecovery';
 import { View, Text } from 'react-native';
 const Stack = createNativeStackNavigator();
 
@@ -23,8 +23,8 @@ function UnAuthUser() {
         <Stack.Screen name="SignUp">
           {(props) => <SignUp {...props} />}
         </Stack.Screen>
-        <Stack.Screen name="CreateCharacter">
-          {(props) => <CreateCharacter {...props} />}
+        <Stack.Screen name="PasswordRecovery">
+          {(props) => <PasswordRecovery {...props} />}
         </Stack.Screen>
       </Stack.Navigator>
     </ApplicationProvider>

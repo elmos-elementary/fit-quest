@@ -9,13 +9,11 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const SingleRoutine = ({ navigation }) => {
   const { singleRoutine, getSessionExercise, completeSession, user } =
     useContext(AuthContext);
-  // console.log('inside single routine ', singleRoutine.sessionExercises);
 
   const onTouch = (id) => {
     getSessionExercise(id).then(() => {
@@ -24,69 +22,78 @@ const SingleRoutine = ({ navigation }) => {
     });
   };
 
+  console.log(singleRoutine);
+
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={image}
+        source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
+        imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Current Routine: {singleRoutine.date}</Text>
-          <ScrollView>
-            {singleRoutine.sessionExercises.map((exercise) => {
-              // console.log('exercise :>> ', exercise);
-              return (
-                <View key={exercise.id} style={{ margin: 20 }}>
-                  <Text>{exercise.exercise.name}</Text>
-                  <View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <Text>Set 1</Text>
-                      <TextInput>Reps</TextInput>
-                      <TextInput>Weight</TextInput>
+        <View style={styles.headerContainer}>
+          <Text style={styles.text}>Current Routine: </Text>
+          <Text>{singleRoutine.date}</Text>
+        </View>
+
+        <ScrollView>
+          {singleRoutine.sessionExercises.map((exercise) => {
+            return (
+              <View key={exercise.id} style={{ margin: 20 }}>
+                <View style={styles.routineContainer}>
+                  <Text style={styles.routineName}>
+                    {exercise.exercise.name}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <View>
+                      <Text style={{ fontSize: 15 }}>Set</Text>
+                      <TextInput>1</TextInput>
+                      <TextInput>2</TextInput>
+                      <TextInput>3</TextInput>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <Text>Set 2</Text>
-                      <TextInput>Reps</TextInput>
-                      <TextInput>Weight</TextInput>
+                    <View style={{ alignItems: 'center' }}>
+                      <Text>Weight (lbs)</Text>
+                      <TextInput>{exercise.weight1}</TextInput>
+                      <TextInput>{exercise.weight2}</TextInput>
+                      <TextInput>{exercise.weight3}</TextInput>
                     </View>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                      }}
-                    >
-                      <Text>Set 3</Text>
-                      <TextInput>Reps</TextInput>
-                      <TextInput>Weight</TextInput>
+                    <View style={{ alignItems: 'center', padding: 2 }}>
+                      <Text>Reps</Text>
+                      <TextInput>{exercise.set1}</TextInput>
+                      <TextInput>{exercise.set2}</TextInput>
+                      <TextInput>{exercise.set3}</TextInput>
                     </View>
-                    <Button
-                      title="Record Exercise =>"
-                      onPress={() => {
-                        onTouch(exercise.exerciseId);
-                      }}
-                    />
                   </View>
+
+                  <Button
+                    title="+"
+                    style={styles.addRoutine}
+                    onPress={() => {
+                      onTouch(exercise.exerciseId);
+                    }}
+                  />
                 </View>
-              );
-            })}
+              </View>
+            );
+          })}
+        </ScrollView>
+
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
             <Button
               title="Complete Workout"
+              color="white"
               onPress={() => {
                 completeSession(user.id);
               }}
             />
-          </ScrollView>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -96,24 +103,56 @@ const SingleRoutine = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
   },
+
   backgroundImage: {
     flex: 1,
     justifyContent: 'center',
   },
-  textContainer: {
-    flex: 1,
+
+  headerContainer: {
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 35,
+    opacity: 0.8,
+    borderRadius: 15,
+  },
+
+  text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  button: {
+    backgroundColor: 'black',
+    padding: 2,
+    margin: 50,
+    borderRadius: 15,
+    width: '50%',
+  },
+  routineContainer: {
+    backgroundColor: 'white',
+    opacity: 0.9,
+    // padding: 10,
+    borderRadius: 10,
     margin: 10,
   },
-  text: {
-    fontSize: 30,
-
-    borderRadius: 5,
-    borderColor: '#3D3D3D',
+  routineName: {
+    textAlign: 'center',
+    fontSize: 20,
+    padding: 5,
+    fontWeight: 'bold',
+  },
+  addRoutine: {
+    backgroundColor: '#7E7E7E',
     borderWidth: 1,
-    padding: 4,
-    margin: 5,
   },
 });
 
