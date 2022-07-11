@@ -9,12 +9,39 @@ import {
   ImageBackground,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
-import { ProgressBar, MD3Colors } from 'react-native-paper';
+import { Bar } from 'react-native-progress';
 import * as Font from 'expo-font';
 
 const Character = ({ navigation }) => {
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const { user, getSession } = useContext(AuthContext);
+
+  // User Level Experience Table
+  let levelCounter = 10;
+  const levelExp = {};
+  for (let i = 1; i <= 100; i++) {
+    if (i === 1) {
+      levelExp[i] = 0;
+    } else {
+      levelExp[i] = levelCounter;
+      levelCounter += 11;
+    }
+  }
+
+  // Skill Level Experience Table
+  let skillCounter = 10;
+  const skillLevelExp = {};
+  for (let i = 1; i <= 100; i++) {
+    if (i === 1) {
+      skillLevelExp[i] = 0;
+    } else {
+      skillLevelExp[i] = skillCounter;
+      skillCounter += 11;
+    }
+  }
+
+  console.log(useContext(AuthContext));
+  console.log(getSession);
+  // console.log(user);
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -32,8 +59,10 @@ const Character = ({ navigation }) => {
                 style={{ width: 100, height: 100 }}
               />
             </View>
-            <View style={styles.container}>
-              <Text>{user.image}</Text>
+            <View style={styles.topTextBox}>
+              <Text>{user.name}</Text>
+              <Text>Level: {user.currentLevel}</Text>
+              <Bar progress={user.currentLevelExp / 10} />
             </View>
           </View>
         </View>
@@ -55,7 +84,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   top: {
-    justifyContent: 'left',
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    opacity: 0.8,
+  },
+  topTextBox: {
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    flexBasis: 300,
+    paddingLeft: 20,
   },
 });
 
