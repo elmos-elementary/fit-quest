@@ -182,11 +182,10 @@ router.put('/complete/:userId', async (req, res, next) => {
     // Calculate total exp gain based on character level and skill levels, does not include item bonus
     const user = await User.findByPk(userId)
     const characterId = user.characterId
-    const character = await Character.findByPk(characterId, {include: [Item]})
-    const charLevel = character.currentLevel
+    const character = await Character.findByPk(characterId, { include: [Item] })
     let expGain = 0
     expGain =
-      charLevel *
+      character.currentLevel *
       (exerciseTypes.chest +
         exerciseTypes.back +
         exerciseTypes.arms +
@@ -327,21 +326,10 @@ router.put('/complete/:userId', async (req, res, next) => {
       },
     })
     let currentOpponentHealth = currentOpponent.currentHealth
-    currentOpponentHealth -= character.currentLevel // USING CURRENT LEVEL TO DAMAGE, CHANGE LATER
+    currentOpponentHealth -= character.combatSkill
     let coins = character.coins
     if (currentOpponentHealth <= 0) {
       await currentOpponent.update({ alive: false, currentHealth: 0 })
-      // Give item
-      switch (currentOpponent.type) {
-        case 'common':
-          break
-        case 'uncommon':
-          break
-        case 'legendary':
-          break
-        case 'godly':
-          break
-      }
 
       // Give coins
       coins += Math.ceil(
@@ -356,7 +344,9 @@ router.put('/complete/:userId', async (req, res, next) => {
         character.addItem(newItem)
       } else {
         if (Math.ceil(Math.random() * 4) === 4) {
-          const newItem = await Item.create(generateItem(character.currentLevel))
+          const newItem = await Item.create(
+            generateItem(character.currentLevel)
+          )
           character.addItem(newItem)
         }
       }
@@ -380,8 +370,10 @@ router.put('/complete/:userId', async (req, res, next) => {
     // Add exp gain to character, level up if needed and set currentlLevelExp
     let newCharacterExp = expGain + character.characterExp
     let newCurrentLevel = character.currentLevel
+    let newCombatSkill = character.combatSkill
     while (newCharacterExp >= levelExp[Number(newCurrentLevel) + 1]) {
       newCurrentLevel++
+      newCombatSkill++
       // Roll for item every level up
       if (Math.ceil(Math.random() * 4) === 4) {
         const newItem = await Item.create(generateItem(character.currentLevel))
@@ -393,6 +385,7 @@ router.put('/complete/:userId', async (req, res, next) => {
       characterExp: newCharacterExp,
       currentLevel: newCurrentLevel,
       currentLevelExp: newCurrentLevelExp,
+      combatSkill: newCombatSkill,
       chestExp: newChestExp,
       chestCurrentLevelExp: newChestCurrentLevelExp,
       chestCurrentLevel: newChestCurrentLevel,

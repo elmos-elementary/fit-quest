@@ -64,42 +64,75 @@ router.put('/equip/:characterId/:itemId', async (req, res, next) => {
       res.send('Item does not belong to character')
     }
 
-    // Find character and check if item is already equipped, else equip item
+    // Find character and check if item is already equipped, else equip item and modify combat skill
     const character = await Character.findByPk(characterId)
+    let newCombatSkill = character.combatSkill
     switch (item.type) {
       case 'weapon':
         if (character.weapon === item.id) {
           res.send('Item is already equipped')
         } else {
-          await character.update({ weapon: item.id })
+          if (character.weapon) {
+            // If unequipping previous item, modify combat skill
+            const unequippedItem = await Item.findByPk(character.weapon)
+            newCombatSkill -= unequippedItem.combatSkill
+          }
+          newCombatSkill += item.combatSkill
+          await character.update({
+            weapon: item.id,
+            combatSkill: newCombatSkill,
+          })
         }
         break
       case 'head':
         if (character.head === item.id) {
           res.send('Item is already equipped')
         } else {
-          await character.update({ head: item.id })
+          if (character.head) {
+            const unequippedItem = await Item.findByPk(character.head)
+            newCombatSkill -= unequippedItem.combatSkill
+          }
+          newCombatSkill += item.combatSkill
+          await character.update({ head: item.id, combatSkill: newCombatSkill })
         }
         break
       case 'chest':
         if (character.chest === item.id) {
           res.send('Item is already equipped')
         } else {
-          await character.update({ chest: item.id })
+          if (character.chest) {
+            const unequippedItem = await Item.findByPk(character.chest)
+            newCombatSkill -= unequippedItem.combatSkill
+          }
+          newCombatSkill += item.combatSkill
+          await character.update({
+            chest: item.id,
+            combatSkill: newCombatSkill,
+          })
         }
         break
       case 'leg':
         if (character.leg === item.id) {
           res.send('Item is already equipped')
         } else {
-          await character.update({ leg: item.id })
+          if (character.leg) {
+            const unequippedItem = await Item.findByPk(character.leg)
+            newCombatSkill -= unequippedItem.combatSkill
+          }
+          newCombatSkill += item.combatSkill
+          await character.update({ leg: item.id, combatSkill: newCombatSkill })
         }
         break
       case 'ring':
         if (character.ring === item.id) {
           res.send('Item is already equipped')
         } else {
-          await character.update({ ring: item.id })
+          if (character.ring) {
+            const unequippedItem = await Item.findByPk(character.ring)
+            newCombatSkill -= unequippedItem.combatSkill
+          }
+          newCombatSkill += item.combatSkill
+          await character.update({ ring: item.id, combatSkill: newCombatSkill })
         }
         break
     }
@@ -116,42 +149,53 @@ router.put('/unequip/:characterId/:slot', async (req, res, next) => {
     const characterId = req.params.characterId
     const slot = req.params.slot
 
-    // Find character and check if item is in slot, then unequip item
+    // Find character and check if item is in slot, then unequip item and modify combat skill
     const character = await Character.findByPk(characterId)
+    let newCombatSkill = character.combatSkill
     switch (slot) {
       case 'weapon':
         if (!character.weapon) {
           res.send('No item equipped')
         } else {
-          await character.update({ weapon: null })
+          const unequippedItem = await Item.findByPk(character.weapon)
+          newCombatSkill -= unequippedItem.combatSkill
+          await character.update({ weapon: null, combatSkill: newCombatSkill })
         }
         break
       case 'head':
         if (!character.head) {
           res.send('No item equipped')
         } else {
-          await character.update({ head: null })
+          const unequippedItem = await Item.findByPk(character.head)
+          newCombatSkill -= unequippedItem.combatSkill
+          await character.update({ head: null, combatSkill: newCombatSkill })
         }
         break
       case 'chest':
         if (!character.chest) {
           res.send('No item equipped')
         } else {
-          await character.update({ chest: null })
+          const unequippedItem = await Item.findByPk(character.chest)
+          newCombatSkill -= unequippedItem.combatSkill
+          await character.update({ chest: null, combatSkill: newCombatSkill })
         }
         break
       case 'leg':
         if (!character.leg) {
           res.send('No item equipped')
         } else {
-          await character.update({ leg: null })
+          const unequippedItem = await Item.findByPk(character.leg)
+          newCombatSkill -= unequippedItem.combatSkill
+          await character.update({ leg: null, combatSkill: newCombatSkill })
         }
         break
       case 'ring':
         if (!character.ring) {
           res.send('No item equipped')
         } else {
-          await character.update({ ring: null })
+          const unequippedItem = await Item.findByPk(character.ring)
+          newCombatSkill -= unequippedItem.combatSkill
+          await character.update({ ring: null, combatSkill: newCombatSkill })
         }
         break
     }
