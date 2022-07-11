@@ -12,6 +12,8 @@ import { AuthContext } from '../context/AuthContext';
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailErrorMessage, setEmailErrorMessage] = useState('');
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
   const { login } = useContext(AuthContext);
 
   return (
@@ -44,6 +46,7 @@ const Login = ({ navigation }) => {
             value={email}
             onChangeText={(nextValue) => setEmail(nextValue)}
           />
+          <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
           <Text style={styles.inputHeader}>PASSWORD</Text>
           <TextInput
             placeholder="****"
@@ -52,13 +55,14 @@ const Login = ({ navigation }) => {
             secureTextEntry={true}
             onChangeText={(nextValue) => setPassword(nextValue)}
           />
+          <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
         </View>
 
         <View>
           <Text
             category="s1"
             status="primary"
-            style={{ textAlign: 'right', margin: 2 }}
+            style={{ textAlign: 'right', margin: 2, paddingRight: 20 }}
             onPress={() => {
               navigation.navigate('PasswordRecovery');
             }}
@@ -72,7 +76,16 @@ const Login = ({ navigation }) => {
               title="Log In"
               color="white"
               onPress={() => {
-                login(email.toLowerCase(), password);
+                if (email === '' || password === '') {
+                  if (email === '') {
+                    setEmailErrorMessage('Please input email');
+                  }
+                  if (password === '') {
+                    setPasswordErrorMessage('Please input Password');
+                  }
+                } else {
+                  login(email.toLowerCase(), password);
+                }
               }}
             />
           </View>
@@ -129,6 +142,12 @@ export const styles = StyleSheet.create({
     backgroundColor: 'black',
     padding: 1,
     margin: 30,
+  },
+
+  errorMessage: {
+    color: 'red',
+    paddingLeft: 20,
+    paddingBottom: 10,
   },
 });
 export default Login;
