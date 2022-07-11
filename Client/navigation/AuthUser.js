@@ -8,6 +8,7 @@ import SingleRoutine from '../components/SingleRoutine';
 import SessionExercise from '../components/SessionExercise';
 import UserHistory from '../components/UserHistory';
 import AllRoutines from '../components/AllRoutines';
+import Character from '../components/Character';
 
 const AuthUser = () => {
   return (
@@ -26,6 +27,9 @@ const AuthUser = () => {
       </Stack.Screen>
       <Stack.Screen name="AllRoutines">
         {(props) => <AllRoutines {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name="Character">
+        {(props) => <Character {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
