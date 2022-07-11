@@ -23,7 +23,7 @@ router.post('/signup', async (req, res, next) => {
       currentHealth: 3,
       level: 1,
     })
-    opponent.setCharacter(user)
+    opponent.setUser(user)
     // Token stuff
     res.send({ token: await user.generateToken() });
   } catch (err) {
