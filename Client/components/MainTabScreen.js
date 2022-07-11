@@ -1,11 +1,15 @@
+import React, { useContext } from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import UserHome from './UserHome';
 import AllRoutines from './AllRoutines';
+import SingleRoutine from './SingleRoutine';
+import { AuthContext } from '../context/AuthContext';
 
 const Tab = createMaterialBottomTabNavigator();
 
 function MainTabScreen() {
+  const { user } = useContext(AuthContext);
   return (
     <Tab.Navigator
       initialRouteName="UserHome"
@@ -24,10 +28,21 @@ function MainTabScreen() {
         }}
       />
       <Tab.Screen
-        name="StartWorkout"
+        name="AllRoutines"
         component={AllRoutines}
         options={{
           tabBarLabel: 'Workouts',
+          tabBarColor: '#1f65ff',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="bell" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="SingleRoutine"
+        component={SingleRoutine}
+        options={{
+          tabBarLabel: 'Current Session',
           tabBarColor: '#1f65ff',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="bell" color={color} size={26} />

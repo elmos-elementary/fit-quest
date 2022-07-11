@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [sessionExercise, setSessionExercise] = useState(null);
   const [userHistory, setUserHistory] = useState(null);
+  const [exerciseHistory, setExerciseHistory] = useState([]);
 
   const login = async (email, password) => {
     try {
@@ -150,7 +151,7 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessions/current/${userId}`
       );
-     
+
       data.sessionExercises.sort((a, b) => a.exerciseId - b.exerciseId);
       setSingleRoutine(data);
       return data;
@@ -201,6 +202,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getExerciseHistory = async (userId, exerciseId) => {
+    try {
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/sessionExercises/history/${userId}/${exerciseId}`
+      );
+
+      setExerciseHistory(data);
+
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const logout = () => {
     try {
       console.log('logout ran');
@@ -235,14 +250,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // function fetchData() {
-    //   AsyncStorage.getItem('userToken').then((response) => {
-    //     getUser(response);
-    //   });
-    // }
     console.log('use effect ran');
     isLoggedIn();
-    // fetchData();
 
     getRoutine();
   }, []);
@@ -269,6 +278,8 @@ export const AuthProvider = ({ children }) => {
         completeSession,
         updateSessionExercise,
         getSession,
+        getExerciseHistory,
+        exerciseHistory,
       }}
     >
       {children}

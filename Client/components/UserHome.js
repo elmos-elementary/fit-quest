@@ -14,6 +14,7 @@ import * as Font from 'expo-font';
 
 const UserHome = ({ navigation }) => {
   const { logout, user, getUserHistory } = useContext(AuthContext);
+  console.log('user1 :>> ', user);
 
   const findUserHistory = () => {
     getUserHistory(user.id).then(() => {
@@ -49,7 +50,7 @@ const UserHome = ({ navigation }) => {
                   color="black"
                   title="Start Workout"
                   onPress={() => {
-                    navigation.navigate('StartWorkout');
+                    navigation.navigate('AllRoutines');
                   }}
                 />
               </View>

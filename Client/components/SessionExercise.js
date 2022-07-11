@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
+import ExerciseHistory from './ExerciseHistory';
 
 const SessionExercise = ({ navigation }) => {
   const { sessionExercise, updateSessionExercise, user, getSession } =
@@ -99,6 +100,7 @@ const SessionExercise = ({ navigation }) => {
 
         <ScrollView>
           <Text>{sessionExercise.exercise.description}</Text>
+          <ExerciseHistory exerciseId={sessionExercise.exercise.id} />
         </ScrollView>
       </ImageBackground>
     </View>
