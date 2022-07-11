@@ -14,8 +14,7 @@ import { AuthContext } from '../context/AuthContext';
 
 const UserHistory = ({ navigation }) => {
   const { userHistory } = useContext(AuthContext);
-  // console.log('userHistory :>> ', userHistory);
-  // console.log('userHistory :>> ', userHistory.length);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -30,9 +29,7 @@ const UserHistory = ({ navigation }) => {
               console.log('history :>> ', history.sessionExercises);
               return (
                 <View>
-                  {/* <Text>{history.routine}</Text> */}
                   <Text>{history.routine.name}</Text>
-                  {/* <Text>{history.routineId}</Text>; */}
                 </View>
               );
             })}

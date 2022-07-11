@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
@@ -18,11 +19,8 @@ const SingleRoutine = ({ navigation }) => {
   const onTouch = (id) => {
     getSessionExercise(id).then(() => {
       navigation.navigate('SessionExercise');
-      console.log('in on touch');
     });
   };
-
-  console.log(singleRoutine);
 
   return (
     <View style={styles.container}>
@@ -34,7 +32,7 @@ const SingleRoutine = ({ navigation }) => {
       >
         <View style={styles.headerContainer}>
           <Text style={styles.text}>Current Routine: </Text>
-          <Text>{singleRoutine.date}</Text>
+          <Text>{new Date().toUTCString()}</Text>
         </View>
 
         <ScrollView>
@@ -70,14 +68,6 @@ const SingleRoutine = ({ navigation }) => {
                       <TextInput>{exercise.set3}</TextInput>
                     </View>
                   </View>
-
-                  <Button
-                    title="+"
-                    style={styles.addRoutine}
-                    onPress={() => {
-                      onTouch(exercise.exerciseId);
-                    }}
-                  />
                 </View>
               </View>
             );
@@ -91,6 +81,17 @@ const SingleRoutine = ({ navigation }) => {
               color="white"
               onPress={() => {
                 completeSession(user.id);
+                Alert.alert('Good Job', 'Want to try some more?', [
+                  {
+                    text: 'No',
+                    onPress: () => navigation.navigate('UserHome'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'yes',
+                    onPress: () => navigation.navigate('AllRoutines'),
+                  },
+                ]);
               }}
             />
           </View>
