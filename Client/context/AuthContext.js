@@ -100,14 +100,12 @@ export const AuthProvider = ({ children }) => {
 
   const getRoutine = async () => {
     try {
-
       console.log('get routine ran');
       const { data } = await axios.get(
         'https://fitquestapp.herokuapp.com/api/routines'
       );
 
       setRoutine(data);
-
     } catch (err) {
       console.error(err);
     }
@@ -135,7 +133,6 @@ export const AuthProvider = ({ children }) => {
 
   const getSessionExercise = async (id) => {
     try {
-
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessionexercises/${id}`
       );
@@ -148,15 +145,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const completeSession = async (id) => {
+    try {
+      console.log('in complete session');
+      const { data } = await axios.put(
+        `https://fitquestapp.herokuapp.com/api/sessions/complete/${id}`
+      );
+      console.log(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const getUserHistory = async (id) => {
     try {
-
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessions/all/${id}`
       );
       // data.sort((a, b) => a.date - b.date);
+      console.log(data);
       setUserHistory(data);
-    
+
       return data;
     } catch (err) {
       console.error(err);
@@ -228,6 +238,7 @@ export const AuthProvider = ({ children }) => {
         sessionExercise,
         getUserHistory,
         userHistory,
+        completeSession,
       }}
     >
       {children}

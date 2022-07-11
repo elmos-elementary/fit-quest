@@ -13,7 +13,8 @@ import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const SingleRoutine = ({ navigation }) => {
-  const { singleRoutine, getSessionExercise } = useContext(AuthContext);
+  const { singleRoutine, getSessionExercise, completeSession, user } =
+    useContext(AuthContext);
   // console.log('inside single routine ', singleRoutine.sessionExercises);
 
   const onTouch = (id) => {
@@ -79,7 +80,12 @@ const SingleRoutine = ({ navigation }) => {
                 </View>
               );
             })}
-            <Button title="Complete Workout" />
+            <Button
+              title="Complete Workout"
+              onPress={() => {
+                completeSession(user.id);
+              }}
+            />
           </ScrollView>
         </View>
       </ImageBackground>

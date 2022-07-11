@@ -15,6 +15,9 @@ import { AuthContext } from '../context/AuthContext';
 const SessionExercise = ({ navigation }) => {
   const onTouch = () => {};
 
+  const { sessionExercise } = useContext(AuthContext);
+  console.log('sessionExercise :>> ', sessionExercise);
+
   return (
     <View style={styles.container}>
       <ImageBackground

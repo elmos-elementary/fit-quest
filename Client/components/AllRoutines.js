@@ -12,7 +12,7 @@ import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const AllRoutines = ({ navigation }) => {
-  const { routine, getSingleRoutine, user, logout } = useContext(AuthContext);
+  const { routine, getSingleRoutine, user, logout,  } = useContext(AuthContext);
 
   const onTouch = (id) => {
     getSingleRoutine(user.id, id).then(() => {
