@@ -20,6 +20,17 @@ const Character = ({ navigation }) => {
   const [showChest, setShowChest] = useState(false);
   const [showLeg, setShowLeg] = useState(false);
   const [showRing, setShowRing] = useState(false);
+  const [chestItem, setChestItem] = useState(null || user.chest);
+  const [headItem, setHeadItem] = useState(null);
+  const [legItem, setLegItem] = useState(null);
+  const [ringItem, setRingItem] = useState(null);
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  //Send current items to state
+  // while (firstLoad) {
+  //   setChestItem(user.chest)
+  //   setFirstLoad(true)
+  // }
 
   // User Level Experience Table
   let levelCounter = 10;
@@ -346,14 +357,18 @@ const Character = ({ navigation }) => {
           </View>
           {showInventory ? (
             <View style={styles.openInventory}>
-              <View>
-                <View style={styles.emptyInventorySlot}>
-                  <Text style={styles.emptyInventoryText}>Equip</Text>
-                </View>
-                <View style={styles.intentoryTextTitleContainer}>
-                  <Text>Ring</Text>
-                </View>
-              </View>
+              {userItems.map((item) => {
+                return (
+                  <View key={item.id} style={styles.singleItemContainer}>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text style={styles.emptyInventoryText}>{item.name}</Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>{item.type}</Text>
+                    </View>
+                  </View>
+                );
+              })}
             </View>
           ) : (
             <View></View>
