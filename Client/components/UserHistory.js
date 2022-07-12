@@ -12,9 +12,13 @@ import {
 import { AuthContext } from '../context/AuthContext';
 
 const UserHistory = ({ navigation }) => {
-  const { userHistory, user } = useContext(AuthContext);
-  // console.log('userHistory :>> ', userHistory);
-  // console.log('userHistory :>> ', userHistory.length);
+  const { userHistory, getSingleSession } = useContext(AuthContext);
+
+  const onTouch = (id) => {
+    getSingleSession(id).then(() => {
+      navigation.navigate('UserSingleSession');
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -29,7 +33,13 @@ const UserHistory = ({ navigation }) => {
           <ScrollView>
             {userHistory.map((history, i) => {
               return (
-                <TouchableOpacity key={i} style={{ margin: 20 }}>
+                <TouchableOpacity
+                  key={i}
+                  style={{ margin: 20 }}
+                  onPress={() => {
+                    onTouch(history.id);
+                  }}
+                >
                   <Text>{history.date}</Text>
                   <Text>{history.routine.name}</Text>
                 </TouchableOpacity>
