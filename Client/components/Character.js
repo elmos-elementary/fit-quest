@@ -516,40 +516,21 @@ const Character = ({ navigation }) => {
             ) : (
               <View></View>
             )}
-
-            <View style={styles.buttonContainer}>
-              <View style={styles.button}>
-                <Button
-                  color="white"
-                  title="Inventory"
-                  onPress={() => {
-                    showInventoryFunc();
-                  }}
-                />
+            {!showInventory ? (
+              <View style={styles.buttonContainer}>
+                <View style={styles.button}>
+                  <Button
+                    color="white"
+                    title="Inventory"
+                    onPress={() => {
+                      showInventoryFunc();
+                    }}
+                  />
+                </View>
               </View>
-              <View style={styles.button}>
-                <Button
-                  color="white"
-                  title="Past Sessions"
-                  onPress={() => {
-                    Alert.alert(
-                      `You don't have no workouts! Get some more workouts in and earn those items!`
-                    );
-                  }}
-                />
-              </View>
-              <View style={styles.button}>
-                <Button
-                  color="white"
-                  title="Edit Character"
-                  onPress={() => {
-                    Alert.alert(
-                      `You're not interesting enough to change! Level up and then maybe you can change!`
-                    );
-                  }}
-                />
-              </View>
-            </View>
+            ) : (
+              <View></View>
+            )}
           </View>
         </ImageBackground>
       </View>
@@ -657,7 +638,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'grey',
     borderRadius: 20,
     width: '90%',
-    marginRight: 8,
+    margin: 8,
     marginTop: 8,
     padding: 3,
     justifyContent: 'center',
