@@ -13,9 +13,10 @@ import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const UserHistory = ({ navigation }) => {
-  const { userHistory } = useContext(AuthContext);
-  console.log('userHistory :>> ', userHistory);
+  const { userHistory, user } = useContext(AuthContext);
+  // console.log('userHistory :>> ', userHistory);
   // console.log('userHistory :>> ', userHistory.length);
+
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -24,16 +25,18 @@ const UserHistory = ({ navigation }) => {
         style={styles.backgroundImage}
       >
         <View style={styles.textContainer}>
-          <Text style={styles.text}>UserHistory Page</Text>
+          <Text style={styles.text}>Past Workouts</Text>
           <ScrollView>
             {userHistory.map((history, i) => {
-              // console.log('history inside map :>> ', history.sessionExercises);
+              // console.log(
+              //   'history inside map :>>*********************** ',
+              //   history
+              // );
               return (
-                <View key={i}>
-                  {/* <Text>{history.routine}</Text> */}
+                <TouchableOpacity key={i} style={{ margin: 20 }}>
+                  <Text>{history.date}</Text>
                   <Text>{history.routine.name}</Text>
-                  {/* <Text>{history.routineId}</Text>; */}
-                </View>
+                </TouchableOpacity>
               );
             })}
           </ScrollView>

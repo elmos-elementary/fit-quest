@@ -23,7 +23,6 @@ const SingleRoutine = ({ navigation }) => {
   const onTouch = (id) => {
     getSessionExercise(id).then(() => {
       navigation.navigate('SessionExercise');
-      console.log('in on touch');
     });
   };
 

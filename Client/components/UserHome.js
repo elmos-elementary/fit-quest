@@ -15,7 +15,6 @@ import * as Font from 'expo-font';
 
 const UserHome = ({ navigation }) => {
   const { logout, user, getUserHistory, getSession } = useContext(AuthContext);
-  // console.log('user1 :>> ', user);
 
   const findUserHistory = () => {
     getUserHistory(user.id).then(() => {
@@ -31,6 +30,7 @@ const UserHome = ({ navigation }) => {
 
   useEffect(() => {
     getSession(user.id);
+    getUserHistory(user.id);
   }, []);
 
   return (

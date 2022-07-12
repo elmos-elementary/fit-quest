@@ -40,7 +40,6 @@ router.post('/signup', async (req, res, next) => {
 
 router.get('/me', async (req, res, next) => {
   try {
-    // console.log('req :>> ', req.headers);
     res.send(await User.findByToken(req.headers.authorization));
   } catch (ex) {
     console.log('in router get error');
