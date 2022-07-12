@@ -19,41 +19,49 @@ const ExerciseHistory = ({ exerciseId }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {exerciseHistory.map((exercise, i) => {
         return (
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}
-            key={i}
-          >
+          <View key={i}>
             <View>
-              <Text>{exercise.session.date}</Text>
+              <Text style={styles.date}>{exercise.session.date}</Text>
             </View>
-            <View>
-              <Text style={{ fontSize: 15 }}>Set</Text>
-              <Text>1</Text>
-              <Text>2</Text>
-              <Text>3</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <View style={{ alignItems: 'center' }}>
+                <Text style={styles.routineName}>Set</Text>
+                <Text>1</Text>
+                <Text>2</Text>
+                <Text>3</Text>
+              </View>
+
+              <View style={{ alignItems: 'center' }}>
+                <Text style={styles.routineName}>Weight (lbs)</Text>
+                <Text>{exercise.weight1}</Text>
+                <Text>{exercise.weight2}</Text>
+                <Text>{exercise.weight3}</Text>
+              </View>
+              <View style={{ alignItems: 'center', padding: 2 }}>
+                <Text style={styles.routineName}>Reps</Text>
+                <Text>{exercise.set1}</Text>
+                <Text>{exercise.set2}</Text>
+                <Text>{exercise.set3}</Text>
+              </View>
             </View>
-            <View style={{ alignItems: 'center' }}>
-              <Text>Weight (lbs)</Text>
-              <Text>{exercise.weight1}</Text>
-              <Text>{exercise.weight2}</Text>
-              <Text>{exercise.weight3}</Text>
-            </View>
-            <View style={{ alignItems: 'center', padding: 2 }}>
-              <Text>Reps</Text>
-              <Text>{exercise.set1}</Text>
-              <Text>{exercise.set2}</Text>
-              <Text>{exercise.set3}</Text>
-            </View>
+            <View
+              style={{
+                borderBottomColor: 'black',
+                borderBottomWidth: 1,
+              }}
+            />
           </View>
         );
       })}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -72,12 +80,20 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-
     borderRadius: 5,
     borderColor: '#3D3D3D',
     borderWidth: 1,
     padding: 4,
     margin: 5,
+  },
+  date: {
+    fontSize: 15,
+    fontWeight: 'bold',
+  },
+  routineName: {
+    textAlign: 'center',
+    padding: 5,
+    fontWeight: 'bold',
   },
 });
 

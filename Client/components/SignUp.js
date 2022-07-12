@@ -127,7 +127,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    margin: 70,
+    margin: 80,
     opacity: 0.8,
     borderRadius: 15,
     width: '60%',
@@ -144,7 +144,8 @@ export const styles = StyleSheet.create({
 
   text1: {
     fontSize: 20,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    fontFamily: 'Roboto',
   },
 
   textInput: {

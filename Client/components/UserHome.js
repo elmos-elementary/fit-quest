@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Button,
-  Modal,
   Image,
   StyleSheet,
   ImageBackground,
@@ -52,9 +51,7 @@ const UserHome = ({ navigation }) => {
               <Text style={{ fontSize: 20, fontFamily: Font.helvetica }}>
                 {user.firstName}
               </Text>
-              <Text style={{ fontSize: 18, fontFamily: Font.helvetica }}>
-                Class
-              </Text>
+
               <Text style={{ fontSize: 15, fontFamily: Font.helvetica }}>
                 Level {user.currentLevel}
               </Text>
