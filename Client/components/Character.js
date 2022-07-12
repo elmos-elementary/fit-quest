@@ -78,6 +78,35 @@ const Character = ({ navigation }) => {
       skillCounter += 11;
     }
   }
+  const calculateAddedBonuses = () => {
+    let itemArr = [headItem, chestItem, legItem, ringItem, weaponItem];
+    let currAbdominalsLevelBonus = 0;
+    for (let i = 0; i < itemArr.length; i++) {
+      if (itemArr[i]) {
+        let currItem = itemArr[i];
+        currAbdominalsLevelBonus += currItem.abdominalsLevelBonus;
+      }
+    }
+    // itemArr.forEach((item) => {
+    //   if (item) {
+    //     currAbdominalsLevelBonus + 1;
+
+    //     setArmsLevelBonus(armsLevelBonus + (item.armsLevelBonus || 0));
+    //     setBackLevelBonus(backLevelBonus + (item.backLevelBonus || 0));
+    //     setCardioLevelBonus(cardioLevelBonus + (item.cardioLevelBonus || 0));
+    //     setChestLevelBonus(chestLevelBonus + (item.chestLevelBonus || 0));
+    //     setLegsLevelBonus(legsLevelBonus + (item.legsLevelBonus || 0));
+    //     setShouldersLevelBonus(
+    //       shouldersLevelBonus + (item.shouldersLevelBonus || 0)
+    //     );
+    //     setStretchingLevelBonus(
+    //       stretchingLevelBonus + (item.stretchingLevelBonus || 0)
+    //     );
+    //   }
+    // });
+    console.log(currAbdominalsLevelBonus);
+    setAbdominalsLevelBonus(currAbdominalsLevelBonus);
+  };
 
   //grab items if user has items
 
@@ -85,7 +114,6 @@ const Character = ({ navigation }) => {
   // console.log(getSession);
   // console.log(levelExp);
   // console.log(levelExp[currentLevelString]);
-  console.log(userItems);
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -407,6 +435,7 @@ const Character = ({ navigation }) => {
                         style={styles.emptyInventoryText}
                         onPress={() => {
                           setRingItem(null);
+                          calculateAddedBonuses();
                         }}
                       >
                         {ringItem.name}
@@ -499,6 +528,7 @@ const Character = ({ navigation }) => {
                               } else if (item.type === 'weapon') {
                                 setWeaponItem(item);
                               }
+                              calculateAddedBonuses();
                               updateUserItems(user.id, item.id);
                             }}
                           >
