@@ -2,19 +2,21 @@ import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   ImageBackground,
   ScrollView,
   TouchableOpacity,
-  TextInput,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
 const UserHistory = ({ navigation }) => {
-  const { userHistory, user } = useContext(AuthContext);
-  // console.log('userHistory :>> ', userHistory);
-  // console.log('userHistory :>> ', userHistory.length);
+  const { userHistory, getSingleSession } = useContext(AuthContext);
+
+  const onTouch = (id) => {
+    getSingleSession(id).then(() => {
+      navigation.navigate('UserSingleSession');
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -24,14 +26,29 @@ const UserHistory = ({ navigation }) => {
         imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
-        <View style={styles.textContainer}>
+        <View style={styles.headerContainer}>
           <Text style={styles.text}>Previous Workouts</Text>
+        </View>
+        <View style={styles.historyContainer}>
           <ScrollView>
             {userHistory.map((history, i) => {
               return (
-                <TouchableOpacity key={i} style={{ margin: 20 }}>
+                <TouchableOpacity
+                  key={i}
+                  style={{ margin: 20 }}
+                  onPress={() => {
+                    onTouch(history.id);
+                  }}
+                  x
+                >
                   <Text>{history.date}</Text>
                   <Text>{history.routine.name}</Text>
+                  <View
+                    style={{
+                      borderBottomColor: 'black',
+                      borderBottomWidth: 2,
+                    }}
+                  />
                 </TouchableOpacity>
               );
             })}
@@ -50,19 +67,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  textContainer: {
-    flex: 1,
+
+  headerContainer: {
+    justifyContent: 'center',
     alignItems: 'center',
-    margin: 10,
+    backgroundColor: 'white',
+    margin: 35,
+    opacity: 0.8,
+    borderRadius: 5,
   },
   text: {
     fontSize: 30,
-
     borderRadius: 5,
     borderColor: '#3D3D3D',
-    borderWidth: 1,
-    padding: 4,
-    margin: 5,
+    padding: 2,
+    margin: 10,
+    alignItems: 'center',
+  },
+  historyContainer: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#dddddd',
+    margin: 30,
+    opacity: 0.8,
+    borderRadius: 5,
   },
 });
 

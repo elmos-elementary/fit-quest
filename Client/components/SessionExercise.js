@@ -14,7 +14,6 @@ import {
 import ExerciseHistory from './ExerciseHistory';
 import { AuthContext } from '../context/AuthContext';
 
-
 const SessionExercise = ({ navigation }) => {
   const { sessionExercise, updateSessionExercise, user, getSession } =
     useContext(AuthContext);
@@ -25,6 +24,7 @@ const SessionExercise = ({ navigation }) => {
   const [set1, setSet1] = useState(sessionExercise.set1);
   const [set2, setSet2] = useState(sessionExercise.set2);
   const [set3, setSet3] = useState(sessionExercise.set3);
+  const [description, setDescription] = useState('about');
 
   const onTouch = (id) => {
     updateSessionExercise(id, {
@@ -116,46 +116,53 @@ const SessionExercise = ({ navigation }) => {
             }}
           />
         </View>
-        <TouchableOpacity>
+        <View>
           <View style={styles.navigationContainer}>
-            <Button
-              title="About"
-              color="black"
-              onPress={() => {
-                navigation.navigate('SessionExercise');
-              }}
-            />
+            <View style={styles.navButton}>
+              <Button
+                title="About"
+                color="black"
+                onPress={() => {
+                  setDescription('about');
+                }}
+              />
+            </View>
+
             <Button
               title="History"
               color="black"
               onPress={() => {
-                <ExerciseHistory exerciseId={sessionExercise.exercise.id} />;
+                setDescription('history');
               }}
             />
             <Button title="Charts" color="black" />
           </View>
-        </TouchableOpacity>
+        </View>
 
         <View style={styles.descriptionContainer}>
-          <ScrollView>
-            <Text style={{ textAlign: 'center' }}>
-              {sessionExercise.exercise.description}
-            </Text>
+          {description === 'about' ? (
+            <ScrollView>
+              <Text style={{ textAlign: 'center' }}>
+                {sessionExercise.exercise.description}
+              </Text>
 
-            <View style={styles.imageContainer}>
-              <Image
-                source={{ uri: sessionExercise.exercise.image }}
-                style={{ width: '100%', height: '100%' }}
-              />
-            </View>
+              <View style={styles.imageContainer}>
+                <Image
+                  source={{ uri: sessionExercise.exercise.image }}
+                  style={{ width: '100%', height: '100%' }}
+                />
+              </View>
 
-            <Text
-              style={{ color: 'blue', textAlign: 'center' }}
-              onPress={() => Linking.openURL(sessionExercise.exercise.video)}
-            >
-              Checkout video
-            </Text>
-          </ScrollView>
+              <Text
+                style={{ color: 'blue', textAlign: 'center' }}
+                onPress={() => Linking.openURL(sessionExercise.exercise.video)}
+              >
+                Checkout video
+              </Text>
+            </ScrollView>
+          ) : (
+            <ExerciseHistory exerciseId={sessionExercise.exercise.id} />
+          )}
         </View>
       </ImageBackground>
     </View>
@@ -252,6 +259,11 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     margin: 5,
+  },
+  navButton: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    margin: 2,
   },
 });
 
