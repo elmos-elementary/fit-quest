@@ -5,6 +5,7 @@ import UserHome from './UserHome';
 import AllRoutines from './AllRoutines';
 import SingleRoutine from './SingleRoutine';
 import UserHistory from './UserHistory';
+// import SessionExercise from './SessionExercise';
 import { AuthContext } from '../context/AuthContext';
 
 const Tab = createMaterialBottomTabNavigator();
