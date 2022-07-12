@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [sessionExercise, setSessionExercise] = useState(null);
   const [userHistory, setUserHistory] = useState([]);
   const [exerciseHistory, setExerciseHistory] = useState([]);
+  const [userItems, setUserItems] = useState([]);
 
   const login = async (email, password) => {
     try {
@@ -239,6 +240,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getUserItems = async (id) => {
+    try {
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/items/user/${id}`
+      );
+      console.log('getUserItems', data);
+      setUserItems(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     isLoggedIn();
     getRoutine();
@@ -268,6 +282,8 @@ export const AuthProvider = ({ children }) => {
         getSession,
         getExerciseHistory,
         exerciseHistory,
+        getUserItems,
+        userItems,
       }}
     >
       {children}

@@ -14,7 +14,7 @@ import { Bar } from 'react-native-progress';
 import * as Font from 'expo-font';
 
 const Character = ({ navigation }) => {
-  const { user, getSession } = useContext(AuthContext);
+  const { user, getSession, userItems, getUserItems } = useContext(AuthContext);
   const [showInventory, setShowInventory] = useState(false);
   const [showHead, setShowHead] = useState(false);
   const [showChest, setShowChest] = useState(false);
@@ -48,7 +48,7 @@ const Character = ({ navigation }) => {
   // console.log(getSession);
   // console.log(levelExp);
   // console.log(levelExp[currentLevelString]);
-  console.log(user);
+  // console.log(user);
   return (
     <View style={styles.container}>
       <ImageBackground
