@@ -18,12 +18,27 @@ const SingleRoutine = ({ navigation }) => {
     getSessionExercise,
     completeSession,
     user,
-    getSession,
+    getRoutine,
+    getUserHistory,
   } = useContext(AuthContext);
 
   const onTouch = (id) => {
     getSessionExercise(id).then(() => {
       navigation.navigate('SessionExercise');
+    });
+  };
+
+  const no = () => {
+    getUserHistory(user.id).then(() => {
+      navigation.navigate('UserHome');
+    });
+  };
+
+  const yes = () => {
+    getRoutine().then(() => {
+      getUserHistory(user.id).then(() => {
+        navigation.navigate('AllRoutines');
+      });
     });
   };
 
@@ -98,12 +113,12 @@ const SingleRoutine = ({ navigation }) => {
                 Alert.alert('Good Job', 'Want to try some more?', [
                   {
                     text: 'No',
-                    onPress: () => navigation.navigate('UserHome'),
+                    onPress: () => no(),
                     style: 'cancel',
                   },
                   {
                     text: 'yes',
-                    onPress: () => navigation.navigate('AllRoutines'),
+                    onPress: () => yes(),
                   },
                 ]);
               }}

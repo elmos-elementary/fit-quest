@@ -19,7 +19,7 @@ const ExerciseHistory = ({ exerciseId }) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {exerciseHistory.map((exercise, i) => {
         return (
           <View
@@ -53,7 +53,7 @@ const ExerciseHistory = ({ exerciseId }) => {
           </View>
         );
       })}
-    </View>
+    </ScrollView>
   );
 };
 

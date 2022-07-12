@@ -14,7 +14,7 @@ import { ProgressBar, MD3Colors } from 'react-native-paper';
 import * as Font from 'expo-font';
 
 const UserHome = ({ navigation }) => {
-  const { logout, user, getUserHistory, getSession, getUserItems } =
+  const { logout, user, getUserHistory, getSession, getUserItems, getCurrentOpponent } =
     useContext(AuthContext);
 
   const findUserHistory = () => {
@@ -37,6 +37,7 @@ const UserHome = ({ navigation }) => {
 
   useEffect(() => {
     getSession(user.id);
+    getCurrentOpponent(user.id)
     getUserHistory(user.id);
   }, []);
 
