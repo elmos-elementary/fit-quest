@@ -15,13 +15,14 @@ import { Bar } from 'react-native-progress';
 import * as Font from 'expo-font';
 
 const Character = ({ navigation }) => {
-  const { user, getSession, userItems, getUserItems } = useContext(AuthContext);
+  const { user, getSession, userItems, getUserItems, updateUserItems } =
+    useContext(AuthContext);
   const [showInventory, setShowInventory] = useState(false);
-  const [chestItem, setChestItem] = useState(null || user.chest);
-  const [headItem, setHeadItem] = useState(null || user.head);
-  const [legItem, setLegItem] = useState(null || user.leg);
-  const [ringItem, setRingItem] = useState(null || user.ring);
-  const [weaponItem, setWeaponItem] = useState(null || user.weapon);
+  const [chestItem, setChestItem] = useState(null || userItems[user.chest]);
+  const [headItem, setHeadItem] = useState(null || userItems[user.head]);
+  const [legItem, setLegItem] = useState(null || userItems[user.leg]);
+  const [ringItem, setRingItem] = useState(null || userItems[user.ring]);
+  const [weaponItem, setWeaponItem] = useState(null || userItems[user.weapon]);
   const [combatSkill, setCombatSkill] = useState(0 || user.combatSkill);
   const [abdominalsLevel, setAbdominalsLevel] = useState(
     0 || user.abdominalsCurrentLevel
@@ -77,11 +78,14 @@ const Character = ({ navigation }) => {
       skillCounter += 11;
     }
   }
+
+  //grab items if user has items
+
   // let currentLevelString = user.currentLevel.toString();
   // console.log(getSession);
   // console.log(levelExp);
   // console.log(levelExp[currentLevelString]);
-  // console.log(user);
+  console.log(userItems);
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -476,7 +480,7 @@ const Character = ({ navigation }) => {
                     ringItem === item ||
                     weaponItem === item
                   ) {
-                    return <View></View>;
+                    return <View key={item.id}></View>;
                   } else {
                     return (
                       <View key={item.id} style={styles.singleItemContainer}>
@@ -495,6 +499,7 @@ const Character = ({ navigation }) => {
                               } else if (item.type === 'weapon') {
                                 setWeaponItem(item);
                               }
+                              updateUserItems(user.id, item.id);
                             }}
                           >
                             {item.name}

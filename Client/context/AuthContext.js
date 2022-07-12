@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [userHistory, setUserHistory] = useState([]);
   const [exerciseHistory, setExerciseHistory] = useState([]);
   const [userItems, setUserItems] = useState([]);
+  const [updateItems, setUpdateItems] = useState([]);
 
   const login = async (email, password) => {
     try {
@@ -245,8 +246,19 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/items/user/${id}`
       );
-      console.log('getUserItems', data);
       setUserItems(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const updateUserItems = async (userId, itemId) => {
+    try {
+      const { data } = await axios.put(
+        `https://fitquestapp.herokuapp.com/api/items/equip/${userId}/${itemId}`
+      );
+      setUpdateItems(data);
       return data;
     } catch (err) {
       console.error(err);
@@ -284,6 +296,7 @@ export const AuthProvider = ({ children }) => {
         exerciseHistory,
         getUserItems,
         userItems,
+        updateUserItems,
       }}
     >
       {children}
