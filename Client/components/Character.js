@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ImageBackground,
   Alert,
+  ScrollView,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { Bar } from 'react-native-progress';
@@ -20,17 +21,12 @@ const Character = ({ navigation }) => {
   const [showChest, setShowChest] = useState(false);
   const [showLeg, setShowLeg] = useState(false);
   const [showRing, setShowRing] = useState(false);
+  const [showWeapon, setShowWeapon] = useState(false);
   const [chestItem, setChestItem] = useState(null || user.chest);
-  const [headItem, setHeadItem] = useState(null);
-  const [legItem, setLegItem] = useState(null);
-  const [ringItem, setRingItem] = useState(null);
-  const [firstLoad, setFirstLoad] = useState(true);
-
-  //Send current items to state
-  // while (firstLoad) {
-  //   setChestItem(user.chest)
-  //   setFirstLoad(true)
-  // }
+  const [headItem, setHeadItem] = useState(null || user.head);
+  const [legItem, setLegItem] = useState(null || user.leg);
+  const [ringItem, setRingItem] = useState(null || user.ring);
+  const [weaponItem, setWeaponItem] = useState(null || user.weapon);
 
   // User Level Experience Table
   let levelCounter = 10;
@@ -61,397 +57,510 @@ const Character = ({ navigation }) => {
   // console.log(levelExp[currentLevelString]);
   // console.log(user);
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../src/assets/background.jpeg')}
-        resizeMode="cover"
-        style={styles.backgroundImage}
-      >
-        <View style={styles.main}>
-          <View style={styles.top}>
-            <View style={styles.container}>
-              <Image
-                source={{
-                  uri: 'https://png.pngtree.com/png-vector/20201228/ourmid/pngtree-a-warrior-boy-clipart-png-image_2659449.jpg',
-                }}
-                style={{ width: 100, height: 100 }}
-              />
+    <ScrollView>
+      <View style={styles.container}>
+        <ImageBackground
+          source={require('../../src/assets/background.jpeg')}
+          resizeMode="cover"
+          style={styles.backgroundImage}
+        >
+          <View style={styles.main}>
+            <View style={styles.top}>
+              <View style={styles.container}>
+                <Image
+                  source={{
+                    uri: 'https://png.pngtree.com/png-vector/20201228/ourmid/pngtree-a-warrior-boy-clipart-png-image_2659449.jpg',
+                  }}
+                  style={{ width: 100, height: 100 }}
+                />
+              </View>
+              <View style={styles.topTextBox}>
+                <Text>{user.name}</Text>
+                <Text>Level: {user.currentLevel}</Text>
+                <Bar
+                  progress={
+                    user.currentLevelExp /
+                    levelExp[(user.currentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  height={16}
+                />
+                <Text>
+                  {user.currentLevelExp} /{' '}
+                  {levelExp[(user.currentLevel + 1).toString()]} XP
+                </Text>
+                <Text>Coins: ${user.coins}</Text>
+              </View>
             </View>
-            <View style={styles.topTextBox}>
-              <Text>{user.name}</Text>
-              <Text>Level: {user.currentLevel}</Text>
-              <Bar
-                progress={
-                  user.currentLevelExp /
-                  levelExp[(user.currentLevel + 1).toString()]
-                }
-                color={'grey'}
-                height={16}
-              />
-              <Text>
-                {user.currentLevelExp} /{' '}
-                {levelExp[(user.currentLevel + 1).toString()]} XP
-              </Text>
-              <Text>Coins: ${user.coins}</Text>
+            <View style={styles.allSkillsContainer}>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Abdominals</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.abdominalsCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.abdominalsCurrentLevelExp /
+                    levelExp[(user.abdominalsCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Arms</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.armsCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.armsCurrentLevelExp /
+                    levelExp[(user.armsCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Back</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.backCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.backCurrentLevelExp /
+                    levelExp[(user.backCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Cardio</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.cardioCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.cardioCurrentLevelExp /
+                    levelExp[(user.cardioCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Chest</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.chestCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.chestCurrentLevelExp /
+                    levelExp[(user.chestCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Legs</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.legsCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.legsCurrentLevelExp /
+                    levelExp[(user.legsCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Shoulders</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.shouldersCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.shouldersCurrentLevelExp /
+                    levelExp[(user.shouldersCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
+              <View style={styles.skillsContainer}>
+                <Text style={styles.skillsTitle}>Stretching</Text>
+                <Text style={styles.skillsLevel}>
+                  Level {user.stretchingCurrentLevel}
+                </Text>
+                <Bar
+                  progress={
+                    user.stretchingCurrentLevelExp /
+                    levelExp[(user.stretchingCurrentLevel + 1).toString()]
+                  }
+                  color={'grey'}
+                  width={150}
+                  height={16}
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.allSkillsContainer}>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Abdominals</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.abdominalsCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.abdominalsCurrentLevelExp /
-                  levelExp[(user.abdominalsCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Arms</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.armsCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.armsCurrentLevelExp /
-                  levelExp[(user.armsCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Back</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.backCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.backCurrentLevelExp /
-                  levelExp[(user.backCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Cardio</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.cardioCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.cardioCurrentLevelExp /
-                  levelExp[(user.cardioCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Chest</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.chestCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.chestCurrentLevelExp /
-                  levelExp[(user.chestCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Legs</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.legsCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.legsCurrentLevelExp /
-                  levelExp[(user.legsCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Shoulders</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.shouldersCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.shouldersCurrentLevelExp /
-                  levelExp[(user.shouldersCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-            <View style={styles.skillsContainer}>
-              <Text style={styles.skillsTitle}>Stretching</Text>
-              <Text style={styles.skillsLevel}>
-                Level {user.stretchingCurrentLevel}
-              </Text>
-              <Bar
-                progress={
-                  user.stretchingCurrentLevelExp /
-                  levelExp[(user.stretchingCurrentLevel + 1).toString()]
-                }
-                color={'grey'}
-                width={150}
-                height={16}
-              />
-            </View>
-          </View>
-          <View style={styles.allItemsContainer}>
-            <View style={styles.singleItemContainer}>
-              {user.head ? (
-                <View>
+            <View style={styles.allItemsContainer}>
+              <View style={styles.singleItemContainer}>
+                {headItem ? (
                   <View>
-                    <Text>The Item goes here</Text>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          setHeadItem(null);
+                        }}
+                      >
+                        {headItem.name}
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Head</Text>
+                    </View>
                   </View>
-                  <Text>Head</Text>
-                </View>
-              ) : (
+                ) : (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          if (showHead) {
+                            setShowHead(false);
+                          } else {
+                            setShowHead(true);
+                            setShowChest(false);
+                            setShowLeg(false);
+                            setShowRing(false);
+                            setShowInventory(false);
+                            setShowWeapon(false);
+                          }
+                        }}
+                      >
+                        Equip
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Head</Text>
+                    </View>
+                  </View>
+                )}
+              </View>
+              <View style={styles.singleItemContainer}>
+                {chestItem ? (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          setChestItem(null);
+                        }}
+                      >
+                        {chestItem.name}
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Chest</Text>
+                    </View>
+                  </View>
+                ) : (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          if (showChest) {
+                            setShowChest(false);
+                          } else {
+                            setShowChest(true);
+                            setShowHead(false);
+                            setShowLeg(false);
+                            setShowRing(false);
+                            setShowInventory(false);
+                            setShowWeapon(false);
+                          }
+                        }}
+                      >
+                        Equip
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Chest</Text>
+                    </View>
+                  </View>
+                )}
+              </View>
+              <View style={styles.singleItemContainer}>
+                {legItem ? (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          setLegItem(null);
+                        }}
+                      >
+                        {legItem.name}
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Leg</Text>
+                    </View>
+                  </View>
+                ) : (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          if (showLeg) {
+                            setShowLeg(false);
+                          } else {
+                            setShowLeg(true);
+                            setShowChest(false);
+                            setShowHead(false);
+                            setShowRing(false);
+                            setShowInventory(false);
+                            setShowWeapon(false);
+                          }
+                        }}
+                      >
+                        Equip
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Legs</Text>
+                    </View>
+                  </View>
+                )}
+              </View>
+              <View style={styles.singleItemContainer}>
+                {ringItem ? (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          setRingItem(null);
+                        }}
+                      >
+                        {ringItem.name}
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Ring</Text>
+                    </View>
+                  </View>
+                ) : (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          if (showRing) {
+                            setShowRing(false);
+                          } else {
+                            setShowRing(true);
+                            setShowChest(false);
+                            setShowLeg(false);
+                            setShowHead(false);
+                            setShowInventory(false);
+                            setShowWeapon(false);
+                          }
+                        }}
+                      >
+                        Equip
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Ring</Text>
+                    </View>
+                  </View>
+                )}
+              </View>
+              <View style={styles.singleItemContainer}>
+                {weaponItem ? (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          setWeaponItem(null);
+                        }}
+                      >
+                        {weaponItem.name}
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Weapon</Text>
+                    </View>
+                  </View>
+                ) : (
+                  <View>
+                    <View style={styles.emptyInventorySlot}>
+                      <Text
+                        style={styles.emptyInventoryText}
+                        onPress={() => {
+                          if (showWeapon) {
+                            setShowWeapon(false);
+                          } else {
+                            setShowWeapon(true);
+                            setShowChest(false);
+                            setShowLeg(false);
+                            setShowHead(false);
+                            setShowInventory(false);
+                            setShowRing(false);
+                          }
+                        }}
+                      >
+                        Equip
+                      </Text>
+                    </View>
+                    <View style={styles.intentoryTextTitleContainer}>
+                      <Text>Weapon</Text>
+                    </View>
+                  </View>
+                )}
+              </View>
+            </View>
+            {showInventory ? (
+              <View style={styles.allItemsContainer}>
+                {userItems.map((item) => {
+                  if (
+                    headItem === item ||
+                    chestItem === item ||
+                    legItem === item ||
+                    ringItem === item ||
+                    weaponItem === item
+                  ) {
+                    return <View></View>;
+                  } else {
+                    return (
+                      <View key={item.id} style={styles.singleItemContainer}>
+                        <View style={styles.emptyInventorySlot}>
+                          <Text
+                            style={styles.emptyInventoryText}
+                            onPress={() => {
+                              if (item.type === 'head') {
+                                setHeadItem(item);
+                              } else if (item.type === 'chest') {
+                                setChestItem(item);
+                              } else if (item.type === 'leg') {
+                                setLegItem(item);
+                              } else if (item.type === 'ring') {
+                                setRingItem(item);
+                              } else if (item.type === 'weapon') {
+                                setWeaponItem(item);
+                              }
+                            }}
+                          >
+                            {item.name}
+                          </Text>
+                        </View>
+                        <View style={styles.intentoryTextTitleContainer}>
+                          <Text>{item.type}</Text>
+                        </View>
+                      </View>
+                    );
+                  }
+                })}
+              </View>
+            ) : (
+              <View></View>
+            )}
+            {showHead ? (
+              <View style={styles.openInventory}>
                 <View>
                   <View style={styles.emptyInventorySlot}>
-                    <Text
-                      style={styles.emptyInventoryText}
-                      onPress={() => {
-                        if (showHead) {
-                          setShowHead(false);
-                        } else {
-                          setShowHead(true);
-                          setShowChest(false);
-                          setShowLeg(false);
-                          setShowRing(false);
-                          setShowInventory(false);
-                        }
-                      }}
-                    >
-                      Equip
-                    </Text>
-                  </View>
-                  <View style={styles.intentoryTextTitleContainer}>
-                    <Text>Head</Text>
-                  </View>
-                </View>
-              )}
-            </View>
-            <View style={styles.singleItemContainer}>
-              {user.chest ? (
-                <View>
-                  <View>
-                    <Text>The Item goes here</Text>
-                  </View>
-                  <Text>Chest</Text>
-                </View>
-              ) : (
-                <View>
-                  <View style={styles.emptyInventorySlot}>
-                    <Text
-                      style={styles.emptyInventoryText}
-                      onPress={() => {
-                        if (showChest) {
-                          setShowChest(false);
-                        } else {
-                          setShowChest(true);
-                          setShowHead(false);
-                          setShowLeg(false);
-                          setShowRing(false);
-                          setShowInventory(false);
-                        }
-                      }}
-                    >
-                      Equip
-                    </Text>
-                  </View>
-                  <View style={styles.intentoryTextTitleContainer}>
-                    <Text>Chest</Text>
-                  </View>
-                </View>
-              )}
-            </View>
-            <View style={styles.singleItemContainer}>
-              {user.leg ? (
-                <View>
-                  <View>
-                    <Text>The Item goes here</Text>
-                  </View>
-                  <Text>Legs</Text>
-                </View>
-              ) : (
-                <View>
-                  <View style={styles.emptyInventorySlot}>
-                    <Text
-                      style={styles.emptyInventoryText}
-                      onPress={() => {
-                        if (showLeg) {
-                          setShowLeg(false);
-                        } else {
-                          setShowLeg(true);
-                          setShowChest(false);
-                          setShowHead(false);
-                          setShowRing(false);
-                          setShowInventory(false);
-                        }
-                      }}
-                    >
-                      Equip
-                    </Text>
-                  </View>
-                  <View style={styles.intentoryTextTitleContainer}>
-                    <Text>Legs</Text>
-                  </View>
-                </View>
-              )}
-            </View>
-            <View style={styles.singleItemContainer}>
-              {user.ring ? (
-                <View>
-                  <View>
-                    <Text>The Item goes here</Text>
-                  </View>
-                  <Text>Ring</Text>
-                </View>
-              ) : (
-                <View>
-                  <View style={styles.emptyInventorySlot}>
-                    <Text
-                      style={styles.emptyInventoryText}
-                      onPress={() => {
-                        if (showRing) {
-                          setShowRing(false);
-                        } else {
-                          setShowRing(true);
-                          setShowChest(false);
-                          setShowLeg(false);
-                          setShowHead(false);
-                          setShowInventory(false);
-                        }
-                      }}
-                    >
-                      Equip
-                    </Text>
+                    <Text style={styles.emptyInventoryText}>Equip</Text>
                   </View>
                   <View style={styles.intentoryTextTitleContainer}>
                     <Text>Ring</Text>
                   </View>
                 </View>
-              )}
-            </View>
-          </View>
-          {showInventory ? (
-            <View style={styles.openInventory}>
-              {userItems.map((item) => {
-                return (
-                  <View key={item.id} style={styles.singleItemContainer}>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text style={styles.emptyInventoryText}>{item.name}</Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>{item.type}</Text>
-                    </View>
-                  </View>
-                );
-              })}
-            </View>
-          ) : (
-            <View></View>
-          )}
-          {showHead ? (
-            <View style={styles.openInventory}>
-              <View>
-                <View style={styles.emptyInventorySlot}>
-                  <Text style={styles.emptyInventoryText}>Equip</Text>
-                </View>
-                <View style={styles.intentoryTextTitleContainer}>
-                  <Text>Ring</Text>
-                </View>
+              </View>
+            ) : (
+              <View></View>
+            )}
+            {showChest ? (
+              <View style={styles.openInventory}>
+                <Text>hello</Text>
+              </View>
+            ) : (
+              <View></View>
+            )}
+            {showLeg ? (
+              <View style={styles.openInventory}>
+                <Text>hello</Text>
+              </View>
+            ) : (
+              <View></View>
+            )}
+            {showRing ? (
+              <View style={styles.openInventory}>
+                <Text>hello</Text>
+              </View>
+            ) : (
+              <View></View>
+            )}
+            <View style={styles.buttonContainer}>
+              <View style={styles.button}>
+                <Button
+                  color="white"
+                  title="Inventory"
+                  onPress={() => {
+                    if (showInventory) {
+                      setShowInventory(false);
+                    } else {
+                      setShowInventory(true);
+                      setShowChest(false);
+                      setShowLeg(false);
+                      setShowHead(false);
+                      setShowRing(false);
+                    }
+                  }}
+                />
+              </View>
+              <View style={styles.button}>
+                <Button
+                  color="white"
+                  title="Past Sessions"
+                  onPress={() => {
+                    Alert.alert(
+                      `You don't have no workouts! Get some more workouts in and earn those items!`
+                    );
+                  }}
+                />
+              </View>
+              <View style={styles.button}>
+                <Button
+                  color="white"
+                  title="Edit Character"
+                  onPress={() => {
+                    Alert.alert(
+                      `You're not interesting enough to change! Level up and then maybe you can change!`
+                    );
+                  }}
+                />
               </View>
             </View>
-          ) : (
-            <View></View>
-          )}
-          {showChest ? (
-            <View style={styles.openInventory}>
-              <Text>hello</Text>
-            </View>
-          ) : (
-            <View></View>
-          )}
-          {showLeg ? (
-            <View style={styles.openInventory}>
-              <Text>hello</Text>
-            </View>
-          ) : (
-            <View></View>
-          )}
-          {showRing ? (
-            <View style={styles.openInventory}>
-              <Text>hello</Text>
-            </View>
-          ) : (
-            <View></View>
-          )}
-          <View style={styles.buttonContainer}>
-            <View style={styles.button}>
-              <Button
-                color="white"
-                title="Inventory"
-                onPress={() => {
-                  if (showInventory) {
-                    setShowInventory(false);
-                  } else {
-                    setShowInventory(true);
-                    setShowChest(false);
-                    setShowLeg(false);
-                    setShowHead(false);
-                    setShowRing(false);
-                  }
-                }}
-              />
-            </View>
-            <View style={styles.button}>
-              <Button
-                color="white"
-                title="Past Sessions"
-                onPress={() => {
-                  Alert.alert(
-                    `You don't have no workouts! Get some more workouts in and earn those items!`
-                  );
-                }}
-              />
-            </View>
-            <View style={styles.button}>
-              <Button
-                color="white"
-                title="Edit Character"
-                onPress={() => {
-                  Alert.alert(
-                    `You're not interesting enough to change! Level up and then maybe you can change!`
-                  );
-                }}
-              />
-            </View>
           </View>
-        </View>
-      </ImageBackground>
-    </View>
+        </ImageBackground>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -483,6 +592,7 @@ export const styles = StyleSheet.create({
   },
   allSkillsContainer: {
     backgroundColor: 'white',
+
     borderRadius: 20,
     opacity: 0.8,
     margin: 10,
@@ -501,6 +611,9 @@ export const styles = StyleSheet.create({
   },
   allItemsContainer: {
     flexDirection: 'row',
+    maxWidth: 400,
+    flex: 1,
+    flexWrap: 'wrap',
     backgroundColor: 'white',
     borderRadius: 20,
     opacity: 0.8,
@@ -510,9 +623,10 @@ export const styles = StyleSheet.create({
   singleItemContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: 10,
-    padding: 10,
+    // justifyContent: 'center',
+    margin: 5,
+    padding: 5,
+    minWidth: 70,
   },
   emptyInventorySlot: {
     alignItems: 'center',
