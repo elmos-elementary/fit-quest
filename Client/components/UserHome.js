@@ -14,7 +14,8 @@ import * as Font from 'expo-font';
 import { Bar } from 'react-native-progress';
 
 const UserHome = ({ navigation }) => {
-  const { logout, user, getUserHistory, getSession } = useContext(AuthContext);
+  const { logout, user, getUserHistory, getSession, getUserItems } =
+    useContext(AuthContext);
 
   const findUserHistory = () => {
     getUserHistory(user.id).then(() => {
@@ -25,6 +26,12 @@ const UserHome = ({ navigation }) => {
   const getUserCurrentSession = () => {
     getSession(user.id).then(() => {
       navigation.navigate('SingleRoutine');
+    });
+  };
+
+  const getCharacterInfo = () => {
+    getUserItems(user.id).then(() => {
+      navigation.navigate('Character');
     });
   };
 
@@ -103,7 +110,7 @@ const UserHome = ({ navigation }) => {
                   color="black"
                   title="Character"
                   onPress={() => {
-                    navigation.navigate('Character');
+                    getCharacterInfo();
                   }}
                 />
               </View>
