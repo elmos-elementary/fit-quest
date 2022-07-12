@@ -1,25 +1,24 @@
-import React, { createContext, useState, useEffect } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import axios from 'axios'
-import * as Font from 'expo-font'
+import React, { createContext, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [userToken, setUserToken] = useState(null)
-  const [userInfo, setUserInfo] = useState(null)
-  const [routine, setRoutine] = useState(null)
-  const [singleRoutine, setSingleRoutine] = useState(null)
-  const [user, setUser] = useState(null)
-  const [sessionExercise, setSessionExercise] = useState(null)
-  const [userHistory, setUserHistory] = useState(null)
-  const [opponent, setOpponent] = useState(null)
+  const [isLoading, setIsLoading] = useState(false);
+  const [userToken, setUserToken] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+  const [routine, setRoutine] = useState(null);
+  const [singleRoutine, setSingleRoutine] = useState(null);
+  const [user, setUser] = useState(null);
+  const [sessionExercise, setSessionExercise] = useState(null);
+  const [userHistory, setUserHistory] = useState([]);
+  const [exerciseHistory, setExerciseHistory] = useState([]);
+  const [currentOpponent, setCurrentOpponent] = useState([])
 
   const login = async (email, password) => {
     try {
-      console.log('login ran')
-      setIsLoading(true)
+      setIsLoading(true);
 
       const { data } = await axios.post(
         'https://fitquestapp.herokuapp.com/api/auth/login',
@@ -50,8 +49,7 @@ export const AuthProvider = ({ children }) => {
 
   const signUp = async (email, password, firstName, lastName) => {
     try {
-      console.log('signup ran')
-      setIsLoading(true)
+      setIsLoading(true);
       const { data } = await axios.post(
         'https://fitquestapp.herokuapp.com/api/auth/signup',
         {
@@ -83,9 +81,8 @@ export const AuthProvider = ({ children }) => {
 
   const getUser = async (token) => {
     try {
-      console.log('getuser ran')
-      setIsLoading(true)
-      axios.defaults.headers.common['Authorization'] = token
+      setIsLoading(true);
+      axios.defaults.headers.common['Authorization'] = token;
       const { data } = await axios.get(
         'https://fitquestapp.herokuapp.com/api/auth/me'
       )
@@ -94,19 +91,16 @@ export const AuthProvider = ({ children }) => {
       setIsLoading(false)
       return data
     } catch (err) {
-      console.log('error in getUser')
-      console.error(err)
+      console.error(err);
     }
   }
 
   const getRoutine = async () => {
     try {
-      console.log('get routine ran')
       const { data } = await axios.get(
         'https://fitquestapp.herokuapp.com/api/routines'
-      )
-
-      setRoutine(data)
+      );
+      setRoutine(data);
     } catch (err) {
       console.error(err)
     }
@@ -114,7 +108,6 @@ export const AuthProvider = ({ children }) => {
 
   const getSingleRoutine = async (userId, routineId) => {
     try {
-      console.log('get single routine ran')
       await axios.post(
         `https://fitquestapp.herokuapp.com/api/sessions/start/${userId}`,
         { date: new Date(), routineId }
@@ -150,11 +143,14 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessions/current/${userId}`
-      )
+      );
 
-      data.sessionExercises.sort((a, b) => a.exerciseId - b.exerciseId)
-      setSingleRoutine(data)
-      return data
+      if (data.sessionExercises) {
+        data.sessionExercises.sort((a, b) => a.exerciseId - b.exerciseId);
+      }
+
+      setSingleRoutine(data);
+      return data;
     } catch (err) {
       console.error(err)
     }
@@ -162,7 +158,6 @@ export const AuthProvider = ({ children }) => {
 
   const completeSession = async (id) => {
     try {
-      console.log('in complete session')
       const { data } = await axios.put(
         `https://fitquestapp.herokuapp.com/api/sessions/complete/${id}`
       )
@@ -175,7 +170,6 @@ export const AuthProvider = ({ children }) => {
 
   const updateSessionExercise = async (id, obj) => {
     try {
-      console.log('in update session exercise')
       const { data } = await axios.put(
         `https://fitquestapp.herokuapp.com/api/sessionExercises/${id}`,
         obj
@@ -191,36 +185,47 @@ export const AuthProvider = ({ children }) => {
     try {
       const { data } = await axios.get(
         `https://fitquestapp.herokuapp.com/api/sessions/all/${id}`
-      )
-      // data.sort((a, b) => a.date - b.date);
-
-      setUserHistory(data)
-
-      return data
-    } catch (err) {
-      console.error(err)
+      );
+      data.sort((a, b) => b.id - a.id);
+      setUserHistory(data);
+    } catch(err) {
+      console.log(err)
     }
   }
 
   const getCurrentOpponent = async (userId) => {
     try {
-      const { data } = await axios.get(
-        `https://localhost:8080/api/opponents/current/${userId}`
-      )
-      setOpponent(data)
+      // const { data } = await axios.get(
+      //   `https://fitquestapp.herokuapp.com/api/opponents/current/${userId}`
+      // )
+      // setCurrentOpponent(data)
+      console.log('test')
     } catch (err) {
       console.log(err)
     }
   }
 
+  const getExerciseHistory = async (userId, exerciseId) => {
+    try {
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/sessionExercises/history/${userId}/${exerciseId}`
+      );
+
+      setExerciseHistory(data);
+
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const logout = () => {
     try {
-      console.log('logout ran')
-      setIsLoading(true)
-      setUserToken(null)
-      AsyncStorage.removeItem('userInfo')
-      AsyncStorage.removeItem('userToken')
-      setIsLoading(false)
+      setIsLoading(true);
+      setUserToken(null);
+      AsyncStorage.removeItem('userInfo');
+      AsyncStorage.removeItem('userToken');
+      setIsLoading(false);
     } catch (err) {
       console.error(err)
     }
@@ -228,36 +233,27 @@ export const AuthProvider = ({ children }) => {
 
   const isLoggedIn = async () => {
     try {
-      console.log('is logged in  ran')
-      setIsLoading(true)
-      let foundUser = await AsyncStorage.getItem('userInfo')
-      let userToken = await AsyncStorage.getItem('userToken')
-      foundUser = JSON.parse(foundUser)
+      setIsLoading(true);
+      let foundUser = await AsyncStorage.getItem('userInfo');
+      let userToken = await AsyncStorage.getItem('userToken');
+      foundUser = JSON.parse(foundUser);
 
       if (foundUser) {
-        setUserToken(userToken)
-        setUserInfo(foundUser)
-        getUser(userToken)
+        await setUserToken(userToken);
+        await setUserInfo(foundUser);
+        await getUser(userToken);
       }
 
-      setIsLoading(false)
-    } catch (e) {
-      console.log('is logged in error: ', e)
+      setIsLoading(false);
+    } catch (err) {
+      console.error(err);
     }
   }
 
   useEffect(() => {
-    // function fetchData() {
-    //   AsyncStorage.getItem('userToken').then((response) => {
-    //     getUser(response);
-    //   });
-    // }
-    console.log('use effect ran')
-    isLoggedIn()
-    // fetchData();
-
-    getRoutine()
-  }, [])
+    isLoggedIn();
+    getRoutine();
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -281,8 +277,10 @@ export const AuthProvider = ({ children }) => {
         completeSession,
         updateSessionExercise,
         getSession,
-        opponent,
-        getCurrentOpponent
+        currentOpponent,
+        getCurrentOpponent,
+        getExerciseHistory,
+        exerciseHistory,
       }}
     >
       {children}

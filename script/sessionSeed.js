@@ -1,44 +1,47 @@
+let date = new Date().toString();
+date = date && date.slice(0, 25);
+
 const session = [
   {
-    date: '2022-06-20',
-    complete: true
+    date: date,
+    complete: true,
     // Cody chest
   },
   {
-    date: '2022-06-22',
-    complete: true
+    date: date,
+    complete: true,
     // Cody back
   },
   {
-    date: '2022-06-24',
-    complete: true
+    date: date,
+    complete: true,
     // Cody lower body
   },
   {
-    date: '2022-06-27',
-    complete: true
+    date: date,
+    complete: true,
     // Cody chest
   },
   {
-    date: '2022-06-29',
-    complete: true
+    date: date,
+    complete: true,
     // Cody back
   },
   {
-    date: '2022-07-01',
-    complete: true
+    date: date,
+    complete: true,
     // Cody lower body
   },
   {
-    date: '2022-06-24',
-    complete: true
+    date: date,
+    complete: true,
     // Murphy cardio
   },
   {
-    date: '2022-07-01',
-    complete: true
+    date: date,
+    complete: true,
     // Murphy cardio
-  }
-]
+  },
+];
 
-module.exports = session
+module.exports = session;

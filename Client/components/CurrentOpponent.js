@@ -9,11 +9,11 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native'
+import { Bar } from 'react-native-progress';
 import { AuthContext } from '../context/AuthContext'
 
 const CurrentOpponent = ({ navigation }) => {
-  const currentOpponent = 'PLACEHOLDER OPPONENT'
-  const user = 'PLACEHOLDER USER'
+  const { user, currentOpponent } = useContext(AuthContext);
 
   const minGold = Math.ceil(user.currentLevel * 0.95)
   const maxGold = Math.ceil(user.currentLevel * 1.05)
@@ -33,7 +33,15 @@ const CurrentOpponent = ({ navigation }) => {
           <View style={styles.opponentInfo}>
             <Text style={styles.text}>{currentOpponent.name}</Text>
             <Text style={styles.text}>{`Level ${currentOpponent.level}`}</Text>
-            {/* HP Info */}
+            <Bar
+                progress={
+                  currentOpponent.currentHealth /
+                  currentOpponent.totalHealth
+                }
+                color={'red'}
+                width={150}
+                height={16}
+              />
           </View>
           <View style={styles.rewards}>
             <Text style={styles.text}>Rewards</Text>
