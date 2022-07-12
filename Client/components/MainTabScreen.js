@@ -38,6 +38,7 @@ function MainTabScreen() {
               options={{
                 tabBarLabel: 'Current Session',
                 tabBarColor: '#1f65ff',
+
                 tabBarIcon: ({ color }) => (
                   <MaterialCommunityIcons name="bell" color={color} size={26} />
                 ),
