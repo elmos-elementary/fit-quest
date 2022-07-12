@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
@@ -26,6 +27,7 @@ const SingleRoutine = ({ navigation }) => {
     });
   };
 
+  const date = new Date().toString();
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -36,7 +38,7 @@ const SingleRoutine = ({ navigation }) => {
       >
         <View style={styles.headerContainer}>
           <Text style={styles.text}>Current Routine: </Text>
-          <Text>{singleRoutine.date}</Text>
+          <Text>{date && date.slice(0, 25)}</Text>
         </View>
 
         <ScrollView>
@@ -74,7 +76,7 @@ const SingleRoutine = ({ navigation }) => {
                   </View>
 
                   <Button
-                    title="+"
+                    title="Start Exercise"
                     style={styles.addRoutine}
                     onPress={() => {
                       onTouch(exercise.id);
@@ -93,6 +95,17 @@ const SingleRoutine = ({ navigation }) => {
               color="white"
               onPress={() => {
                 completeSession(user.id);
+                Alert.alert('Good Job', 'Want to try some more?', [
+                  {
+                    text: 'No',
+                    onPress: () => navigation.navigate('UserHome'),
+                    style: 'cancel',
+                  },
+                  {
+                    text: 'yes',
+                    onPress: () => navigation.navigate('AllRoutines'),
+                  },
+                ]);
               }}
             />
           </View>
@@ -140,11 +153,11 @@ const styles = StyleSheet.create({
     width: '50%',
   },
   routineContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#dddddd',
     opacity: 0.9,
-    // padding: 10,
-    borderRadius: 10,
+    borderRadius: 5,
     margin: 10,
+    padding: 10,
   },
   routineName: {
     textAlign: 'center',

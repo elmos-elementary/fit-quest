@@ -45,12 +45,12 @@ const UserHome = ({ navigation }) => {
             <View style={styles.image}>
               <Image
                 source={{ uri: user.image }}
-                style={{ width: 150, height: 150 }}
+                style={{ width: 300, height: 300 }}
               />
             </View>
             <View style={styles.inputContainer}>
               <Text style={{ fontSize: 20, fontFamily: Font.helvetica }}>
-                {user.firstName} {user.lastName}
+                {user.firstName}
               </Text>
               <Text style={{ fontSize: 18, fontFamily: Font.helvetica }}>
                 Class
@@ -82,7 +82,13 @@ const UserHome = ({ navigation }) => {
                 />
               </View>
               <View style={styles.button}>
-                <Button color="black" title="Character" />
+                <Button
+                  color="black"
+                  title="Character"
+                  onPress={() => {
+                    navigation.navigate('Character');
+                  }}
+                />
               </View>
               <View>
                 <Button
@@ -116,15 +122,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 40,
+    padding: 10,
   },
   inputContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 80,
+    margin: 60,
     backgroundColor: 'white',
     borderRadius: 20,
     opacity: 0.8,

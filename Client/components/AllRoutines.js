@@ -31,12 +31,7 @@ const AllRoutines = ({ navigation }) => {
       >
         <View style={styles.textContainer}>
           <Text style={styles.text}>Choose Routine</Text>
-          {/* <Button
-            title="logout"
-            onPress={() => {
-              logout();
-            }}
-          /> */}
+
           <View>
             <View style={styles.routineContainer}>
               <ScrollView>

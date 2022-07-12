@@ -9,10 +9,11 @@ import {
   TouchableOpacity,
   TextInput,
   Image,
+  Linking,
 } from 'react-native';
-import { image } from './UserHome';
-import { AuthContext } from '../context/AuthContext';
 import ExerciseHistory from './ExerciseHistory';
+import { AuthContext } from '../context/AuthContext';
+
 
 const SessionExercise = ({ navigation }) => {
   const { sessionExercise, updateSessionExercise, user, getSession } =
@@ -47,48 +48,67 @@ const SessionExercise = ({ navigation }) => {
       <ImageBackground
         source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
+        imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
         <View style={styles.headerContainer}>
           <Text style={styles.text}>{sessionExercise.exercise.name}</Text>
         </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}
-        >
-          <View>
-            <Text style={{ fontSize: 15 }}>Set</Text>
-            <TextInput>1</TextInput>
-            <TextInput>2</TextInput>
-            <TextInput>3</TextInput>
+        <View style={styles.routineContainer}>
+          <View style={styles.navigationContainer}>
+            <View>
+              <Text style={styles.routineText}>Set</Text>
+              <TextInput style={styles.textInput1}>1</TextInput>
+              <TextInput style={styles.textInput1}>2</TextInput>
+              <TextInput style={styles.textInput1}>3</TextInput>
+            </View>
+
+            <View style={{ alignItems: 'center' }}>
+              <Text style={styles.routineText}>Weight (lbs)</Text>
+              <TextInput
+                onChangeText={(nextValue) => setWeight1(nextValue)}
+                style={styles.textInput}
+              >
+                {sessionExercise.weight1}
+              </TextInput>
+              <TextInput
+                onChangeText={(nextValue) => setWeight2(nextValue)}
+                style={styles.textInput}
+              >
+                {sessionExercise.weight2}
+              </TextInput>
+              <TextInput
+                onChangeText={(nextValue) => setWeight3(nextValue)}
+                style={styles.textInput}
+              >
+                {sessionExercise.weight3}
+              </TextInput>
+            </View>
+
+            <View style={{ alignItems: 'center', padding: 2 }}>
+              <Text style={styles.routineText}>Reps</Text>
+              <TextInput
+                onChangeText={(nextValue) => setSet1(nextValue)}
+                style={styles.textInput}
+              >
+                {sessionExercise.set1}
+              </TextInput>
+              <TextInput
+                onChangeText={(nextValue) => setSet2(nextValue)}
+                style={styles.textInput}
+              >
+                {sessionExercise.set2}
+              </TextInput>
+              <TextInput
+                onChangeText={(nextValue) => setSet3(nextValue)}
+                style={styles.textInput}
+              >
+                {sessionExercise.set3}
+              </TextInput>
+            </View>
           </View>
-          <View style={{ alignItems: 'center' }}>
-            <Text>Weight (lbs)</Text>
-            <TextInput onChangeText={(nextValue) => setWeight1(nextValue)}>
-              {sessionExercise.weight1}
-            </TextInput>
-            <TextInput onChangeText={(nextValue) => setWeight2(nextValue)}>
-              {sessionExercise.weight2}
-            </TextInput>
-            <TextInput onChangeText={(nextValue) => setWeight3(nextValue)}>
-              {sessionExercise.weight3}
-            </TextInput>
-          </View>
-          <View style={{ alignItems: 'center', padding: 2 }}>
-            <Text>Reps</Text>
-            <TextInput onChangeText={(nextValue) => setSet1(nextValue)}>
-              {sessionExercise.set1}
-            </TextInput>
-            <TextInput onChangeText={(nextValue) => setSet2(nextValue)}>
-              {sessionExercise.set2}
-            </TextInput>
-            <TextInput onChangeText={(nextValue) => setSet3(nextValue)}>
-              {sessionExercise.set3}
-            </TextInput>
-          </View>
+
           <Button
             title="Record Exercise"
             onPress={() => {
@@ -96,15 +116,47 @@ const SessionExercise = ({ navigation }) => {
             }}
           />
         </View>
+        <TouchableOpacity>
+          <View style={styles.navigationContainer}>
+            <Button
+              title="About"
+              color="black"
+              onPress={() => {
+                navigation.navigate('SessionExercise');
+              }}
+            />
+            <Button
+              title="History"
+              color="black"
+              onPress={() => {
+                <ExerciseHistory exerciseId={sessionExercise.exercise.id} />;
+              }}
+            />
+            <Button title="Charts" color="black" />
+          </View>
+        </TouchableOpacity>
 
-        <ScrollView>
-          <Text>{sessionExercise.exercise.description}</Text>
-          <ExerciseHistory exerciseId={sessionExercise.exercise.id} />
-          <Image
-            source={{ uri: sessionExercise.exercise.image }}
-            style={{ width: 150, height: 150 }}
-          />
-        </ScrollView>
+        <View style={styles.descriptionContainer}>
+          <ScrollView>
+            <Text style={{ textAlign: 'center' }}>
+              {sessionExercise.exercise.description}
+            </Text>
+
+            <View style={styles.imageContainer}>
+              <Image
+                source={{ uri: sessionExercise.exercise.image }}
+                style={{ width: '100%', height: '100%' }}
+              />
+            </View>
+
+            <Text
+              style={{ color: 'blue', textAlign: 'center' }}
+              onPress={() => Linking.openURL(sessionExercise.exercise.video)}
+            >
+              Checkout video
+            </Text>
+          </ScrollView>
+        </View>
       </ImageBackground>
     </View>
   );
@@ -118,18 +170,87 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+
+  headerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    margin: 35,
+    opacity: 0.8,
+    borderRadius: 5,
+  },
+
   textContainer: {
-    flex: 1,
     alignItems: 'center',
     margin: 10,
   },
+
   text: {
     fontSize: 30,
-
     borderRadius: 5,
     borderColor: '#3D3D3D',
-    borderWidth: 1,
     padding: 4,
+    margin: 10,
+    alignItems: 'center',
+  },
+
+  routineContainer: {
+    backgroundColor: '#dddddd',
+    opacity: 0.9,
+    borderRadius: 10,
+    margin: 20,
+    padding: 10,
+  },
+
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  button: {
+    backgroundColor: 'black',
+    padding: 2,
+    margin: 50,
+    borderRadius: 15,
+    width: '50%',
+  },
+  descriptionContainer: {
+    flex: 2,
+    backgroundColor: '#dddddd',
+    opacity: 0.9,
+    margin: 20,
+    padding: 10,
+    borderRadius: 5,
+  },
+  navigationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#dddddd',
+    opacity: 0.9,
+    margin: 15,
+    borderRadius: 15,
+  },
+  imageContainer: {
+    backgroundColor: 'white',
+    borderRadius: 5,
+    overflow: 'hidden',
+    margin: 20,
+  },
+
+  routineText: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+
+  textInput1: {
+    padding: 5,
+    borderRadius: 5,
+    margin: 5,
+  },
+  textInput: {
+    backgroundColor: 'white',
+    padding: 5,
+    borderRadius: 5,
     margin: 5,
   },
 });

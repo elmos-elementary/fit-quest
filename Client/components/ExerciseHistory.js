@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const ExerciseHistory = ({ exerciseId }) => {

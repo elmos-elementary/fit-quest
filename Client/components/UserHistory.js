@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import { image } from './UserHome';
 import { AuthContext } from '../context/AuthContext';
 
 const UserHistory = ({ navigation }) => {
@@ -22,16 +21,13 @@ const UserHistory = ({ navigation }) => {
       <ImageBackground
         source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
+        imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
         <View style={styles.textContainer}>
-          <Text style={styles.text}>Past Workouts</Text>
+          <Text style={styles.text}>Previous Workouts</Text>
           <ScrollView>
             {userHistory.map((history, i) => {
-              // console.log(
-              //   'history inside map :>>*********************** ',
-              //   history
-              // );
               return (
                 <TouchableOpacity key={i} style={{ margin: 20 }}>
                   <Text>{history.date}</Text>
