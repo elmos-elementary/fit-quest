@@ -195,11 +195,11 @@ export const AuthProvider = ({ children }) => {
 
   const getCurrentOpponent = async (userId) => {
     try {
-      // const { data } = await axios.get(
-      //   `https://fitquestapp.herokuapp.com/api/opponents/current/${userId}`
-      // )
-      // setCurrentOpponent(data)
-      console.log('test')
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/opponents/current/${userId}`
+      )
+      setCurrentOpponent(data)
+      console.log(data)
     } catch (err) {
       console.log(err)
     }
