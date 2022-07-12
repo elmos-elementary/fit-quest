@@ -9,6 +9,7 @@ import SessionExercise from '../components/SessionExercise';
 import UserHistory from '../components/UserHistory';
 import AllRoutines from '../components/AllRoutines';
 import Character from '../components/Character';
+import UserSingleSession from '../components/UserSingleSession';
 
 const AuthUser = () => {
   return (
@@ -30,6 +31,9 @@ const AuthUser = () => {
       </Stack.Screen>
       <Stack.Screen name="Character">
         {(props) => <Character {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name="UserSingleSession">
+        {(props) => <UserSingleSession {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );

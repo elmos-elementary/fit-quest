@@ -144,8 +144,7 @@ export const styles = StyleSheet.create({
 
   text1: {
     fontSize: 20,
-    // fontWeight: 'bold',
-    fontFamily: 'Roboto',
+    fontWeight: 'bold',
   },
 
   textInput: {

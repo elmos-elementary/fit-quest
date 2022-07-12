@@ -11,6 +11,7 @@ import {
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
 import * as Font from 'expo-font';
+import { Bar } from 'react-native-progress';
 
 const UserHome = ({ navigation }) => {
   const { logout, user, getUserHistory, getSession } = useContext(AuthContext);
@@ -31,6 +32,17 @@ const UserHome = ({ navigation }) => {
     getSession(user.id);
     getUserHistory(user.id);
   }, []);
+
+  let levelCounter = 10;
+  const levelExp = {};
+  for (let i = 1; i <= 100; i++) {
+    if (i === 1) {
+      levelExp[i] = 0;
+    } else {
+      levelExp[i] = levelCounter;
+      levelCounter += 11;
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -53,9 +65,17 @@ const UserHome = ({ navigation }) => {
               </Text>
 
               <Text style={{ fontSize: 15, fontFamily: Font.helvetica }}>
-                Level {user.currentLevel}
+                Level: {user.currentLevel}
               </Text>
-              <ProgressBar progress={0.5} />
+              <Bar
+                progress={
+                  user.currentLevelExp /
+                  levelExp[(user.currentLevel + 1).toString()]
+                }
+                color={'grey'}
+                height={15}
+              />
+
               <View style={styles.button}>
                 <Button
                   color="black"
