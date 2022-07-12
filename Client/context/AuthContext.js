@@ -144,7 +144,10 @@ export const AuthProvider = ({ children }) => {
         `https://fitquestapp.herokuapp.com/api/sessions/current/${userId}`
       );
 
-      data.sessionExercises.sort((a, b) => a.exerciseId - b.exerciseId);
+      if (data.sessionExercises) {
+        data.sessionExercises.sort((a, b) => a.exerciseId - b.exerciseId);
+      }
+
       setSingleRoutine(data);
       return data;
     } catch (err) {
@@ -176,8 +179,6 @@ export const AuthProvider = ({ children }) => {
       console.error(err);
     }
   };
-
- 
 
   const getUserHistory = async (id) => {
     try {
