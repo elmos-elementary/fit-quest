@@ -7,19 +7,31 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
 import * as Font from 'expo-font';
 
 const UserHome = ({ navigation }) => {
-  const { logout, user, getUserHistory } = useContext(AuthContext);
+  const { logout, user, getUserHistory, getSession } = useContext(AuthContext);
 
   const findUserHistory = () => {
     getUserHistory(user.id).then(() => {
       navigation.navigate('UserHistory');
     });
   };
+
+  const getUserCurrentSession = () => {
+    getSession(user.id).then(() => {
+      navigation.navigate('SingleRoutine');
+    });
+  };
+
+  useEffect(() => {
+    getSession(user.id);
+    getUserHistory(user.id);
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -31,17 +43,20 @@ const UserHome = ({ navigation }) => {
             style={styles.backgroundImage}
           >
             <View style={styles.image}>
-              <Image source={require('../../src/assets/favicon.png')} />
+              <Image
+                source={{ uri: user.image }}
+                style={{ width: 300, height: 300 }}
+              />
             </View>
             <View style={styles.inputContainer}>
               <Text style={{ fontSize: 20, fontFamily: Font.helvetica }}>
-                Username
+                {user.firstName}
               </Text>
               <Text style={{ fontSize: 18, fontFamily: Font.helvetica }}>
                 Class
               </Text>
               <Text style={{ fontSize: 15, fontFamily: Font.helvetica }}>
-                Level 99
+                Level {user.currentLevel}
               </Text>
               <ProgressBar progress={0.5} />
               <View style={styles.button}>
@@ -49,7 +64,11 @@ const UserHome = ({ navigation }) => {
                   color="black"
                   title="Start Workout"
                   onPress={() => {
-                    navigation.navigate('StartWorkout');
+                    {
+                      user.currentSession
+                        ? getUserCurrentSession()
+                        : navigation.navigate('AllRoutines');
+                    }
                   }}
                 />
               </View>
@@ -84,8 +103,10 @@ const UserHome = ({ navigation }) => {
           </ImageBackground>
         </View>
       ) : (
-        <View>
-          <Text>Some Text HERE</Text>
+        <View
+          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+        >
+          <ActivityIndicator size={'large'} />
         </View>
       )}
     </View>
@@ -101,15 +122,16 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 40,
+    padding: 10,
   },
   inputContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 80,
+    margin: 60,
     backgroundColor: 'white',
     borderRadius: 20,
     opacity: 0.8,
