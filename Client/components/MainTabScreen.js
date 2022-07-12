@@ -5,7 +5,7 @@ import UserHome from './UserHome';
 import AllRoutines from './AllRoutines';
 import SingleRoutine from './SingleRoutine';
 import UserHistory from './UserHistory';
-// import SessionExercise from './SessionExercise';
+import CurrentOpponent from './CurrentOpponent';
 import { AuthContext } from '../context/AuthContext';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -73,6 +73,21 @@ function MainTabScreen() {
               ),
             }}
           />
+          <Tab.Screen
+          name="CurrentOpponent"
+          component={CurrentOpponent}
+          options={{
+            tabBarLabel: 'Opponent',
+            tabBarColor: '#1f65ff',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons
+                name="arrow-projectile-multiple"
+                color={color}
+                size={26}
+              />
+            ),
+          }}
+        />
         </Tab.Navigator>
       ) : (
         <Tab.Navigator
