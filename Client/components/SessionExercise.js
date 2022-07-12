@@ -17,7 +17,6 @@ import ExerciseHistory from './ExerciseHistory';
 const SessionExercise = ({ navigation }) => {
   const { sessionExercise, updateSessionExercise, user, getSession } =
     useContext(AuthContext);
-  console.log('sessionExercise :>> ', sessionExercise);
 
   const [weight1, setWeight1] = useState(sessionExercise.weight1);
   const [weight2, setWeight2] = useState(sessionExercise.weight2);
@@ -101,6 +100,10 @@ const SessionExercise = ({ navigation }) => {
         <ScrollView>
           <Text>{sessionExercise.exercise.description}</Text>
           <ExerciseHistory exerciseId={sessionExercise.exercise.id} />
+          <Image
+            source={{ uri: sessionExercise.exercise.image }}
+            style={{ width: 150, height: 150 }}
+          />
         </ScrollView>
       </ImageBackground>
     </View>

@@ -105,7 +105,6 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.get(
         'https://fitquestapp.herokuapp.com/api/routines'
       );
-
       setRoutine(data);
     } catch (err) {
       console.error(err);
@@ -238,9 +237,9 @@ export const AuthProvider = ({ children }) => {
       foundUser = JSON.parse(foundUser);
 
       if (foundUser) {
-        setUserToken(userToken);
-        setUserInfo(foundUser);
-        getUser(userToken);
+        await setUserToken(userToken);
+        await setUserInfo(foundUser);
+        await getUser(userToken);
       }
 
       setIsLoading(false);
@@ -254,6 +253,7 @@ export const AuthProvider = ({ children }) => {
     isLoggedIn();
 
     getRoutine();
+    // getSession();
   }, []);
 
   return (
