@@ -3,7 +3,7 @@ import { Layout } from '@ui-kitten/components';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import { View, StyleSheet, Text, Button } from 'react-native';
-import { image } from './UserHome';
+import * as Font from 'expo-font';
 
 const HomeScreen = ({ navigation }) => (
   <Layout style={{ flex: 1, justifyContent: 'center' }}>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 30,
-    // fontFamily: 'Palatino-Bold',
+    fontFamily: 'Didot-Bold',
     backgroundColor: 'white',
     borderRadius: 20,
     overflow: 'hidden',

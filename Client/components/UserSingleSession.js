@@ -23,7 +23,7 @@ const UserSingleSession = ({ navigation }) => {
         style={styles.backgroundImage}
       >
         <View style={styles.headerContainer}>
-          <Text style={styles.text}>Hello this needs the routine name </Text>
+          <Text style={styles.text}>Completed Routine </Text>
         </View>
 
         {singleSession.sessionExercises.map((exercise) => {
@@ -37,20 +37,20 @@ const UserSingleSession = ({ navigation }) => {
                     justifyContent: 'space-between',
                   }}
                 >
-                  <View>
-                    <Text style={{ fontSize: 15 }}>Set</Text>
+                  <View style={{ alignItems: 'center' }}>
+                    <Text style={styles.routineName}>Set</Text>
                     <Text>1</Text>
                     <Text>2</Text>
                     <Text>3</Text>
                   </View>
                   <View style={{ alignItems: 'center' }}>
-                    <Text>Weight (lbs)</Text>
+                    <Text style={styles.routineName}>Weight (lbs)</Text>
                     <Text>{exercise.weight1}</Text>
                     <Text>{exercise.weight2}</Text>
                     <Text>{exercise.weight3}</Text>
                   </View>
                   <View style={{ alignItems: 'center', padding: 2 }}>
-                    <Text>Reps</Text>
+                    <Text style={styles.routineName}>Reps</Text>
                     <Text>{exercise.set1}</Text>
                     <Text>{exercise.set2}</Text>
                     <Text>{exercise.set3}</Text>
@@ -79,19 +79,34 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  textContainer: {
-    flex: 1,
+
+  headerContainer: {
+    justifyContent: 'center',
     alignItems: 'center',
-    margin: 10,
+    backgroundColor: 'white',
+    margin: 30,
+    opacity: 0.8,
+    borderRadius: 5,
   },
+
   text: {
     fontSize: 30,
-
     borderRadius: 5,
     borderColor: '#3D3D3D',
-    borderWidth: 1,
     padding: 4,
-    margin: 5,
+  },
+
+  routineContainer: {
+    backgroundColor: '#dddddd',
+    opacity: 0.9,
+    borderRadius: 5,
+    margin: 30,
+  },
+
+  routineName: {
+    textAlign: 'center',
+    padding: 5,
+    fontWeight: 'bold',
   },
 });
 

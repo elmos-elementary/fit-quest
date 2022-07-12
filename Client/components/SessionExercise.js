@@ -118,13 +118,16 @@ const SessionExercise = ({ navigation }) => {
         </View>
         <View>
           <View style={styles.navigationContainer}>
-            <Button
-              title="About"
-              color="black"
-              onPress={() => {
-                setDescription('about');
-              }}
-            />
+            <View style={styles.navButton}>
+              <Button
+                title="About"
+                color="black"
+                onPress={() => {
+                  setDescription('about');
+                }}
+              />
+            </View>
+
             <Button
               title="History"
               color="black"
@@ -256,6 +259,11 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     margin: 5,
+  },
+  navButton: {
+    backgroundColor: 'white',
+    borderRadius: 15,
+    margin: 2,
   },
 });
 
