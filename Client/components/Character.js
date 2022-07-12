@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { Bar } from 'react-native-progress';
@@ -14,6 +15,11 @@ import * as Font from 'expo-font';
 
 const Character = ({ navigation }) => {
   const { user, getSession } = useContext(AuthContext);
+  const [showInventory, setShowInventory] = useState(false);
+  const [showHead, setShowHead] = useState(false);
+  const [showChest, setShowChest] = useState(false);
+  const [showLeg, setShowLeg] = useState(false);
+  const [showRing, setShowRing] = useState(false);
 
   // User Level Experience Table
   let levelCounter = 10;
@@ -68,6 +74,7 @@ const Character = ({ navigation }) => {
                   user.currentLevelExp /
                   levelExp[(user.currentLevel + 1).toString()]
                 }
+                color={'grey'}
                 height={16}
               />
               <Text>
@@ -88,6 +95,7 @@ const Character = ({ navigation }) => {
                   user.abdominalsCurrentLevelExp /
                   levelExp[(user.abdominalsCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -102,6 +110,7 @@ const Character = ({ navigation }) => {
                   user.armsCurrentLevelExp /
                   levelExp[(user.armsCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -116,6 +125,7 @@ const Character = ({ navigation }) => {
                   user.backCurrentLevelExp /
                   levelExp[(user.backCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -130,6 +140,7 @@ const Character = ({ navigation }) => {
                   user.cardioCurrentLevelExp /
                   levelExp[(user.cardioCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -144,6 +155,7 @@ const Character = ({ navigation }) => {
                   user.chestCurrentLevelExp /
                   levelExp[(user.chestCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -158,6 +170,7 @@ const Character = ({ navigation }) => {
                   user.legsCurrentLevelExp /
                   levelExp[(user.legsCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -172,6 +185,7 @@ const Character = ({ navigation }) => {
                   user.shouldersCurrentLevelExp /
                   levelExp[(user.shouldersCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -186,6 +200,7 @@ const Character = ({ navigation }) => {
                   user.stretchingCurrentLevelExp /
                   levelExp[(user.stretchingCurrentLevel + 1).toString()]
                 }
+                color={'grey'}
                 width={150}
                 height={16}
               />
@@ -203,7 +218,21 @@ const Character = ({ navigation }) => {
               ) : (
                 <View>
                   <View style={styles.emptyInventorySlot}>
-                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                    <Text
+                      style={styles.emptyInventoryText}
+                      onPress={() => {
+                        if (showHead) {
+                          setShowHead(false);
+                        } else {
+                          setShowHead(true);
+                          setShowChest(false);
+                          setShowLeg(false);
+                          setShowRing(false);
+                        }
+                      }}
+                    >
+                      Equip
+                    </Text>
                   </View>
                   <View style={styles.intentoryTextTitleContainer}>
                     <Text>Head</Text>
@@ -222,7 +251,21 @@ const Character = ({ navigation }) => {
               ) : (
                 <View>
                   <View style={styles.emptyInventorySlot}>
-                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                    <Text
+                      style={styles.emptyInventoryText}
+                      onPress={() => {
+                        if (showChest) {
+                          setShowChest(false);
+                        } else {
+                          setShowChest(true);
+                          setShowHead(false);
+                          setShowLeg(false);
+                          setShowRing(false);
+                        }
+                      }}
+                    >
+                      Equip
+                    </Text>
                   </View>
                   <View style={styles.intentoryTextTitleContainer}>
                     <Text>Chest</Text>
@@ -241,7 +284,21 @@ const Character = ({ navigation }) => {
               ) : (
                 <View>
                   <View style={styles.emptyInventorySlot}>
-                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                    <Text
+                      style={styles.emptyInventoryText}
+                      onPress={() => {
+                        if (showLeg) {
+                          setShowLeg(false);
+                        } else {
+                          setShowLeg(true);
+                          setShowChest(false);
+                          setShowHead(false);
+                          setShowRing(false);
+                        }
+                      }}
+                    >
+                      Equip
+                    </Text>
                   </View>
                   <View style={styles.intentoryTextTitleContainer}>
                     <Text>Legs</Text>
@@ -260,13 +317,97 @@ const Character = ({ navigation }) => {
               ) : (
                 <View>
                   <View style={styles.emptyInventorySlot}>
-                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                    <Text
+                      style={styles.emptyInventoryText}
+                      onPress={() => {
+                        if (showRing) {
+                          setShowRing(false);
+                        } else {
+                          setShowRing(true);
+                          setShowChest(false);
+                          setShowLeg(false);
+                          setShowHead(false);
+                        }
+                      }}
+                    >
+                      Equip
+                    </Text>
                   </View>
                   <View style={styles.intentoryTextTitleContainer}>
                     <Text>Ring</Text>
                   </View>
                 </View>
               )}
+            </View>
+          </View>
+          {showHead ? (
+            <View style={styles.openInventory}>
+              <View>
+                <View style={styles.emptyInventorySlot}>
+                  <Text style={styles.emptyInventoryText}>Equip</Text>
+                </View>
+                <View style={styles.intentoryTextTitleContainer}>
+                  <Text>Ring</Text>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View></View>
+          )}
+          {showChest ? (
+            <View style={styles.openInventory}>
+              <Text>hello</Text>
+            </View>
+          ) : (
+            <View></View>
+          )}
+          {showLeg ? (
+            <View style={styles.openInventory}>
+              <Text>hello</Text>
+            </View>
+          ) : (
+            <View></View>
+          )}
+          {showRing ? (
+            <View style={styles.openInventory}>
+              <Text>hello</Text>
+            </View>
+          ) : (
+            <View></View>
+          )}
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button
+                color="white"
+                title="Inventory"
+                onPress={() => {
+                  Alert.alert(
+                    `You don't have nuthin! Get some more workouts in and earn those items!`
+                  );
+                }}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                color="white"
+                title="Past Sessions"
+                onPress={() => {
+                  Alert.alert(
+                    `You don't have no workouts! Get some more workouts in and earn those items!`
+                  );
+                }}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                color="white"
+                title="Edit Character"
+                onPress={() => {
+                  Alert.alert(
+                    `You're not interesting enough to change! Level up and then maybe you can change!`
+                  );
+                }}
+              />
             </View>
           </View>
         </View>
@@ -336,8 +477,7 @@ export const styles = StyleSheet.create({
   emptyInventorySlot: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
-    opacity: 0.8,
+    backgroundColor: 'grey',
     borderRadius: 20,
     height: 70,
     width: 70,
@@ -349,6 +489,36 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 3,
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    opacity: 0.8,
+    margin: 10,
+    padding: 10,
+  },
+  button: {
+    borderWidth: 1,
+    borderColor: '#3D3D3D',
+    backgroundColor: 'grey',
+    borderRadius: 20,
+    width: '90%',
+    marginRight: 8,
+    marginTop: 8,
+    padding: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  openInventory: {
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    opacity: 0.8,
+    margin: 10,
+    padding: 10,
   },
 });
 
