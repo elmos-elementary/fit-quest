@@ -422,10 +422,11 @@ export const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   main: {
     flexDirection: 'column',
+    paddingTop:35
   },
   top: {
     flexDirection: 'row',
