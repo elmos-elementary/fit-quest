@@ -8,11 +8,7 @@ import SingleRoutine from '../components/SingleRoutine';
 import SessionExercise from '../components/SessionExercise';
 import UserHistory from '../components/UserHistory';
 import AllRoutines from '../components/AllRoutines';
-<<<<<<< HEAD
-import ExerciseHistory from '../components/ExerciseHistory';
-=======
 import Character from '../components/Character';
->>>>>>> 59b1aa6a6075edc1cd0fef19192c06fe4c07a664
 
 const AuthUser = () => {
   return (
