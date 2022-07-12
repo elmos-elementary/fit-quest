@@ -14,12 +14,9 @@ export const AuthProvider = ({ children }) => {
   const [sessionExercise, setSessionExercise] = useState(null);
   const [userHistory, setUserHistory] = useState([]);
   const [exerciseHistory, setExerciseHistory] = useState([]);
-<<<<<<< HEAD
   const [currentOpponent, setCurrentOpponent] = useState([])
-=======
   const [userItems, setUserItems] = useState([]);
   const [updateItems, setUpdateItems] = useState([]);
->>>>>>> main
 
   const login = async (email, password) => {
     try {
