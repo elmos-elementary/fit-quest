@@ -39,7 +39,6 @@ const UserHistory = ({ navigation }) => {
                   onPress={() => {
                     onTouch(history.id);
                   }}
-                  x
                 >
                   <Text>{history.date}</Text>
                   <Text>{history.routine.name}</Text>
