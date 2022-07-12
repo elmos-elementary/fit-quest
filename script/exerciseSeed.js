@@ -494,6 +494,15 @@ const exercise = [
     image: 'https://www.bodybuilding.com/images/2020/april/494_2f-large.jpg',
     video: 'https://www.youtube.com/shorts/XL6kPdK2mwc',
   },
+  {
+    name: 'Seated Triceps Press',
+    exerciseType: 'strength',
+    bodyPart: 'arms',
+    description:
+      "Sit down on a bench with back support and grasp a dumbbell with both hands and hold it overhead at arm's length. Keeping your upper arms close to your head (elbows in) and perpendicular to the floor, lower the resistance in a semi-circular motion behind your head until your forearms touch your biceps. Go back to the starting position by using the triceps to raise the dumbbell. Breathe out as you perform this step. Repeat for the recommended amount of repetitions.",
+    image: 'https://www.bodybuilding.com/images/2020/xdb/originals/xdb-54e-seated-triceps-press-m1-16x9.jpg',
+    video: 'https://www.youtube.com/watch?v=YK6zrgVI4GI',
+  },
 ];
 
 module.exports = exercise;
