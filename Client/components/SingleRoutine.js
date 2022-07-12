@@ -19,7 +19,6 @@ const SingleRoutine = ({ navigation }) => {
     completeSession,
     user,
     getSession,
-    getCurrentOpponent,
   } = useContext(AuthContext);
 
   const onTouch = (id) => {

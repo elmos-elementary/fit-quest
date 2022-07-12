@@ -199,7 +199,6 @@ export const AuthProvider = ({ children }) => {
         `https://fitquestapp.herokuapp.com/api/opponents/current/${userId}`
       )
       setCurrentOpponent(data)
-      console.log('GOT OPPONENT')
     } catch (err) {
       console.log(err)
     }
