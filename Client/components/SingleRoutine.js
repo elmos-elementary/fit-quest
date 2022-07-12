@@ -27,6 +27,7 @@ const SingleRoutine = ({ navigation }) => {
     });
   };
 
+  const date = new Date().toString();
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -37,7 +38,7 @@ const SingleRoutine = ({ navigation }) => {
       >
         <View style={styles.headerContainer}>
           <Text style={styles.text}>Current Routine: </Text>
-          <Text>{new Date().toLocaleString()}</Text>
+          <Text>{date && date.slice(0, 25)}</Text>
         </View>
 
         <ScrollView>
@@ -73,6 +74,14 @@ const SingleRoutine = ({ navigation }) => {
                       <Text>{exercise.set3}</Text>
                     </View>
                   </View>
+
+                  <Button
+                    title="Start Exercise"
+                    style={styles.addRoutine}
+                    onPress={() => {
+                      onTouch(exercise.id);
+                    }}
+                  />
                 </View>
               </View>
             );
