@@ -31,9 +31,6 @@ const AuthUser = () => {
       <Stack.Screen name="Character">
         {(props) => <Character {...props} />}
       </Stack.Screen>
-      <Stack.Screen name="CurrentOpponent">
-        {(props) => <CurrentOpponent {...props} />}
-      </Stack.Screen>
     </Stack.Navigator>
   );
 };

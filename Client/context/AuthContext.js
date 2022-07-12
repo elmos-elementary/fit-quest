@@ -161,7 +161,7 @@ export const AuthProvider = ({ children }) => {
       const { data } = await axios.put(
         `https://fitquestapp.herokuapp.com/api/sessions/complete/${id}`
       )
-
+      getCurrentOpponent(id)
       return data
     } catch (err) {
       console.error(err)
@@ -199,7 +199,7 @@ export const AuthProvider = ({ children }) => {
         `https://fitquestapp.herokuapp.com/api/opponents/current/${userId}`
       )
       setCurrentOpponent(data)
-      console.log(data)
+      console.log('GOT OPPONENT')
     } catch (err) {
       console.log(err)
     }

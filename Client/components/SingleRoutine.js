@@ -96,7 +96,6 @@ const SingleRoutine = ({ navigation }) => {
               color="white"
               onPress={() => {
                 completeSession(user.id);
-                getCurrentOpponent(user.id)
                 Alert.alert('Good Job', 'Want to try some more?', [
                   {
                     text: 'No',
