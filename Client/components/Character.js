@@ -74,6 +74,7 @@ const Character = ({ navigation }) => {
                 {user.currentLevelExp} /{' '}
                 {levelExp[(user.currentLevel + 1).toString()]} XP
               </Text>
+              <Text>Coins: ${user.coins}</Text>
             </View>
           </View>
           <View style={styles.allSkillsContainer}>
@@ -191,7 +192,82 @@ const Character = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.allItemsContainer}>
-            <Text>Item 1</Text>
+            <View style={styles.singleItemContainer}>
+              {user.head ? (
+                <View>
+                  <View>
+                    <Text>The Item goes here</Text>
+                  </View>
+                  <Text>Head</Text>
+                </View>
+              ) : (
+                <View>
+                  <View style={styles.emptyInventorySlot}>
+                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                  </View>
+                  <View style={styles.intentoryTextTitleContainer}>
+                    <Text>Head</Text>
+                  </View>
+                </View>
+              )}
+            </View>
+            <View style={styles.singleItemContainer}>
+              {user.chest ? (
+                <View>
+                  <View>
+                    <Text>The Item goes here</Text>
+                  </View>
+                  <Text>Chest</Text>
+                </View>
+              ) : (
+                <View>
+                  <View style={styles.emptyInventorySlot}>
+                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                  </View>
+                  <View style={styles.intentoryTextTitleContainer}>
+                    <Text>Chest</Text>
+                  </View>
+                </View>
+              )}
+            </View>
+            <View style={styles.singleItemContainer}>
+              {user.leg ? (
+                <View>
+                  <View>
+                    <Text>The Item goes here</Text>
+                  </View>
+                  <Text>Legs</Text>
+                </View>
+              ) : (
+                <View>
+                  <View style={styles.emptyInventorySlot}>
+                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                  </View>
+                  <View style={styles.intentoryTextTitleContainer}>
+                    <Text>Legs</Text>
+                  </View>
+                </View>
+              )}
+            </View>
+            <View style={styles.singleItemContainer}>
+              {user.ring ? (
+                <View>
+                  <View>
+                    <Text>The Item goes here</Text>
+                  </View>
+                  <Text>Ring</Text>
+                </View>
+              ) : (
+                <View>
+                  <View style={styles.emptyInventorySlot}>
+                    <Text style={styles.emptyInventoryText}>Equip</Text>
+                  </View>
+                  <View style={styles.intentoryTextTitleContainer}>
+                    <Text>Ring</Text>
+                  </View>
+                </View>
+              )}
+            </View>
           </View>
         </View>
       </ImageBackground>
@@ -243,11 +319,36 @@ export const styles = StyleSheet.create({
     width: 60,
   },
   allItemsContainer: {
+    flexDirection: 'row',
     backgroundColor: 'white',
     borderRadius: 20,
     opacity: 0.8,
     margin: 10,
     padding: 10,
+  },
+  singleItemContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 10,
+    padding: 10,
+  },
+  emptyInventorySlot: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'blue',
+    opacity: 0.8,
+    borderRadius: 20,
+    height: 70,
+    width: 70,
+  },
+  emptyInventoryText: {
+    color: 'white',
+  },
+  intentoryTextTitleContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 3,
   },
 });
 
