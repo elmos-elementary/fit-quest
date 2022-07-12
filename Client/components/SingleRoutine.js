@@ -153,11 +153,11 @@ const styles = StyleSheet.create({
     width: '50%',
   },
   routineContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#dddddd',
     opacity: 0.9,
-    // padding: 10,
-    borderRadius: 10,
+    borderRadius: 5,
     margin: 10,
+    padding: 10,
   },
   routineName: {
     textAlign: 'center',

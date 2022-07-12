@@ -7,6 +7,7 @@ import {
   Image,
   StyleSheet,
   ImageBackground,
+  ActivityIndicator,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import { ProgressBar, MD3Colors } from 'react-native-paper';
