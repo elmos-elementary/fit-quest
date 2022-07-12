@@ -22,6 +22,21 @@ const Character = ({ navigation }) => {
   const [legItem, setLegItem] = useState(null || user.leg);
   const [ringItem, setRingItem] = useState(null || user.ring);
   const [weaponItem, setWeaponItem] = useState(null || user.weapon);
+  const [combatSkill, setCombatSkill] = useState(0 || user.combatSkill);
+  const [abdominalsLevel, setAbdominalsLevel] = useState(
+    0 || user.abdominalsCurrentLevel
+  );
+  const [armsLevel, setArmsLevel] = useState(0 || user.armsCurrentLevel);
+  const [backLevel, setBackLevel] = useState(0 || user.backCurrentLevel);
+  const [cardioLevel, setCardioLevel] = useState(0 || user.cardioCurrentLevel);
+  const [chestLevel, setChestLevel] = useState(0 || user.chestCurrentLevel);
+  const [legsLevel, setLegsLevel] = useState(0 || user.legsCurrentLevel);
+  const [shouldersLevel, setShouldersLevel] = useState(
+    0 || user.shouldersCurrentLevel
+  );
+  const [stretchingLevel, setStretchingLevel] = useState(
+    0 || user.stretchingCurrentLevel
+  );
 
   const showInventoryFunc = () => {
     if (showInventory) {
@@ -93,14 +108,13 @@ const Character = ({ navigation }) => {
                   {levelExp[(user.currentLevel + 1).toString()]} XP
                 </Text>
                 <Text>Coins: ${user.coins}</Text>
+                <Text>Combat Skill: {combatSkill}</Text>
               </View>
             </View>
             <View style={styles.allSkillsContainer}>
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Abdominals</Text>
-                <Text style={styles.skillsLevel}>
-                  Level {user.abdominalsCurrentLevel}
-                </Text>
+                <Text style={styles.skillsLevel}>Level {abdominalsLevel}</Text>
                 <Bar
                   progress={
                     user.abdominalsCurrentLevelExp /
@@ -113,9 +127,7 @@ const Character = ({ navigation }) => {
               </View>
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Arms</Text>
-                <Text style={styles.skillsLevel}>
-                  Level {user.armsCurrentLevel}
-                </Text>
+                <Text style={styles.skillsLevel}>Level {armsLevel}</Text>
                 <Bar
                   progress={
                     user.armsCurrentLevelExp /
@@ -128,9 +140,7 @@ const Character = ({ navigation }) => {
               </View>
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Back</Text>
-                <Text style={styles.skillsLevel}>
-                  Level {user.backCurrentLevel}
-                </Text>
+                <Text style={styles.skillsLevel}>Level {backLevel}</Text>
                 <Bar
                   progress={
                     user.backCurrentLevelExp /
@@ -144,7 +154,7 @@ const Character = ({ navigation }) => {
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Cardio</Text>
                 <Text style={styles.skillsLevel}>
-                  Level {user.cardioCurrentLevel}
+                  Level {cardioLevel}
                 </Text>
                 <Bar
                   progress={
@@ -159,7 +169,7 @@ const Character = ({ navigation }) => {
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Chest</Text>
                 <Text style={styles.skillsLevel}>
-                  Level {user.chestCurrentLevel}
+                  Level {chestLevel}
                 </Text>
                 <Bar
                   progress={
@@ -174,7 +184,7 @@ const Character = ({ navigation }) => {
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Legs</Text>
                 <Text style={styles.skillsLevel}>
-                  Level {user.legsCurrentLevel}
+                  Level {legsLevel}
                 </Text>
                 <Bar
                   progress={
@@ -189,7 +199,7 @@ const Character = ({ navigation }) => {
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Shoulders</Text>
                 <Text style={styles.skillsLevel}>
-                  Level {user.shouldersCurrentLevel}
+                  Level {shouldersLevel}
                 </Text>
                 <Bar
                   progress={
@@ -204,7 +214,7 @@ const Character = ({ navigation }) => {
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Stretching</Text>
                 <Text style={styles.skillsLevel}>
-                  Level {user.stretchingCurrentLevel}
+                  Level {stretchingLevel}
                 </Text>
                 <Bar
                   progress={
@@ -439,7 +449,6 @@ const Character = ({ navigation }) => {
             ) : (
               <View></View>
             )}
-
 
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
