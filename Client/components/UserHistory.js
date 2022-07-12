@@ -13,7 +13,8 @@ import { AuthContext } from '../context/AuthContext';
 
 const UserHistory = ({ navigation }) => {
   const { userHistory, user } = useContext(AuthContext);
-  console.log('userHistory :>> ', userHistory);
+  // console.log('userHistory :>> ', userHistory);
+  // console.log('userHistory :>> ', userHistory.length);
 
   return (
     <View style={styles.container}>

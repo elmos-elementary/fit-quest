@@ -14,10 +14,10 @@ import {
 import ExerciseHistory from './ExerciseHistory';
 import { AuthContext } from '../context/AuthContext';
 
+
 const SessionExercise = ({ navigation }) => {
   const { sessionExercise, updateSessionExercise, user, getSession } =
     useContext(AuthContext);
-  console.log('sessionExercise :>> ', sessionExercise);
 
   const [weight1, setWeight1] = useState(sessionExercise.weight1);
   const [weight2, setWeight2] = useState(sessionExercise.weight2);
@@ -59,33 +59,51 @@ const SessionExercise = ({ navigation }) => {
           <View style={styles.navigationContainer}>
             <View>
               <Text style={styles.routineText}>Set</Text>
-              <TextInput>1</TextInput>
-              <TextInput>2</TextInput>
-              <TextInput>3</TextInput>
+              <TextInput style={styles.textInput1}>1</TextInput>
+              <TextInput style={styles.textInput1}>2</TextInput>
+              <TextInput style={styles.textInput1}>3</TextInput>
             </View>
 
             <View style={{ alignItems: 'center' }}>
               <Text style={styles.routineText}>Weight (lbs)</Text>
-              <TextInput onChangeText={(nextValue) => setWeight1(nextValue)}>
+              <TextInput
+                onChangeText={(nextValue) => setWeight1(nextValue)}
+                style={styles.textInput}
+              >
                 {sessionExercise.weight1}
               </TextInput>
-              <TextInput onChangeText={(nextValue) => setWeight2(nextValue)}>
+              <TextInput
+                onChangeText={(nextValue) => setWeight2(nextValue)}
+                style={styles.textInput}
+              >
                 {sessionExercise.weight2}
               </TextInput>
-              <TextInput onChangeText={(nextValue) => setWeight3(nextValue)}>
+              <TextInput
+                onChangeText={(nextValue) => setWeight3(nextValue)}
+                style={styles.textInput}
+              >
                 {sessionExercise.weight3}
               </TextInput>
             </View>
 
             <View style={{ alignItems: 'center', padding: 2 }}>
               <Text style={styles.routineText}>Reps</Text>
-              <TextInput onChangeText={(nextValue) => setSet1(nextValue)}>
+              <TextInput
+                onChangeText={(nextValue) => setSet1(nextValue)}
+                style={styles.textInput}
+              >
                 {sessionExercise.set1}
               </TextInput>
-              <TextInput onChangeText={(nextValue) => setSet2(nextValue)}>
+              <TextInput
+                onChangeText={(nextValue) => setSet2(nextValue)}
+                style={styles.textInput}
+              >
                 {sessionExercise.set2}
               </TextInput>
-              <TextInput onChangeText={(nextValue) => setSet3(nextValue)}>
+              <TextInput
+                onChangeText={(nextValue) => setSet3(nextValue)}
+                style={styles.textInput}
+              >
                 {sessionExercise.set3}
               </TextInput>
             </View>
@@ -159,7 +177,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 35,
     opacity: 0.8,
-    borderRadius: 10,
+    borderRadius: 5,
   },
 
   textContainer: {
@@ -177,7 +195,7 @@ const styles = StyleSheet.create({
   },
 
   routineContainer: {
-    backgroundColor: 'white',
+    backgroundColor: '#dddddd',
     opacity: 0.9,
     borderRadius: 10,
     margin: 20,
@@ -198,7 +216,7 @@ const styles = StyleSheet.create({
   },
   descriptionContainer: {
     flex: 2,
-    backgroundColor: 'white',
+    backgroundColor: '#dddddd',
     opacity: 0.9,
     margin: 20,
     padding: 10,
@@ -207,7 +225,7 @@ const styles = StyleSheet.create({
   navigationContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: 'white',
+    backgroundColor: '#dddddd',
     opacity: 0.9,
     margin: 15,
     borderRadius: 15,
@@ -215,11 +233,25 @@ const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor: 'white',
     borderRadius: 5,
+    overflow: 'hidden',
+    margin: 20,
   },
 
   routineText: {
     fontWeight: 'bold',
     fontSize: 15,
+  },
+
+  textInput1: {
+    padding: 5,
+    borderRadius: 5,
+    margin: 5,
+  },
+  textInput: {
+    backgroundColor: 'white',
+    padding: 5,
+    borderRadius: 5,
+    margin: 5,
   },
 });
 
