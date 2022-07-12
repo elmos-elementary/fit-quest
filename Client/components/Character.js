@@ -38,11 +38,11 @@ const Character = ({ navigation }) => {
       skillCounter += 11;
     }
   }
-  let currentLevelString = user.currentLevel.toString();
-  console.log(getSession);
-  console.log(levelExp);
-  console.log(levelExp[currentLevelString]);
-  // console.log(user);
+  // let currentLevelString = user.currentLevel.toString();
+  // console.log(getSession);
+  // console.log(levelExp);
+  // console.log(levelExp[currentLevelString]);
+  console.log(user);
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -64,19 +64,134 @@ const Character = ({ navigation }) => {
               <Text>{user.name}</Text>
               <Text>Level: {user.currentLevel}</Text>
               <Bar
-                progress={user.currentLevelExp / levelExp[currentLevelString]}
+                progress={
+                  user.currentLevelExp /
+                  levelExp[(user.currentLevel + 1).toString()]
+                }
+                height={16}
               />
               <Text>
-                {user.currentLevelExp} / {levelExp[currentLevelString]} XP
+                {user.currentLevelExp} /{' '}
+                {levelExp[(user.currentLevel + 1).toString()]} XP
               </Text>
             </View>
           </View>
           <View style={styles.allSkillsContainer}>
             <View style={styles.skillsContainer}>
-              <Text>Chest</Text>
-              <Text>Level</Text>
-              <Bar progress={8 / 10} width={200} height={16} />
+              <Text style={styles.skillsTitle}>Abdominals</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.abdominalsCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.abdominalsCurrentLevelExp /
+                  levelExp[(user.abdominalsCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
             </View>
+            <View style={styles.skillsContainer}>
+              <Text style={styles.skillsTitle}>Arms</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.armsCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.armsCurrentLevelExp /
+                  levelExp[(user.armsCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
+            </View>
+            <View style={styles.skillsContainer}>
+              <Text style={styles.skillsTitle}>Back</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.backCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.backCurrentLevelExp /
+                  levelExp[(user.backCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
+            </View>
+            <View style={styles.skillsContainer}>
+              <Text style={styles.skillsTitle}>Cardio</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.cardioCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.cardioCurrentLevelExp /
+                  levelExp[(user.cardioCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
+            </View>
+            <View style={styles.skillsContainer}>
+              <Text style={styles.skillsTitle}>Chest</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.chestCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.chestCurrentLevelExp /
+                  levelExp[(user.chestCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
+            </View>
+            <View style={styles.skillsContainer}>
+              <Text style={styles.skillsTitle}>Legs</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.legsCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.legsCurrentLevelExp /
+                  levelExp[(user.legsCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
+            </View>
+            <View style={styles.skillsContainer}>
+              <Text style={styles.skillsTitle}>Shoulders</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.shouldersCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.shouldersCurrentLevelExp /
+                  levelExp[(user.shouldersCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
+            </View>
+            <View style={styles.skillsContainer}>
+              <Text style={styles.skillsTitle}>Stretching</Text>
+              <Text style={styles.skillsLevel}>
+                Level {user.stretchingCurrentLevel}
+              </Text>
+              <Bar
+                progress={
+                  user.stretchingCurrentLevelExp /
+                  levelExp[(user.stretchingCurrentLevel + 1).toString()]
+                }
+                width={150}
+                height={16}
+              />
+            </View>
+          </View>
+          <View style={styles.allItemsContainer}>
+            <Text>Item 1</Text>
           </View>
         </View>
       </ImageBackground>
@@ -119,6 +234,20 @@ export const styles = StyleSheet.create({
   skillsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    margin: 4,
+  },
+  skillsTitle: {
+    width: 85,
+  },
+  skillsLevel: {
+    width: 60,
+  },
+  allItemsContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    opacity: 0.8,
+    margin: 10,
+    padding: 10,
   },
 });
 
