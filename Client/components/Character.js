@@ -228,6 +228,7 @@ const Character = ({ navigation }) => {
                           setShowChest(false);
                           setShowLeg(false);
                           setShowRing(false);
+                          setShowInventory(false);
                         }
                       }}
                     >
@@ -261,6 +262,7 @@ const Character = ({ navigation }) => {
                           setShowHead(false);
                           setShowLeg(false);
                           setShowRing(false);
+                          setShowInventory(false);
                         }
                       }}
                     >
@@ -294,6 +296,7 @@ const Character = ({ navigation }) => {
                           setShowChest(false);
                           setShowHead(false);
                           setShowRing(false);
+                          setShowInventory(false);
                         }
                       }}
                     >
@@ -327,6 +330,7 @@ const Character = ({ navigation }) => {
                           setShowChest(false);
                           setShowLeg(false);
                           setShowHead(false);
+                          setShowInventory(false);
                         }
                       }}
                     >
@@ -340,6 +344,20 @@ const Character = ({ navigation }) => {
               )}
             </View>
           </View>
+          {showInventory ? (
+            <View style={styles.openInventory}>
+              <View>
+                <View style={styles.emptyInventorySlot}>
+                  <Text style={styles.emptyInventoryText}>Equip</Text>
+                </View>
+                <View style={styles.intentoryTextTitleContainer}>
+                  <Text>Ring</Text>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View></View>
+          )}
           {showHead ? (
             <View style={styles.openInventory}>
               <View>
@@ -381,9 +399,15 @@ const Character = ({ navigation }) => {
                 color="white"
                 title="Inventory"
                 onPress={() => {
-                  Alert.alert(
-                    `You don't have nuthin! Get some more workouts in and earn those items!`
-                  );
+                  if (showInventory) {
+                    setShowInventory(false);
+                  } else {
+                    setShowInventory(true);
+                    setShowChest(false);
+                    setShowLeg(false);
+                    setShowHead(false);
+                    setShowRing(false);
+                  }
                 }}
               />
             </View>
@@ -426,7 +450,7 @@ export const styles = StyleSheet.create({
   },
   main: {
     flexDirection: 'column',
-    paddingTop:35
+    paddingTop: 35,
   },
   top: {
     flexDirection: 'row',
