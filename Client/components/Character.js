@@ -17,16 +17,19 @@ import * as Font from 'expo-font';
 const Character = ({ navigation }) => {
   const { user, getSession, userItems, getUserItems } = useContext(AuthContext);
   const [showInventory, setShowInventory] = useState(false);
-  const [showHead, setShowHead] = useState(false);
-  const [showChest, setShowChest] = useState(false);
-  const [showLeg, setShowLeg] = useState(false);
-  const [showRing, setShowRing] = useState(false);
-  const [showWeapon, setShowWeapon] = useState(false);
   const [chestItem, setChestItem] = useState(null || user.chest);
   const [headItem, setHeadItem] = useState(null || user.head);
   const [legItem, setLegItem] = useState(null || user.leg);
   const [ringItem, setRingItem] = useState(null || user.ring);
   const [weaponItem, setWeaponItem] = useState(null || user.weapon);
+
+  const showInventoryFunc = () => {
+    if (showInventory) {
+      setShowInventory(false);
+    } else {
+      setShowInventory(true);
+    }
+  };
 
   // User Level Experience Table
   let levelCounter = 10;
@@ -238,16 +241,7 @@ const Character = ({ navigation }) => {
                       <Text
                         style={styles.emptyInventoryText}
                         onPress={() => {
-                          if (showHead) {
-                            setShowHead(false);
-                          } else {
-                            setShowHead(true);
-                            setShowChest(false);
-                            setShowLeg(false);
-                            setShowRing(false);
-                            setShowInventory(false);
-                            setShowWeapon(false);
-                          }
+                          showInventoryFunc();
                         }}
                       >
                         Equip
@@ -282,16 +276,7 @@ const Character = ({ navigation }) => {
                       <Text
                         style={styles.emptyInventoryText}
                         onPress={() => {
-                          if (showChest) {
-                            setShowChest(false);
-                          } else {
-                            setShowChest(true);
-                            setShowHead(false);
-                            setShowLeg(false);
-                            setShowRing(false);
-                            setShowInventory(false);
-                            setShowWeapon(false);
-                          }
+                          showInventoryFunc();
                         }}
                       >
                         Equip
@@ -326,16 +311,7 @@ const Character = ({ navigation }) => {
                       <Text
                         style={styles.emptyInventoryText}
                         onPress={() => {
-                          if (showLeg) {
-                            setShowLeg(false);
-                          } else {
-                            setShowLeg(true);
-                            setShowChest(false);
-                            setShowHead(false);
-                            setShowRing(false);
-                            setShowInventory(false);
-                            setShowWeapon(false);
-                          }
+                          showInventoryFunc();
                         }}
                       >
                         Equip
@@ -370,16 +346,7 @@ const Character = ({ navigation }) => {
                       <Text
                         style={styles.emptyInventoryText}
                         onPress={() => {
-                          if (showRing) {
-                            setShowRing(false);
-                          } else {
-                            setShowRing(true);
-                            setShowChest(false);
-                            setShowLeg(false);
-                            setShowHead(false);
-                            setShowInventory(false);
-                            setShowWeapon(false);
-                          }
+                          showInventoryFunc();
                         }}
                       >
                         Equip
@@ -414,16 +381,7 @@ const Character = ({ navigation }) => {
                       <Text
                         style={styles.emptyInventoryText}
                         onPress={() => {
-                          if (showWeapon) {
-                            setShowWeapon(false);
-                          } else {
-                            setShowWeapon(true);
-                            setShowChest(false);
-                            setShowLeg(false);
-                            setShowHead(false);
-                            setShowInventory(false);
-                            setShowRing(false);
-                          }
+                          showInventoryFunc();
                         }}
                       >
                         Equip
@@ -481,56 +439,15 @@ const Character = ({ navigation }) => {
             ) : (
               <View></View>
             )}
-            {showHead ? (
-              <View style={styles.openInventory}>
-                <View>
-                  <View style={styles.emptyInventorySlot}>
-                    <Text style={styles.emptyInventoryText}>Equip</Text>
-                  </View>
-                  <View style={styles.intentoryTextTitleContainer}>
-                    <Text>Ring</Text>
-                  </View>
-                </View>
-              </View>
-            ) : (
-              <View></View>
-            )}
-            {showChest ? (
-              <View style={styles.openInventory}>
-                <Text>hello</Text>
-              </View>
-            ) : (
-              <View></View>
-            )}
-            {showLeg ? (
-              <View style={styles.openInventory}>
-                <Text>hello</Text>
-              </View>
-            ) : (
-              <View></View>
-            )}
-            {showRing ? (
-              <View style={styles.openInventory}>
-                <Text>hello</Text>
-              </View>
-            ) : (
-              <View></View>
-            )}
+
+
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
                 <Button
                   color="white"
                   title="Inventory"
                   onPress={() => {
-                    if (showInventory) {
-                      setShowInventory(false);
-                    } else {
-                      setShowInventory(true);
-                      setShowChest(false);
-                      setShowLeg(false);
-                      setShowHead(false);
-                      setShowRing(false);
-                    }
+                    showInventoryFunc();
                   }}
                 />
               </View>
