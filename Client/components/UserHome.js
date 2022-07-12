@@ -62,8 +62,8 @@ const UserHome = ({ navigation }) => {
           >
             <View style={styles.image}>
               <Image
-                source={{ uri: user.image }}
-                style={{ width: 300, height: 300 }}
+                source={require('../../src/assets/userImage.png')}
+                style={{ width: 250, height: 300 }}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -146,18 +146,20 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 40,
+    margin: 90,
     padding: 10,
   },
+
   inputContainer: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
     margin: 60,
     backgroundColor: 'white',
-    borderRadius: 20,
+    borderRadius: 15,
     opacity: 0.8,
   },
 
