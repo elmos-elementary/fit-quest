@@ -82,7 +82,13 @@ const UserHome = ({ navigation }) => {
                 />
               </View>
               <View style={styles.button}>
-                <Button color="black" title="Character" />
+                <Button
+                  color="black"
+                  title="Character"
+                  onPress={() => {
+                    navigation.navigate('Character');
+                  }}
+                />
               </View>
               <View>
                 <Button
