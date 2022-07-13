@@ -25,13 +25,13 @@ const UserHome = ({ navigation }) => {
 
   const findUserHistory = () => {
     getUserHistory(user.id).then(() => {
-      navigation.navigate('UserHistory');
+      navigation.navigate('HistoryUserStack', { screen: 'UserHistory' });
     });
   };
 
   const getUserCurrentSession = () => {
     getSession(user.id).then(() => {
-      navigation.navigate('SingleRoutine');
+      navigation.navigate('userNoSessionStack', { screen: 'SingleRoutine' });
     });
   };
 
@@ -98,7 +98,9 @@ const UserHome = ({ navigation }) => {
                     {
                       user.currentSession
                         ? getUserCurrentSession()
-                        : navigation.navigate('AllRoutines');
+                        : navigation.navigate('userNoSessionStack', {
+                            screen: 'AllRoutines',
+                          });
                     }
                   }}
                 />

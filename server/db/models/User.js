@@ -173,7 +173,7 @@ const User = db.define('user', {
   },
   image: {
     type: Sequelize.STRING,
-    defaultValue: 'https://png.pngtree.com/png-vector/20201228/ourmid/pngtree-a-warrior-boy-clipart-png-image_2659449.jpg'
+    defaultValue: 'https://i.imgur.com/4Ef2wUE.png'
   }
 });
 

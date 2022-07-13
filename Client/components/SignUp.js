@@ -65,7 +65,7 @@ const SignUp = ({ navigation }) => {
             placeholder="hello@reallygreatsite.com"
             style={styles.textInput}
             value={email}
-            onChangeText={(nextValue) => setEmail(nextValue.toLowerCase())}
+            onChangeText={(nextValue) => setEmail(nextValue)}
           />
           <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
           <Text style={styles.inputHeader}>PASSWORD</Text>
@@ -105,7 +105,7 @@ const SignUp = ({ navigation }) => {
                     setPasswordErrorMessage('Please input Password');
                   }
                 } else {
-                  signUp(email, password, firstName, lastName);
+                  signUp(email.toLowerCase(), password, firstName, lastName);
                   navigation.navigate('Login');
                 }
               }}

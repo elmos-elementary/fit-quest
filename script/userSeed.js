@@ -41,7 +41,7 @@ const user = [
     chest: null,
     leg: null,
     ring: null,
-    image: 'https://png.pngtree.com/png-vector/20201228/ourmid/pngtree-a-warrior-boy-clipart-png-image_2659449.jpg'
+    image: 'https://i.imgur.com/4Ef2wUE.png'
   },
   {
     firstName: 'Murphy',
@@ -85,7 +85,7 @@ const user = [
     chest: null,
     leg: null,
     ring: null,
-    image: 'https://png.pngtree.com/png-vector/20201228/ourmid/pngtree-a-warrior-boy-clipart-png-image_2659449.jpg'
+    image: 'https://i.imgur.com/4Ef2wUE.png'
   }
 ]
 

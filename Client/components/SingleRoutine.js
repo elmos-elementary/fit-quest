@@ -20,6 +20,8 @@ const SingleRoutine = ({ navigation }) => {
     user,
     getRoutine,
     getUserHistory,
+    getCurrentOpponent,
+    getUserAfterComplete,
   } = useContext(AuthContext);
 
   const onTouch = (id) => {
@@ -31,15 +33,37 @@ const SingleRoutine = ({ navigation }) => {
   const no = () => {
     getUserHistory(user.id).then(() => {
       navigation.navigate('UserHome');
+      getUserAfterComplete(user.id);
     });
   };
 
   const yes = () => {
     getRoutine().then(() => {
       getUserHistory(user.id).then(() => {
-        navigation.navigate('AllRoutines');
+        navigation.navigate('userNoSessionStack', { screen: 'AllRoutines' });
+        getUserAfterComplete(user.id);
       });
     });
+  };
+
+  const complete = () => {
+    Alert.alert('Good Job!!', 'Want to try some more?', [
+      {
+        text: 'No',
+        onPress: () =>
+          completeSession(user.id).then(() => {
+            no();
+          }),
+        style: 'cancel',
+      },
+      {
+        text: 'yes',
+        onPress: () =>
+          completeSession(user.id).then(() => {
+            yes();
+          }),
+      },
+    ]);
   };
 
   const date = new Date().toString();
@@ -109,18 +133,7 @@ const SingleRoutine = ({ navigation }) => {
               title="Complete Workout"
               color="white"
               onPress={() => {
-                completeSession(user.id);
-                Alert.alert('Good Job!!', 'Want to try some more?', [
-                  {
-                    text: 'No',
-                    onPress: () => no(),
-                    style: 'cancel',
-                  },
-                  {
-                    text: 'yes',
-                    onPress: () => yes(),
-                  },
-                ]);
+                complete();
               }}
             />
           </View>
