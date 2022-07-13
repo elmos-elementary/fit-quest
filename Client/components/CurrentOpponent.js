@@ -27,42 +27,43 @@ const CurrentOpponent = ({ navigation }) => {
         imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
-        <View>
-          <View style={styles.headerContainer}>
+        <View style={styles.pageContainer}>
+          <ScrollView>
             <Text style={styles.text}>Current Opponent</Text>
-          </View>
-          <View style={styles.opponentInfo}>
-            <Text style={styles.text}>{currentOpponent.name}</Text>
-            <Text style={styles.text}>{`Level ${currentOpponent.level}`}</Text>
+
             <View style={styles.image}>
               <Image
                 source={{
                   uri: 'https://www.svgheart.com/wp-content/uploads/2021/11/one-eye-monster-cyclops-halloween-free-svg-file-SvgHeart.Com.png',
                 }}
-                style={{ width: 300, height: 300 }}
+                style={{ width: 200, height: 200 }}
               />
             </View>
-            <Bar
-              progress={
-                currentOpponent.currentHealth / currentOpponent.totalHealth
-              }
-              color={'red'}
-              width={150}
-              height={16}
-            />
-            <Text
-              style={styles.text}
-            >{`HP: ${currentOpponent.currentHealth} / ${currentOpponent.totalHealth}`}</Text>
-          </View>
-          <View style={styles.rewards}>
-            <Text style={styles.text}>Rewards</Text>
-            <Text style={styles.text}>
-              {minGold === maxGold
-                ? `${minGold} Gold`
-                : `${minGold} - ${maxGold} Gold`}
-            </Text>
-            <Text style={styles.text}>New Item (25% Chance)</Text>
-          </View>
+            <View style={styles.textContainer}>
+              <Text style={styles.text}>{currentOpponent.name}</Text>
+              <Text
+                style={styles.text1}
+              >{`Level ${currentOpponent.level}`}</Text>
+              <Bar
+                progress={
+                  currentOpponent.currentHealth / currentOpponent.totalHealth
+                }
+                color={'red'}
+                height={15}
+              />
+              <Text>{`HP: ${currentOpponent.currentHealth} / ${currentOpponent.totalHealth}`}</Text>
+            </View>
+
+            <View style={styles.rewards}>
+              <Text style={styles.text1}>Rewards</Text>
+              <Text>
+                {minGold === maxGold
+                  ? `${minGold} Gold`
+                  : `${minGold} - ${maxGold} Gold`}
+              </Text>
+              <Text>New Item (25% Chance)</Text>
+            </View>
+          </ScrollView>
         </View>
       </ImageBackground>
     </View>
@@ -79,24 +80,48 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-
-  headerContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  pageContainer: {
+    flex: 1,
     backgroundColor: 'white',
-    margin: 35,
-    opacity: 0.8,
+    justifyContent: 'center',
+    marginTop: 80,
     borderRadius: 15,
+    margin: 40,
+    padding: 10,
+    opacity: 0.8,
   },
 
   text: {
     fontSize: 20,
     fontWeight: 'bold',
+    textAlign: 'center',
+    margin: 10,
   },
 
-  buttonContainer: {
+  text1: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+
+  image: {
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 20,
+    padding: 10,
+  },
+  textContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  rewards: {
+    backgroundColor: '#7E7E7E',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    margin: 40,
+    padding: 20,
   },
 });
 
