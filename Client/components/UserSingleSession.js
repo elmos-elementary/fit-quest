@@ -60,12 +60,6 @@ const UserSingleSession = ({ navigation }) => {
             </View>
           );
         })}
-        <Button
-          title="Go Back"
-          onPress={() => {
-            navigation.navigate('UserHistory');
-          }}
-        />
       </ImageBackground>
     </View>
   );

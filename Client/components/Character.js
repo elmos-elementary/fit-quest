@@ -85,7 +85,7 @@ const Character = ({ navigation }) => {
   // console.log(getSession);
   // console.log(levelExp);
   // console.log(levelExp[currentLevelString]);
-  console.log(userItems);
+  // console.log(userItems);
   return (
     <ScrollView>
       <View style={styles.container}>
