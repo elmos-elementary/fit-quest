@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -9,15 +9,15 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-} from 'react-native'
-import { Bar } from 'react-native-progress'
-import { AuthContext } from '../context/AuthContext'
+} from 'react-native';
+import { Bar } from 'react-native-progress';
+import { AuthContext } from '../context/AuthContext';
 
 const CurrentOpponent = ({ navigation }) => {
-  const { user, currentOpponent } = useContext(AuthContext)
+  const { user, currentOpponent } = useContext(AuthContext);
 
-  const minGold = Math.ceil(user.currentLevel * 0.95)
-  const maxGold = Math.ceil(user.currentLevel * 1.05)
+  const minGold = Math.ceil(user.currentLevel * 0.95);
+  const maxGold = Math.ceil(user.currentLevel * 1.05);
 
   return (
     <View style={styles.container}>
@@ -27,7 +27,7 @@ const CurrentOpponent = ({ navigation }) => {
         imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
-        <ScrollView>
+        <View>
           <View style={styles.headerContainer}>
             <Text style={styles.text}>Current Opponent</Text>
           </View>
@@ -63,11 +63,11 @@ const CurrentOpponent = ({ navigation }) => {
             </Text>
             <Text style={styles.text}>New Item (25% Chance)</Text>
           </View>
-        </ScrollView>
+        </View>
       </ImageBackground>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -98,6 +98,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-})
+});
 
-export default CurrentOpponent
+export default CurrentOpponent;
