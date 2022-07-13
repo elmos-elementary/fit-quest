@@ -123,7 +123,7 @@ const UserHome = ({ navigation }) => {
               </View>
               <View>
                 <Button
-                  title="logout"
+                  title="Logout"
                   style={{ margin: 10 }}
                   onPress={() => {
                     logout();
@@ -153,21 +153,19 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 90,
-    padding: 10,
+    margin: 20,
   },
 
   inputContainer: {
-    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 60,
+    margin: 40,
     backgroundColor: 'white',
     borderRadius: 15,
     opacity: 0.8,
+    padding: 30,
   },
 
   button: {
