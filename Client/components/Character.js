@@ -472,46 +472,54 @@ const Character = ({ navigation }) => {
             </View>
             {showInventory ? (
               <View style={styles.allItemsContainer}>
-                {userItems.map((item) => {
-                  if (
-                    headItem === item ||
-                    chestItem === item ||
-                    legItem === item ||
-                    ringItem === item ||
-                    weaponItem === item
-                  ) {
-                    return <View key={item.id}></View>;
-                  } else {
-                    return (
-                      <View key={item.id} style={styles.singleItemContainer}>
-                        <View style={styles.emptyInventorySlot}>
-                          <Text
-                            style={styles.emptyInventoryText}
-                            onPress={() => {
-                              if (item.type === 'head') {
-                                setHeadItem(item);
-                              } else if (item.type === 'chest') {
-                                setChestItem(item);
-                              } else if (item.type === 'leg') {
-                                setLegItem(item);
-                              } else if (item.type === 'ring') {
-                                setRingItem(item);
-                              } else if (item.type === 'weapon') {
-                                setWeaponItem(item);
-                              }
-                              updateUserItems(user.id, item.id);
-                            }}
-                          >
-                            {item.name}
-                          </Text>
+                {userItems.length < 1 ? (
+                  <View>
+                    <Text>
+                      You have no items. Go workout for a chance to earn them!
+                    </Text>
+                  </View>
+                ) : (
+                  userItems.map((item) => {
+                    if (
+                      headItem === item ||
+                      chestItem === item ||
+                      legItem === item ||
+                      ringItem === item ||
+                      weaponItem === item
+                    ) {
+                      return <View key={item.id}></View>;
+                    } else {
+                      return (
+                        <View key={item.id} style={styles.singleItemContainer}>
+                          <View style={styles.emptyInventorySlot}>
+                            <Text
+                              style={styles.emptyInventoryText}
+                              onPress={() => {
+                                if (item.type === 'head') {
+                                  setHeadItem(item);
+                                } else if (item.type === 'chest') {
+                                  setChestItem(item);
+                                } else if (item.type === 'leg') {
+                                  setLegItem(item);
+                                } else if (item.type === 'ring') {
+                                  setRingItem(item);
+                                } else if (item.type === 'weapon') {
+                                  setWeaponItem(item);
+                                }
+                                updateUserItems(user.id, item.id);
+                              }}
+                            >
+                              {item.name}
+                            </Text>
+                          </View>
+                          <View style={styles.intentoryTextTitleContainer}>
+                            <Text>{item.type}</Text>
+                          </View>
                         </View>
-                        <View style={styles.intentoryTextTitleContainer}>
-                          <Text>{item.type}</Text>
-                        </View>
-                      </View>
-                    );
-                  }
-                })}
+                      );
+                    }
+                  })
+                )}
               </View>
             ) : (
               <View></View>
