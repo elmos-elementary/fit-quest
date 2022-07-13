@@ -548,7 +548,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     margin: 10,
     marginTop: 50,
-    opacity: 0.8,
+    opacity: 0.9,
     borderRadius: 10,
   },
   top: {
