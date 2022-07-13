@@ -17,7 +17,7 @@ const AllRoutines = ({ navigation }) => {
 
   const onTouch = (id) => {
     getSingleRoutine(user.id, id).then(() => {
-      navigation.navigate('SingleRoutine');
+      navigation.navigate('userNoSessionStack', { screen: 'SingleRoutine' });
     });
   };
 

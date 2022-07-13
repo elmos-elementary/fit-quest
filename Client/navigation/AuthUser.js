@@ -17,24 +17,6 @@ const AuthUser = () => {
       <Stack.Screen name="Home">
         {(props) => <MainTabScreen {...props} />}
       </Stack.Screen>
-      <Stack.Screen name="SingleRoutine">
-        {(props) => <SingleRoutine {...props} />}
-      </Stack.Screen>
-      <Stack.Screen name="SessionExercise">
-        {(props) => <SessionExercise {...props} />}
-      </Stack.Screen>
-      <Stack.Screen name="UserHistory">
-        {(props) => <UserHistory {...props} />}
-      </Stack.Screen>
-      <Stack.Screen name="AllRoutines">
-        {(props) => <AllRoutines {...props} />}
-      </Stack.Screen>
-      <Stack.Screen name="Character">
-        {(props) => <Character {...props} />}
-      </Stack.Screen>
-      <Stack.Screen name="UserSingleSession">
-        {(props) => <UserSingleSession {...props} />}
-      </Stack.Screen>
     </Stack.Navigator>
   );
 };
