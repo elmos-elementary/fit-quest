@@ -23,8 +23,6 @@ const UserHome = ({ navigation }) => {
     getCurrentOpponent,
   } = useContext(AuthContext);
 
-  // console.log('user1 :>> ', user);
-
   const findUserHistory = () => {
     getUserHistory(user.id).then(() => {
       navigation.navigate('HistoryUserStack', { screen: 'UserHistory' });

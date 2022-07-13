@@ -138,7 +138,6 @@ const HistoryUserStack = ({ navigation }) => {
 
 const UserNoSessionStack = ({ navigation }) => {
   const { user } = useContext(AuthContext);
-  console.log('nosessionStack');
   return (
     <noSessionStack.Navigator screenOptions={{ headerShown: false }}>
       {user.currentSession ? (

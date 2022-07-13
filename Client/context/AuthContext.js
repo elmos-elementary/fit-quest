@@ -157,8 +157,6 @@ export const AuthProvider = ({ children }) => {
         data.sessionExercises.sort((a, b) => a.exerciseId - b.exerciseId);
       }
 
-      console.log('data in get session :>> ', data);
-
       setSingleRoutine(data);
       return data;
     } catch (err) {
