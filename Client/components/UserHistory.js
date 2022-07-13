@@ -29,7 +29,12 @@ const UserHistory = ({ navigation }) => {
         <View style={styles.headerContainer}>
           <Text style={styles.text}>Previous Workouts</Text>
         </View>
+
         <View style={styles.historyContainer}>
+          <Text style={{ fontWeight: 'bold' }}>
+            Here are your previous workouts, click on each routine to see
+            exercises completed
+          </Text>
           <ScrollView>
             {userHistory.map((history, i) => {
               return (
@@ -71,9 +76,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    margin: 35,
+    // margin: 35,
     opacity: 0.8,
     borderRadius: 5,
+    marginTop: 45,
   },
   text: {
     fontSize: 30,
