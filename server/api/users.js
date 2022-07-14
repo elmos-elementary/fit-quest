@@ -36,6 +36,19 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.put('/email', async (req, res, next) => {
+  try {
+    const email = req.body.email;
+    const user = await User.findOne({where: {email: email}});
+    if (user) {
+      res.send('User found')
+    }
+    res.send('No user found');
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put('/:id', async (req, res, next) => {
   try {
     const findUser = await User.findByPk(req.params.id);
