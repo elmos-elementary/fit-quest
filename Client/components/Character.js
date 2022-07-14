@@ -306,6 +306,7 @@ const Character = ({ navigation }) => {
                   title="Open Inventory"
                   onPress={() => {
                     setShowInventory(true);
+                    setSelectedItem(-1);
                   }}
                 />
               </View>
@@ -323,6 +324,7 @@ const Character = ({ navigation }) => {
                   resizeMode="cover"
                   style={styles.backgroundImage}
                 >
+                  {/* Inventory Button */}
                   <View style={styles.buttonContainer}>
                     <View style={styles.button}>
                       <Button
@@ -330,6 +332,7 @@ const Character = ({ navigation }) => {
                         title="Close Inventory"
                         onPress={() => {
                           setShowInventory(false);
+                          setSelectedItem(-1);
                         }}
                       />
                     </View>
@@ -535,71 +538,96 @@ const Character = ({ navigation }) => {
                     </View>
 
                     {/* Currently Selected Item */}
-                    <View style={styles.allItemsContainerModal}></View>
+                    <View style={styles.allItemsContainerModal}>
+                      {selectedItem !== -1 ? (
+                        <View>
+                          <View style={styles.emptyInventorySlot}>
+                            <Text
+                              style={styles.emptyInventoryText}
+                              onPress={() => {}}
+                            >
+                              {selectedItem.name}
+                            </Text>
+                          </View>
+                          <View style={styles.intentoryTextTitleContainer}>
+                            <Text>{selectedItem.name}</Text>
+                          </View>
+                        </View>
+                      ) : (
+                        <Text>
+                          Click on one of your currently equiped items or your
+                          inventory items to see its details.
+                        </Text>
+                      )}
+                    </View>
                   </View>
 
                   {/* Full Inventory */}
-                  <View style={styles.allItemsContainer}>
-                    {userItems.length < 1 ? (
-                      <View style={style.modalContainer}>
-                        <Text>
-                          You have no items. Go workout for a chance to earn
-                          them!
-                        </Text>
-                      </View>
-                    ) : (
-                      userItems.map((item) => {
-                        if (
-                          headItem === item ||
-                          chestItem === item ||
-                          legItem === item ||
-                          ringItem === item ||
-                          weaponItem === item
-                        ) {
-                          return <View key={item.id}></View>;
-                        } else {
-                          return (
-                            <View
-                              key={item.id}
-                              style={styles.singleItemContainer}
-                            >
+                  <ScrollView>
+                    <View style={styles.allItemsContainer}>
+                      {userItems.length < 1 ? (
+                        <View style={style.modalContainer}>
+                          <Text>
+                            You have no items. Go workout for a chance to earn
+                            them!
+                          </Text>
+                        </View>
+                      ) : (
+                        userItems.map((item) => {
+                          if (
+                            headItem === item ||
+                            chestItem === item ||
+                            legItem === item ||
+                            ringItem === item ||
+                            weaponItem === item
+                          ) {
+                            return <View key={item.id}></View>;
+                          } else {
+                            return (
                               <View
-                                style={
-                                  selectedItem.id === item.id
-                                    ? styles.selectedInventorySlot
-                                    : styles.emptyInventorySlot
-                                }
+                                key={item.id}
+                                style={styles.singleItemContainer}
                               >
-                                <Text
-                                  style={styles.emptyInventoryText}
-                                  onPress={() => {
-                                    setSelectedItem(item);
-                                    // if (item.type === 'head') {
-                                    //   setHeadItem(item);
-                                    // } else if (item.type === 'chest') {
-                                    //   setChestItem(item);
-                                    // } else if (item.type === 'leg') {
-                                    //   setLegItem(item);
-                                    // } else if (item.type === 'ring') {
-                                    //   setRingItem(item);
-                                    // } else if (item.type === 'weapon') {
-                                    //   setWeaponItem(item);
-                                    // }
-                                    // updateUserItems(user.id, item.id);
-                                  }}
+                                <View
+                                  style={
+                                    selectedItem.id === item.id
+                                      ? styles.selectedInventorySlot
+                                      : styles.emptyInventorySlot
+                                  }
                                 >
-                                  {item.name}
-                                </Text>
+                                  <Text
+                                    style={styles.emptyInventoryText}
+                                    onPress={() => {
+                                      setSelectedItem(item);
+                                      // if (item.type === 'head') {
+                                      //   setHeadItem(item);
+                                      // } else if (item.type === 'chest') {
+                                      //   setChestItem(item);
+                                      // } else if (item.type === 'leg') {
+                                      //   setLegItem(item);
+                                      // } else if (item.type === 'ring') {
+                                      //   setRingItem(item);
+                                      // } else if (item.type === 'weapon') {
+                                      //   setWeaponItem(item);
+                                      // }
+                                      // updateUserItems(user.id, item.id);
+                                    }}
+                                  >
+                                    {item.name}
+                                  </Text>
+                                </View>
+                                <View
+                                  style={styles.intentoryTextTitleContainer}
+                                >
+                                  <Text>{item.type}</Text>
+                                </View>
                               </View>
-                              <View style={styles.intentoryTextTitleContainer}>
-                                <Text>{item.type}</Text>
-                              </View>
-                            </View>
-                          );
-                        }
-                      })
-                    )}
-                  </View>
+                            );
+                          }
+                        })
+                      )}
+                    </View>
+                  </ScrollView>
                 </ImageBackground>
               </View>
             </Modal>
