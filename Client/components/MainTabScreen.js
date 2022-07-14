@@ -151,10 +151,6 @@ const UserNoSessionStack = ({ navigation }) => {
         name="SessionExercise"
         component={SessionExercise}
       />
-      <noSessionStack.Screen
-        name="SessionSummary"
-        component={SessionSummary}
-      />
     </noSessionStack.Navigator>
 
   );

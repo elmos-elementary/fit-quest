@@ -53,6 +53,7 @@ const SingleRoutine = ({ navigation }) => {
             getUserHistory(user.id).then(() => {
               navigation.navigate('SessionSummary');
               getUserAfterComplete(user.id);
+
           })
         })
 
