@@ -170,6 +170,33 @@ router.put('/complete/:userId', async (req, res, next) => {
       res.send('User has no active session!')
     }
 
+    // Session summary
+    const summary = {
+      expGained: 0,
+      characterLevelGained: 0,
+      newLevel: 0,
+      chestExpGained: 0,
+      chestLevelGained: 0,
+      backExpGained: 0,
+      backLevelGained: 0,
+      armsExpGained: 0,
+      armsLevelGained: 0,
+      abdominalsExpGained: 0,
+      abdominalsLevelGained: 0,
+      legsExpGained: 0,
+      legsLevelGained: 0,
+      shouldersExpGained: 0,
+      shouldersLevelGained: 0,
+      cardioExpGained: 0,
+      cardioLevelGained: 0,
+      stretchingExpGained: 0,
+      stretchingLevelGained: 0,
+      damageDealt: 0,
+      coinsGained: 0,
+      newItem: [],
+      opponentDefeated: null
+    }
+
     // Find all exercise types used in session
     const exerciseTypes = {
       chest: 0,
@@ -204,6 +231,7 @@ router.put('/complete/:userId', async (req, res, next) => {
         exerciseTypes.shoulders +
         exerciseTypes.cardio +
         exerciseTypes.stretching)
+    summary.expGained = expGain
 
     // Chest Skill exp
     let newChestExp = user.chestExp
@@ -211,10 +239,12 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newChestCurrentLevelExp = user.chestCurrentLevelExp
     if (exerciseTypes.chest > 0) {
       let chestExpGain = user.chestCurrentLevel
+      summary.chestExpGained = chestExpGain
       newChestExp = user.chestExp + chestExpGain
       newChestCurrentLevel = user.chestCurrentLevel
       while (newChestExp >= skillLevelExp[Number(newChestCurrentLevel) + 1]) {
         newChestCurrentLevel++
+        summary.chestLevelGained++
       }
       newChestCurrentLevelExp =
         newChestExp - skillLevelExp[newChestCurrentLevel]
@@ -226,10 +256,12 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newBackCurrentLevelExp = user.backCurrentLevelExp
     if (exerciseTypes.back > 0) {
       let backExpGain = user.backCurrentLevel
+      summary.backExpGained = backExpGain
       newBackExp = user.backExp + backExpGain
       newBackCurrentLevel = user.backCurrentLevel
       while (newBackExp >= skillLevelExp[Number(newBackCurrentLevel) + 1]) {
         newBackCurrentLevel++
+        summary.backLevelGained++
       }
       newBackCurrentLevelExp = newBackExp - skillLevelExp[newBackCurrentLevel]
     }
@@ -240,10 +272,12 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newArmsCurrentLevelExp = user.armsCurrentLevelExp
     if (exerciseTypes.arms > 0) {
       let armsExpGain = user.armsCurrentLevel
+      summary.armsExpGained = armsExpGain
       newArmsExp = user.armsExp + armsExpGain
       newArmsCurrentLevel = user.armsCurrentLevel
       while (newArmsExp >= skillLevelExp[Number(newArmsCurrentLevel) + 1]) {
         newArmsCurrentLevel++
+        summary.armsLevelGained++
       }
       newArmsCurrentLevelExp = newArmsExp - skillLevelExp[newArmsCurrentLevel]
     }
@@ -254,12 +288,14 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newAbdominalsCurrentLevelExp = user.abdominalsCurrentLevelExp
     if (exerciseTypes.abdominal > 0) {
       let abdominalsExpGain = user.abdominalsCurrentLevel
+      summary.abdominalsExpGained = abdominalsExpGain
       newAbdominalsExp = user.abdominalsExp + abdominalsExpGain
       newAbdominalsCurrentLevel = user.abdominalsCurrentLevel
       while (
         newAbdominalsExp >= skillLevelExp[Number(newAbdominalsCurrentLevel) + 1]
       ) {
         newAbdominalsCurrentLevel++
+        summary.abdominalsLevelGained++
       }
       newAbdominalsCurrentLevelExp =
         newAbdominalsExp - skillLevelExp[newAbdominalsCurrentLevel]
@@ -271,10 +307,12 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newLegsCurrentLevelExp = user.legsCurrentLevelExp
     if (exerciseTypes.legs > 0) {
       let legsExpGain = user.legsCurrentLevel
+      summary.legsExpGained = legsExpGain
       newLegsExp = user.legsExp + legsExpGain
       newLegsCurrentLevel = user.legsCurrentLevel
       while (newLegsExp >= skillLevelExp[Number(newLegsCurrentLevel) + 1]) {
         newLegsCurrentLevel++
+        summary.legsLevelGained++
       }
       newLegsCurrentLevelExp = newLegsExp - skillLevelExp[newLegsCurrentLevel]
     }
@@ -285,12 +323,14 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newShouldersCurrentLevelExp = user.shouldersCurrentLevelExp
     if (exerciseTypes.shoulders > 0) {
       let shouldersExpGain = user.shouldersCurrentLevel
+      summary.shouldersExpGained = shouldersExpGain
       newShouldersExp = user.shouldersExp + shouldersExpGain
       newShouldersCurrentLevel = user.shouldersCurrentLevel
       while (
         newShouldersExp >= skillLevelExp[Number(newShouldersCurrentLevel) + 1]
       ) {
         newShouldersCurrentLevel++
+        summary.shouldersLevelGained++
       }
       newShouldersCurrentLevelExp =
         newShouldersExp - skillLevelExp[newShouldersCurrentLevel]
@@ -302,10 +342,12 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newCardioCurrentLevelExp = user.cardioCurrentLevelExp
     if (exerciseTypes.cardio > 0) {
       let cardioExpGain = user.cardioCurrentLevel
+      summary.cardioExpGained = cardioExpGain
       newCardioExp = user.cardioExp + cardioExpGain
       newCardioCurrentLevel = user.cardioCurrentLevel
       while (newCardioExp >= skillLevelExp[Number(newCardioCurrentLevel) + 1]) {
         newCardioCurrentLevel++
+        summary.cardioLevelGained++
       }
       newCardioCurrentLevelExp =
         newCardioExp - skillLevelExp[newCardioCurrentLevel]
@@ -317,12 +359,14 @@ router.put('/complete/:userId', async (req, res, next) => {
     let newStretchingCurrentLevelExp = user.stretchingCurrentLevelExp
     if (exerciseTypes.stretching > 0) {
       let stretchingExpGain = user.stretchingCurrentLevel
+      summary.stretchingExpGained = stretchingExpGain
       newStretchingExp = user.stretchingExp + stretchingExpGain
       newStretchingCurrentLevel = user.stretchingCurrentLevel
       while (
         newStretchingExp >= skillLevelExp[Number(newStretchingCurrentLevel) + 1]
       ) {
         newStretchingCurrentLevel++
+        summary.stretchingLevelGained++
       }
       newStretchingCurrentLevelExp =
         newStretchingExp - skillLevelExp[newStretchingCurrentLevel]
@@ -337,12 +381,15 @@ router.put('/complete/:userId', async (req, res, next) => {
     })
     let currentOpponentHealth = currentOpponent.currentHealth
     currentOpponentHealth -= user.combatSkill
+    summary.damageDealt = user.combatSkill
     let coins = user.coins
     if (currentOpponentHealth <= 0) {
       await currentOpponent.update({ alive: false, currentHealth: 0 })
 
       // Give coins
-      coins += Math.ceil(user.currentLevel * (Math.random() * 0.1 - 0.05 + 1))
+      const coinsGained = Math.ceil(user.currentLevel * (Math.random() * 0.1 - 0.05 + 1))
+      summary.coinsGained = coinsGained
+      coins += coinsGained
 
       // Roll for item
       const currentItems = user.items
@@ -350,12 +397,16 @@ router.put('/complete/:userId', async (req, res, next) => {
       if (currentItems.length === 0) {
         const newItem = await Item.create(generateItem(user.currentLevel))
         user.addItem(newItem)
+        summary.newItem.push(newItem.name)
       } else {
         if (Math.ceil(Math.random() * 4) === 4) {
           const newItem = await Item.create(generateItem(user.currentLevel))
           user.addItem(newItem)
+          summary.newItem.push(newItem.name)
         }
       }
+
+      summary.opponentDefeated = currentOpponent.name
 
       // Create new opponent
       const name = generateOpponentName()
@@ -379,10 +430,13 @@ router.put('/complete/:userId', async (req, res, next) => {
     while (newCharacterExp >= levelExp[Number(newCurrentLevel) + 1]) {
       newCurrentLevel++
       newCombatSkill++
+      summary.characterLevelGained++
+      summary.newLevel = newCurrentLevel
       // Roll for item every level up
       if (Math.ceil(Math.random() * 4) === 4) {
         const newItem = await Item.create(generateItem(user.currentLevel))
         user.addItem(newItem)
+        summary.newItem.push(newItem.name)
       }
     }
     let newCurrentLevelExp = newCharacterExp - levelExp[newCurrentLevel]
@@ -421,7 +475,8 @@ router.put('/complete/:userId', async (req, res, next) => {
 
     // Assign session as completed
     await session.update({ complete: true })
-    res.json(session)
+
+    res.send(summary)
   } catch (err) {
     next(err)
   }
