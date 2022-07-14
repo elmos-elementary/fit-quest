@@ -24,7 +24,6 @@ const SessionExercise = ({ navigation }) => {
   const [set2, setSet2] = useState(sessionExercise.set2);
   const [set3, setSet3] = useState(sessionExercise.set3);
   const [description, setDescription] = useState('about');
-  const [visual, setVisual] = useState('visual');
 
   const onTouch = (id) => {
     updateSessionExercise(id, {
@@ -166,13 +165,6 @@ const SessionExercise = ({ navigation }) => {
             </>
           )}
         </View>
-        {visual === 'visual' ? (
-          <>
-            <Text>Visual</Text>
-          </>
-        ) : (
-          <View></View>
-        )}
       </ImageBackground>
     </View>
   );

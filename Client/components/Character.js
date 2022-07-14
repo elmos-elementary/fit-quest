@@ -461,24 +461,25 @@ const Character = ({ navigation }) => {
                     }}
                   />
                 </View>
-              ) : (
-                <View>
-                  <View style={styles.emptyInventorySlot}>
-                    <Text
-                      style={styles.emptyInventoryText}
-                      onPress={() => {
-                        showInventoryFunc();
-                      }}
-                    >
-                      Equip
-                    </Text>
-                  </View>
-                  <View style={styles.intentoryTextTitleContainer}>
-                    <Text>Ring</Text>
-                  </View>
+              </View>
+            ) : (
+              <View>
+                <View style={styles.emptyInventorySlot}>
+                  <Text
+                    style={styles.emptyInventoryText}
+                    onPress={() => {
+                      showInventoryFunc();
+                    }}
+                  >
+                    Equip
+                  </Text>
                 </View>
-              )}
-            </View>
+                <View style={styles.intentoryTextTitleContainer}>
+                  <Text>Ring</Text>
+                </View>
+              </View>
+            )}
+
             <View style={styles.singleItemContainer}>
               {weaponItem ? (
                 <View>
