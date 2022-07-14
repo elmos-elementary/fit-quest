@@ -6,6 +6,7 @@ import {
   Button,
   TextInput,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
@@ -24,72 +25,74 @@ const Login = ({ navigation }) => {
         imageStyle={{ opacity: 0.8 }}
         style={styles.backgroundImage}
       >
-        <View style={styles.headerContainer}>
-          <Text style={styles.text1}>Login</Text>
-          <Text category="s1">Don't have an account?</Text>
+        <ScrollView>
+          <View style={styles.headerContainer}>
+            <Text style={styles.text1}>Login</Text>
+            <Text category="s1">Don't have an account?</Text>
 
-          <Text
-            category="s1"
-            status="primary"
-            onPress={() => {
-              navigation.navigate('SignUp');
-            }}
-          >
-            Sign up here.
-          </Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputHeader}>EMAIL</Text>
-          <TextInput
-            placeholder="hello@reallygreatsite.com"
-            style={styles.textInput}
-            value={email}
-            onChangeText={(nextValue) => setEmail(nextValue)}
-          />
-          <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
-          <Text style={styles.inputHeader}>PASSWORD</Text>
-          <TextInput
-            placeholder="****"
-            style={styles.textInput}
-            value={password}
-            secureTextEntry={true}
-            onChangeText={(nextValue) => setPassword(nextValue)}
-          />
-          <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
-        </View>
-
-        <View>
-          <Text
-            category="s1"
-            status="primary"
-            style={{ textAlign: 'right', margin: 2, paddingRight: 20 }}
-            onPress={() => {
-              navigation.navigate('PasswordRecovery');
-            }}
-          >
-            forgot password?
-          </Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button
-              title="Log In"
-              color="white"
+            <Text
+              category="s1"
+              status="primary"
               onPress={() => {
-                if (email === '' || password === '') {
-                  if (email === '') {
-                    setEmailErrorMessage('Please input email');
-                  }
-                  if (password === '') {
-                    setPasswordErrorMessage('Please input Password');
-                  }
-                } else {
-                  login(email.toLowerCase(), password);
-                }
+                navigation.navigate('SignUp');
               }}
-            />
+            >
+              Sign up here.
+            </Text>
           </View>
-        </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputHeader}>EMAIL</Text>
+            <TextInput
+              placeholder="hello@reallygreatsite.com"
+              style={styles.textInput}
+              value={email}
+              onChangeText={(nextValue) => setEmail(nextValue)}
+            />
+            <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
+            <Text style={styles.inputHeader}>PASSWORD</Text>
+            <TextInput
+              placeholder="****"
+              style={styles.textInput}
+              value={password}
+              secureTextEntry={true}
+              onChangeText={(nextValue) => setPassword(nextValue)}
+            />
+            <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
+          </View>
+
+          <View>
+            <Text
+              category="s1"
+              status="primary"
+              style={{ textAlign: 'right', margin: 2, paddingRight: 20 }}
+              onPress={() => {
+                navigation.navigate('PasswordRecovery');
+              }}
+            >
+              forgot password?
+            </Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button
+                title="Log In"
+                color="white"
+                onPress={() => {
+                  if (email === '' || password === '') {
+                    if (email === '') {
+                      setEmailErrorMessage('Please input email');
+                    }
+                    if (password === '') {
+                      setPasswordErrorMessage('Please input Password');
+                    }
+                  } else {
+                    login(email.toLowerCase(), password);
+                  }
+                }}
+              />
+            </View>
+          </View>
+        </ScrollView>
       </ImageBackground>
     </Layout>
   );
