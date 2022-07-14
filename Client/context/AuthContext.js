@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [currentOpponent, setCurrentOpponent] = useState([]);
   const [userItems, setUserItems] = useState([]);
   const [updateItems, setUpdateItems] = useState([]);
+  const [summary, setSummary] = useState(null)
 
   const login = async (email, password) => {
     try {
@@ -166,10 +167,10 @@ export const AuthProvider = ({ children }) => {
 
   const completeSession = async (id) => {
     try {
-      await axios.put(
+      const {data} = await axios.put(
         `https://fitquestapp.herokuapp.com/api/sessions/complete/${id}`
       );
-
+      setSummary(data)
       getCurrentOpponent(id);
     } catch (err) {
       console.error(err);
@@ -342,6 +343,7 @@ export const AuthProvider = ({ children }) => {
         userItems,
         updateUserItems,
         getUserAfterComplete,
+        summary
       }}
     >
       {children}
