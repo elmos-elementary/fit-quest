@@ -46,6 +46,7 @@ const Character = ({ navigation }) => {
   const [legsLevelBonus, setLegsLevelBonus] = useState(0);
   const [shouldersLevelBonus, setShouldersLevelBonus] = useState(0);
   const [stretchingLevelBonus, setStretchingLevelBonus] = useState(0);
+  const [selectedItem, setSelectedItem] = useState(-1);
 
   const showInventoryFunc = () => {
     if (showInventory) {
@@ -95,6 +96,7 @@ const Character = ({ navigation }) => {
           style={styles.backgroundImage}
         >
           <View style={styles.main}>
+            {/* Character Information */}
             <View style={styles.top}>
               <View style={styles.container}>
                 <Image
@@ -123,6 +125,8 @@ const Character = ({ navigation }) => {
                 <Text>Combat Skill: {combatSkill}</Text>
               </View>
             </View>
+
+            {/* Skills */}
             <View style={styles.allSkillsContainer}>
               <View style={styles.skillsContainer}>
                 <Text style={styles.skillsTitle}>Abdominals</Text>
@@ -293,6 +297,8 @@ const Character = ({ navigation }) => {
                 />
               </View>
             </View>
+
+            {/* Inventory Button */}
             <View style={styles.buttonContainer}>
               <View style={styles.button}>
                 <Button
@@ -328,16 +334,23 @@ const Character = ({ navigation }) => {
                       />
                     </View>
                   </View>
-                  {/* <View style={styles.topContainerModal}> */}
-                    <View style={styles.allItemsContainer}>
+                  <View style={styles.topContainerModal}>
+                    {/* Currently Equiped */}
+                    <View style={styles.allItemsContainerModal}>
                       <View style={styles.singleItemContainer}>
                         {headItem ? (
                           <View>
-                            <View style={styles.emptyInventorySlot}>
+                            <View
+                              style={
+                                selectedItem.id === headItem.id
+                                  ? styles.selectedInventorySlot
+                                  : styles.emptyInventorySlot
+                              }
+                            >
                               <Text
                                 style={styles.emptyInventoryText}
                                 onPress={() => {
-                                  setHeadItem(null);
+                                  setSelectedItem(headItem);
                                 }}
                               >
                                 {headItem.name}
@@ -352,11 +365,9 @@ const Character = ({ navigation }) => {
                             <View style={styles.emptyInventorySlot}>
                               <Text
                                 style={styles.emptyInventoryText}
-                                onPress={() => {
-                                  showInventoryFunc();
-                                }}
+                                onPress={() => {}}
                               >
-                                Equip
+                                Empty
                               </Text>
                             </View>
                             <View style={styles.intentoryTextTitleContainer}>
@@ -368,11 +379,17 @@ const Character = ({ navigation }) => {
                       <View style={styles.singleItemContainer}>
                         {chestItem ? (
                           <View>
-                            <View style={styles.emptyInventorySlot}>
+                            <View
+                              style={
+                                selectedItem.id === chestItem.id
+                                  ? styles.selectedInventorySlot
+                                  : styles.emptyInventorySlot
+                              }
+                            >
                               <Text
                                 style={styles.emptyInventoryText}
                                 onPress={() => {
-                                  setChestItem(null);
+                                  setSelectedItem(chestItem);
                                 }}
                               >
                                 {chestItem.name}
@@ -387,11 +404,9 @@ const Character = ({ navigation }) => {
                             <View style={styles.emptyInventorySlot}>
                               <Text
                                 style={styles.emptyInventoryText}
-                                onPress={() => {
-                                  showInventoryFunc();
-                                }}
+                                onPress={() => {}}
                               >
-                                Equip
+                                Empty
                               </Text>
                             </View>
                             <View style={styles.intentoryTextTitleContainer}>
@@ -403,11 +418,17 @@ const Character = ({ navigation }) => {
                       <View style={styles.singleItemContainer}>
                         {legItem ? (
                           <View>
-                            <View style={styles.emptyInventorySlot}>
+                            <View
+                              style={
+                                selectedItem.id === legItem.id
+                                  ? styles.selectedInventorySlot
+                                  : styles.emptyInventorySlot
+                              }
+                            >
                               <Text
                                 style={styles.emptyInventoryText}
                                 onPress={() => {
-                                  setLegItem(null);
+                                  setSelectedItem(legItem);
                                 }}
                               >
                                 {legItem.name}
@@ -422,11 +443,9 @@ const Character = ({ navigation }) => {
                             <View style={styles.emptyInventorySlot}>
                               <Text
                                 style={styles.emptyInventoryText}
-                                onPress={() => {
-                                  showInventoryFunc();
-                                }}
+                                onPress={() => {}}
                               >
-                                Equip
+                                Empty
                               </Text>
                             </View>
                             <View style={styles.intentoryTextTitleContainer}>
@@ -438,11 +457,17 @@ const Character = ({ navigation }) => {
                       <View style={styles.singleItemContainer}>
                         {ringItem ? (
                           <View>
-                            <View style={styles.emptyInventorySlot}>
+                            <View
+                              style={
+                                selectedItem.id === ringItem.id
+                                  ? styles.selectedInventorySlot
+                                  : styles.emptyInventorySlot
+                              }
+                            >
                               <Text
                                 style={styles.emptyInventoryText}
                                 onPress={() => {
-                                  setRingItem(null);
+                                  setSelectedItem(ringItem);
                                 }}
                               >
                                 {ringItem.name}
@@ -457,11 +482,9 @@ const Character = ({ navigation }) => {
                             <View style={styles.emptyInventorySlot}>
                               <Text
                                 style={styles.emptyInventoryText}
-                                onPress={() => {
-                                  showInventoryFunc();
-                                }}
+                                onPress={() => {}}
                               >
-                                Equip
+                                Empty
                               </Text>
                             </View>
                             <View style={styles.intentoryTextTitleContainer}>
@@ -473,11 +496,17 @@ const Character = ({ navigation }) => {
                       <View style={styles.singleItemContainer}>
                         {weaponItem ? (
                           <View>
-                            <View style={styles.emptyInventorySlot}>
+                            <View
+                              style={
+                                selectedItem.id === weaponItem.id
+                                  ? styles.selectedInventorySlot
+                                  : styles.emptyInventorySlot
+                              }
+                            >
                               <Text
                                 style={styles.emptyInventoryText}
                                 onPress={() => {
-                                  setWeaponItem(null);
+                                  setSelectedItem(weaponItem);
                                 }}
                               >
                                 {weaponItem.name}
@@ -492,11 +521,9 @@ const Character = ({ navigation }) => {
                             <View style={styles.emptyInventorySlot}>
                               <Text
                                 style={styles.emptyInventoryText}
-                                onPress={() => {
-                                  showInventoryFunc();
-                                }}
+                                onPress={() => {}}
                               >
-                                Equip
+                                Empty
                               </Text>
                             </View>
                             <View style={styles.intentoryTextTitleContainer}>
@@ -506,11 +533,15 @@ const Character = ({ navigation }) => {
                         )}
                       </View>
                     </View>
-                    {/* <View style={styles.allItemsContainerModal}></View> */}
-                  {/* </View> */}
+
+                    {/* Currently Selected Item */}
+                    <View style={styles.allItemsContainerModal}></View>
+                  </View>
+
+                  {/* Full Inventory */}
                   <View style={styles.allItemsContainer}>
                     {userItems.length < 1 ? (
-                      <View>
+                      <View style={style.modalContainer}>
                         <Text>
                           You have no items. Go workout for a chance to earn
                           them!
@@ -532,22 +563,29 @@ const Character = ({ navigation }) => {
                               key={item.id}
                               style={styles.singleItemContainer}
                             >
-                              <View style={styles.emptyInventorySlot}>
+                              <View
+                                style={
+                                  selectedItem.id === item.id
+                                    ? styles.selectedInventorySlot
+                                    : styles.emptyInventorySlot
+                                }
+                              >
                                 <Text
                                   style={styles.emptyInventoryText}
                                   onPress={() => {
-                                    if (item.type === 'head') {
-                                      setHeadItem(item);
-                                    } else if (item.type === 'chest') {
-                                      setChestItem(item);
-                                    } else if (item.type === 'leg') {
-                                      setLegItem(item);
-                                    } else if (item.type === 'ring') {
-                                      setRingItem(item);
-                                    } else if (item.type === 'weapon') {
-                                      setWeaponItem(item);
-                                    }
-                                    updateUserItems(user.id, item.id);
+                                    setSelectedItem(item);
+                                    // if (item.type === 'head') {
+                                    //   setHeadItem(item);
+                                    // } else if (item.type === 'chest') {
+                                    //   setChestItem(item);
+                                    // } else if (item.type === 'leg') {
+                                    //   setLegItem(item);
+                                    // } else if (item.type === 'ring') {
+                                    //   setRingItem(item);
+                                    // } else if (item.type === 'weapon') {
+                                    //   setWeaponItem(item);
+                                    // }
+                                    // updateUserItems(user.id, item.id);
                                   }}
                                 >
                                   {item.name}
@@ -717,6 +755,16 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     height: 70,
     width: 70,
+  },
+  selectedInventorySlot: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'grey',
+    borderRadius: 20,
+    height: 70,
+    width: 70,
+    borderColor: 'red',
+    borderWidth: 3,
   },
   emptyInventoryText: {
     color: 'white',
