@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react'
 import {
   View,
   Text,
@@ -9,12 +9,16 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
-} from 'react-native';
-import { Bar } from 'react-native-progress';
-import { AuthContext } from '../context/AuthContext';
+} from 'react-native'
+import { AuthContext } from '../context/AuthContext'
 
 const SessionSummary = ({ navigation }) => {
-  const { summary } = useContext(AuthContext);
+  const { summary, currentOpponent } = useContext(AuthContext)
+  const [detailed, setDetailed] = useState(false)
+
+  const back = () => {
+    navigation.navigate('AllRoutines')
+  }
 
   return (
     <View style={styles.container}>
@@ -26,40 +30,207 @@ const SessionSummary = ({ navigation }) => {
       >
         <View style={styles.pageContainer}>
           <ScrollView>
-            <Text style={styles.text}>Session Summary</Text>
+            <Text style={styles.text}>Great Job!</Text>
 
             <View style={styles.textContainer}>
-            {summary.damageDealt ? <Text style={styles.text1}>{`Damage Dealt: ${summary.damageDealt}`}</Text> : <></>}
-            {summary.opponentsDefeated ? <Text style={styles.text1}>{`You have defeated ${summary.opponentsDefeated}!`}</Text> : <></>}
-            {summary.coinsGained ? <Text style={styles.text1}>{`Coins Gained: ${summary.coinsGained}`}</Text> : <></>}
-            {summary.newItem ? <Text style={styles.text1}>{`New Items Gained: ${summary.newItem.join(', ')}`}</Text> : <></>}
-              {summary.expGained ? <Text style={styles.text1}>{`Exp Gained: ${summary.expGained}`}</Text> : <></>}
-              {summary.characterLevelGained ? <Text style={styles.text1}>{`Levels Gained: ${summary.characterLevelGained}`}</Text> : <></>}
-              {summary.newLevel ? <Text style={styles.text1}>{`New Level: ${summary.newLevel}`}</Text> : <></>}
-              {summary.chestExpGained ? <Text style={styles.text1}>{`Chest Exp Gained: ${summary.chestExpGained}`}</Text> : <></>}
-              {summary.chestLevelGained ? <Text style={styles.text1}>{`Chest Level Gained: ${summary.chestLevelGained}`}</Text> : <></>}
-              {summary.backExpGained ? <Text style={styles.text1}>{`Back Exp Gained: ${summary.backExpGained}`}</Text> : <></>}
-              {summary.backLevelGained ? <Text style={styles.text1}>{`Back Level Gained: ${summary.backLevelGained}`}</Text> : <></>}
-              {summary.armsExpGained ? <Text style={styles.text1}>{`Arms Exp Gained: ${summary.armsExpGained}`}</Text> : <></>}
-              {summary.armsLevelGained ? <Text style={styles.text1}>{`Arms Level Gained: ${summary.armsLevelGained}`}</Text> : <></>}
-              {summary.abdominalsExpGained ? <Text style={styles.text1}>{`Abdominals Exp Gained: ${summary.AbdominalsExpGained}`}</Text> : <></>}
-              {summary.abdominalsLevelGained ? <Text style={styles.text1}>{`Abdominals Level Gained: ${summary.AbdominalsLevelGained}`}</Text> : <></>}
-              {summary.legsExpGained ? <Text style={styles.text1}>{`Legs Exp Gained: ${summary.legsExpGained}`}</Text> : <></>}
-              {summary.legsLevelGained ? <Text style={styles.text1}>{`Legs Level Gained: ${summary.legsLevelGained}`}</Text> : <></>}
-              {summary.shouldersExpGained ? <Text style={styles.text1}>{`Shoulders Exp Gained: ${summary.shouldersExpGained}`}</Text> : <></>}
-              {summary.shouldersLevelGained ? <Text style={styles.text1}>{`Shoulders Level Gained: ${summary.shouldersLevelGained}`}</Text> : <></>}
-              {summary.cardioExpGained ? <Text style={styles.text1}>{`Cardio Exp Gained: ${summary.cardioExpGained}`}</Text> : <></>}
-              {summary.cardioLevelGained ? <Text style={styles.text1}>{`Cardio Level Gained: ${summary.cardioLevelGained}`}</Text> : <></>}
-              {summary.stretchingExpGained ? <Text style={styles.text1}>{`Stretching Exp Gained: ${summary.stretchingExpGained}`}</Text> : <></>}
-              {summary.stretchingLevelGained ? <Text style={styles.text1}>{`Stretching Level Gained: ${summary.stretchingLevelGained}`}</Text> : <></>}
-            </View>
+              {summary ? (
+                <>
 
+                <View style={styles.opponent}>
+                  {summary.opponentDefeated ? (
+                    <>
+                    {summary.damageDealt ? (
+                      <Text
+                        style={styles.text1}
+                      >{`Damage Dealt to ${summary.opponentDefeated}: ${summary.damageDealt}`}</Text>
+                    ) : (
+                      <></>
+                    )}
+                    <Text
+                      style={styles.text1}
+                    >{`You have defeated ${summary.opponentDefeated}!`}</Text>
+                    <Text
+                      style={styles.text}
+                    >Rewards</Text>
+                    </>
+                  ) : (
+                    summary.damageDealt ? (
+                      <Text
+                        style={styles.text1}
+                      >{`Damage Dealt to ${currentOpponent.name}: ${summary.damageDealt}`}</Text>
+                    ) : (
+                      <></>
+                    )
+                  )}
+
+                  {summary.coinsGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Coins Gained: ${summary.coinsGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.newItem.length > 0 ? (
+                    <Text
+                      style={styles.text1}
+                    >{`New Items Gained: ${summary.newItem.join(', ')}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  </View>
+                  <View style={styles.experience}>
+                  <Text
+                      style={styles.text}
+                    >Experience Gained</Text>
+                  {summary.expGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Character Exp Gained: ${summary.expGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.characterLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Character Levels Gained: ${summary.characterLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.chestExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Chest Exp Gained: ${summary.chestExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.chestLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Chest Level Gained: ${summary.chestLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.backExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Back Exp Gained: ${summary.backExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.backLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Back Level Gained: ${summary.backLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.armsExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Arms Exp Gained: ${summary.armsExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.armsLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Arms Level Gained: ${summary.armsLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.abdominalsExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Abdominals Exp Gained: ${summary.AbdominalsExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.abdominalsLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Abdominals Level Gained: ${summary.AbdominalsLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.legsExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Legs Exp Gained: ${summary.legsExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.legsLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Legs Level Gained: ${summary.legsLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.shouldersExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Shoulders Exp Gained: ${summary.shouldersExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.shouldersLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Shoulders Level Gained: ${summary.shouldersLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.cardioExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Cardio Exp Gained: ${summary.cardioExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.cardioLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Cardio Level Gained: ${summary.cardioLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.stretchingExpGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Stretching Exp Gained: ${summary.stretchingExpGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  {summary.stretchingLevelGained ? (
+                    <Text
+                      style={styles.text1}
+                    >{`Stretching Level Gained: ${summary.stretchingLevelGained}`}</Text>
+                  ) : (
+                    <></>
+                  )}
+                  </View>
+                </>
+              ) : (
+                <Text style={styles.text}>No Summary Found</Text>
+              )}
+              <View style={styles.buttonContainer}>
+                <View style={styles.button}>
+                  <Button
+                    title="Back"
+                    color="white"
+                    onPress={() => {
+                      back()
+                    }}
+                  />
+                </View>
+              </View>
+            </View>
           </ScrollView>
         </View>
       </ImageBackground>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -91,7 +262,6 @@ const styles = StyleSheet.create({
 
   text1: {
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
   },
 
@@ -106,14 +276,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  rewards: {
-    backgroundColor: '#7E7E7E',
+  buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
-    margin: 40,
-    padding: 20,
   },
-});
 
-export default SessionSummary;
+  button: {
+    backgroundColor: 'black',
+    padding: 2,
+    margin: 50,
+    borderRadius: 15,
+    width: '50%',
+  },
+
+  opponent: {
+    marginTop: 15,
+    alignItems: 'center',
+  },
+
+  experience: {
+    marginTop: 15,
+    alignItems: 'center',
+  }
+})
+
+export default SessionSummary

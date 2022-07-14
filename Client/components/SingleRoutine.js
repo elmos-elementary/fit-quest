@@ -31,40 +31,31 @@ const SingleRoutine = ({ navigation }) => {
     });
   };
 
-  const no = () => {
-    getUserHistory(user.id).then(() => {
-      navigation.navigate('UserHome');
-      getUserAfterComplete(user.id);
-    });
-  };
+  // const no = () => {
+  //   getUserHistory(user.id).then(() => {
+  //     navigation.navigate('UserHome');
+  //     getUserAfterComplete(user.id);
+  //   });
+  // };
 
-  const yes = () => {
-    getRoutine().then(() => {
-      getUserHistory(user.id).then(() => {
-        navigation.navigate('userNoSessionStack', { screen: 'AllRoutines' });
-        getUserAfterComplete(user.id);
-      });
-    });
-  };
+  // const yes = () => {
+  //   getRoutine().then(() => {
+  //     getUserHistory(user.id).then(() => {
+  //       navigation.navigate('userNoSessionStack', { screen: 'AllRoutines' });
+  //       getUserAfterComplete(user.id);
+  //     });
+  //   });
+  // };
 
   const complete = () => {
-    Alert.alert('Good Job!!', 'Want to try some more?', [
-      {
-        text: 'No',
-        onPress: () =>
+
           completeSession(user.id).then(() => {
-            no();
-          }),
-        style: 'cancel',
-      },
-      {
-        text: 'yes',
-        onPress: () =>
-          completeSession(user.id).then(() => {
-            yes();
-          }),
-      },
-    ]);
+            getUserHistory(user.id).then(() => {
+              navigation.navigate('SessionSummary');
+              getUserAfterComplete(user.id);
+          })
+        })
+
   };
 
   const date = new Date().toString();

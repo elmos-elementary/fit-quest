@@ -9,6 +9,7 @@ import CurrentOpponent from './CurrentOpponent';
 import UserSingleSession from './UserSingleSession';
 import SessionExercise from './SessionExercise';
 import Character from './Character';
+import SessionSummary from './SessionSummary'
 import { AuthContext } from '../context/AuthContext';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -150,7 +151,12 @@ const UserNoSessionStack = ({ navigation }) => {
         name="SessionExercise"
         component={SessionExercise}
       />
+      <noSessionStack.Screen
+        name="SessionSummary"
+        component={SessionSummary}
+      />
     </noSessionStack.Navigator>
+
   );
 };
 
