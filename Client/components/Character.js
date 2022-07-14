@@ -293,184 +293,280 @@ const Character = ({ navigation }) => {
                 />
               </View>
             </View>
-            <View style={styles.allItemsContainer}>
-              <View style={styles.singleItemContainer}>
-                {headItem ? (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          setHeadItem(null);
-                        }}
-                      >
-                        {headItem.name}
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Head</Text>
-                    </View>
-                  </View>
-                ) : (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          showInventoryFunc();
-                        }}
-                      >
-                        Equip
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Head</Text>
-                    </View>
-                  </View>
-                )}
-              </View>
-              <View style={styles.singleItemContainer}>
-                {chestItem ? (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          setChestItem(null);
-                        }}
-                      >
-                        {chestItem.name}
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Chest</Text>
-                    </View>
-                  </View>
-                ) : (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          showInventoryFunc();
-                        }}
-                      >
-                        Equip
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Chest</Text>
-                    </View>
-                  </View>
-                )}
-              </View>
-              <View style={styles.singleItemContainer}>
-                {legItem ? (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          setLegItem(null);
-                        }}
-                      >
-                        {legItem.name}
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Leg</Text>
-                    </View>
-                  </View>
-                ) : (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          showInventoryFunc();
-                        }}
-                      >
-                        Equip
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Legs</Text>
-                    </View>
-                  </View>
-                )}
-              </View>
-              <View style={styles.singleItemContainer}>
-                {ringItem ? (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          setRingItem(null);
-                        }}
-                      >
-                        {ringItem.name}
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Ring</Text>
-                    </View>
-                  </View>
-                ) : (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          showInventoryFunc();
-                        }}
-                      >
-                        Equip
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Ring</Text>
-                    </View>
-                  </View>
-                )}
-              </View>
-              <View style={styles.singleItemContainer}>
-                {weaponItem ? (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          setWeaponItem(null);
-                        }}
-                      >
-                        {weaponItem.name}
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Weapon</Text>
-                    </View>
-                  </View>
-                ) : (
-                  <View>
-                    <View style={styles.emptyInventorySlot}>
-                      <Text
-                        style={styles.emptyInventoryText}
-                        onPress={() => {
-                          showInventoryFunc();
-                        }}
-                      >
-                        Equip
-                      </Text>
-                    </View>
-                    <View style={styles.intentoryTextTitleContainer}>
-                      <Text>Weapon</Text>
-                    </View>
-                  </View>
-                )}
+            <View style={styles.buttonContainer}>
+              <View style={styles.button}>
+                <Button
+                  color="white"
+                  title="Open Inventory"
+                  onPress={() => {
+                    setShowInventory(true);
+                  }}
+                />
               </View>
             </View>
-            {showInventory ? (
+
+            {/* Inventory Modal */}
+            <Modal
+              visible={showInventory}
+              animationType={'slide'}
+              presentationStyle={'overFullScreen'}
+            >
+              <View style={styles.modalContainer}>
+                <ImageBackground
+                  source={require('../../src/assets/background.jpeg')}
+                  resizeMode="cover"
+                  style={styles.backgroundImage}
+                >
+                  <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                      <Button
+                        color="white"
+                        title="Close Inventory"
+                        onPress={() => {
+                          setShowInventory(false);
+                        }}
+                      />
+                    </View>
+                  </View>
+                  {/* <View style={styles.topContainerModal}> */}
+                    <View style={styles.allItemsContainer}>
+                      <View style={styles.singleItemContainer}>
+                        {headItem ? (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  setHeadItem(null);
+                                }}
+                              >
+                                {headItem.name}
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Head</Text>
+                            </View>
+                          </View>
+                        ) : (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  showInventoryFunc();
+                                }}
+                              >
+                                Equip
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Head</Text>
+                            </View>
+                          </View>
+                        )}
+                      </View>
+                      <View style={styles.singleItemContainer}>
+                        {chestItem ? (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  setChestItem(null);
+                                }}
+                              >
+                                {chestItem.name}
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Chest</Text>
+                            </View>
+                          </View>
+                        ) : (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  showInventoryFunc();
+                                }}
+                              >
+                                Equip
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Chest</Text>
+                            </View>
+                          </View>
+                        )}
+                      </View>
+                      <View style={styles.singleItemContainer}>
+                        {legItem ? (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  setLegItem(null);
+                                }}
+                              >
+                                {legItem.name}
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Leg</Text>
+                            </View>
+                          </View>
+                        ) : (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  showInventoryFunc();
+                                }}
+                              >
+                                Equip
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Legs</Text>
+                            </View>
+                          </View>
+                        )}
+                      </View>
+                      <View style={styles.singleItemContainer}>
+                        {ringItem ? (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  setRingItem(null);
+                                }}
+                              >
+                                {ringItem.name}
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Ring</Text>
+                            </View>
+                          </View>
+                        ) : (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  showInventoryFunc();
+                                }}
+                              >
+                                Equip
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Ring</Text>
+                            </View>
+                          </View>
+                        )}
+                      </View>
+                      <View style={styles.singleItemContainer}>
+                        {weaponItem ? (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  setWeaponItem(null);
+                                }}
+                              >
+                                {weaponItem.name}
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Weapon</Text>
+                            </View>
+                          </View>
+                        ) : (
+                          <View>
+                            <View style={styles.emptyInventorySlot}>
+                              <Text
+                                style={styles.emptyInventoryText}
+                                onPress={() => {
+                                  showInventoryFunc();
+                                }}
+                              >
+                                Equip
+                              </Text>
+                            </View>
+                            <View style={styles.intentoryTextTitleContainer}>
+                              <Text>Weapon</Text>
+                            </View>
+                          </View>
+                        )}
+                      </View>
+                    </View>
+                    {/* <View style={styles.allItemsContainerModal}></View> */}
+                  {/* </View> */}
+                  <View style={styles.allItemsContainer}>
+                    {userItems.length < 1 ? (
+                      <View>
+                        <Text>
+                          You have no items. Go workout for a chance to earn
+                          them!
+                        </Text>
+                      </View>
+                    ) : (
+                      userItems.map((item) => {
+                        if (
+                          headItem === item ||
+                          chestItem === item ||
+                          legItem === item ||
+                          ringItem === item ||
+                          weaponItem === item
+                        ) {
+                          return <View key={item.id}></View>;
+                        } else {
+                          return (
+                            <View
+                              key={item.id}
+                              style={styles.singleItemContainer}
+                            >
+                              <View style={styles.emptyInventorySlot}>
+                                <Text
+                                  style={styles.emptyInventoryText}
+                                  onPress={() => {
+                                    if (item.type === 'head') {
+                                      setHeadItem(item);
+                                    } else if (item.type === 'chest') {
+                                      setChestItem(item);
+                                    } else if (item.type === 'leg') {
+                                      setLegItem(item);
+                                    } else if (item.type === 'ring') {
+                                      setRingItem(item);
+                                    } else if (item.type === 'weapon') {
+                                      setWeaponItem(item);
+                                    }
+                                    updateUserItems(user.id, item.id);
+                                  }}
+                                >
+                                  {item.name}
+                                </Text>
+                              </View>
+                              <View style={styles.intentoryTextTitleContainer}>
+                                <Text>{item.type}</Text>
+                              </View>
+                            </View>
+                          );
+                        }
+                      })
+                    )}
+                  </View>
+                </ImageBackground>
+              </View>
+            </Modal>
+
+            {/* {showInventory ? (
               <View style={styles.allItemsContainer}>
                 {userItems.length < 1 ? (
                   <View>
@@ -538,7 +634,7 @@ const Character = ({ navigation }) => {
               </View>
             ) : (
               <View></View>
-            )}
+            )} */}
           </View>
         </ImageBackground>
       </View>
@@ -659,6 +755,29 @@ export const styles = StyleSheet.create({
     opacity: 0.8,
     margin: 10,
     padding: 10,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 35,
+    width: '100%',
+    flexDirection: 'row',
+  },
+  allItemsContainerModal: {
+    flexDirection: 'row',
+    maxWidth: 400,
+    flex: 1,
+    flexWrap: 'wrap',
+    backgroundColor: 'white',
+    borderRadius: 20,
+    opacity: 0.8,
+    margin: 10,
+    padding: 10,
+    maxWidth: 200,
+  },
+  topContainerModal: {
+    flexDirection: 'row',
   },
 });
 
