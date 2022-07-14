@@ -2,6 +2,8 @@
   "expo": {
     "name": "FitQuest",
     "slug": "FitQuest",
+    "privacy": "public",
+    "description": "Use gamification to motivate you to workout!",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
@@ -16,13 +18,15 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nneedham.FitQuest"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.nneedham.FitQuest"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"

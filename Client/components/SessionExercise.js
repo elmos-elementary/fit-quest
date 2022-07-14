@@ -11,7 +11,6 @@ import {
   Linking,
 } from 'react-native';
 import ExerciseHistory from './ExerciseHistory';
-import ExerciseVisuals from './ExerciseVisuals';
 import { AuthContext } from '../context/AuthContext';
 
 const SessionExercise = ({ navigation }) => {
@@ -128,7 +127,7 @@ const SessionExercise = ({ navigation }) => {
               title="Visual"
               color="black"
               onPress={() => {
-                setVisual('visual');
+                setDescription('visual');
               }}
             />
           </View>
@@ -142,7 +141,29 @@ const SessionExercise = ({ navigation }) => {
               </Text>
             </ScrollView>
           ) : (
-            <ExerciseHistory exerciseId={sessionExercise.exercise.id} />
+            <>
+              {description === 'visual' ? (
+                <>
+                  <View style={styles.imageContainer}>
+                    <Image
+                      source={{ uri: sessionExercise.exercise.image }}
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  </View>
+
+                  <Text
+                    style={{ color: 'blue', textAlign: 'center' }}
+                    onPress={() =>
+                      Linking.openURL(sessionExercise.exercise.video)
+                    }
+                  >
+                    Checkout video
+                  </Text>
+                </>
+              ) : (
+                <ExerciseHistory exerciseId={sessionExercise.exercise.id} />
+              )}
+            </>
           )}
         </View>
         {visual === 'visual' ? (
