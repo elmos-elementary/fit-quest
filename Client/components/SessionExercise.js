@@ -11,6 +11,7 @@ import {
   Linking,
 } from 'react-native';
 import ExerciseHistory from './ExerciseHistory';
+import ExerciseVisuals from './ExerciseVisuals';
 import { AuthContext } from '../context/AuthContext';
 
 const SessionExercise = ({ navigation }) => {
@@ -24,6 +25,7 @@ const SessionExercise = ({ navigation }) => {
   const [set2, setSet2] = useState(sessionExercise.set2);
   const [set3, setSet3] = useState(sessionExercise.set3);
   const [description, setDescription] = useState('about');
+  const [visual, setVisual] = useState('visual');
 
   const onTouch = (id) => {
     updateSessionExercise(id, {
@@ -68,21 +70,15 @@ const SessionExercise = ({ navigation }) => {
               <TextInput
                 onChangeText={(nextValue) => setWeight1(nextValue)}
                 style={styles.textInput}
-              >
-                {sessionExercise.weight1}
-              </TextInput>
+              ></TextInput>
               <TextInput
                 onChangeText={(nextValue) => setWeight2(nextValue)}
                 style={styles.textInput}
-              >
-                {sessionExercise.weight2}
-              </TextInput>
+              ></TextInput>
               <TextInput
                 onChangeText={(nextValue) => setWeight3(nextValue)}
                 style={styles.textInput}
-              >
-                {sessionExercise.weight3}
-              </TextInput>
+              ></TextInput>
             </View>
 
             <View style={{ alignItems: 'center', padding: 2 }}>
@@ -90,21 +86,15 @@ const SessionExercise = ({ navigation }) => {
               <TextInput
                 onChangeText={(nextValue) => setSet1(nextValue)}
                 style={styles.textInput}
-              >
-                {sessionExercise.set1}
-              </TextInput>
+              ></TextInput>
               <TextInput
                 onChangeText={(nextValue) => setSet2(nextValue)}
                 style={styles.textInput}
-              >
-                {sessionExercise.set2}
-              </TextInput>
+              ></TextInput>
               <TextInput
                 onChangeText={(nextValue) => setSet3(nextValue)}
                 style={styles.textInput}
-              >
-                {sessionExercise.set3}
-              </TextInput>
+              ></TextInput>
             </View>
           </View>
 
@@ -134,7 +124,13 @@ const SessionExercise = ({ navigation }) => {
                 setDescription('history');
               }}
             />
-            <Button title="Charts" color="black" />
+            <Button
+              title="Visual"
+              color="black"
+              onPress={() => {
+                setVisual('visual');
+              }}
+            />
           </View>
         </View>
 
@@ -144,31 +140,24 @@ const SessionExercise = ({ navigation }) => {
               <Text style={{ textAlign: 'center' }}>
                 {sessionExercise.exercise.description}
               </Text>
-
-              <View style={styles.imageContainer}>
-                <Image
-                  source={{ uri: sessionExercise.exercise.image }}
-                  style={{ width: '100%', height: '100%' }}
-                />
-              </View>
-
-              <Text
-                style={{ color: 'blue', textAlign: 'center' }}
-                onPress={() => Linking.openURL(sessionExercise.exercise.video)}
-              >
-                Checkout video
-              </Text>
             </ScrollView>
           ) : (
             <ExerciseHistory exerciseId={sessionExercise.exercise.id} />
           )}
         </View>
+        {visual === 'visual' ? (
+          <>
+            <Text>Visual</Text>
+          </>
+        ) : (
+          <View></View>
+        )}
       </ImageBackground>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
@@ -181,7 +170,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    margin: 35,
+    margin: 50,
     opacity: 0.8,
     borderRadius: 5,
   },
@@ -204,7 +193,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
     opacity: 0.9,
     borderRadius: 10,
-    margin: 20,
+    margin: 10,
     padding: 10,
   },
 
@@ -225,7 +214,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
     opacity: 0.9,
     margin: 20,
-    padding: 10,
+    padding: 40,
     borderRadius: 5,
   },
   navigationContainer: {
@@ -258,6 +247,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderRadius: 5,
     margin: 5,
+    width: 50,
   },
   navButton: {
     backgroundColor: 'white',
