@@ -15,8 +15,14 @@ import { Bar } from 'react-native-progress';
 import * as Font from 'expo-font';
 
 const Character = ({ navigation }) => {
-  const { user, getSession, userItems, getUserItems, updateUserItems } =
-    useContext(AuthContext);
+  const {
+    user,
+    getSession,
+    userItems,
+    getUserItems,
+    updateUserItems,
+    unequipUserItem,
+  } = useContext(AuthContext);
   const [showInventory, setShowInventory] = useState(false);
   const [chestItem, setChestItem] = useState(null || userItems[user.chest]);
   const [headItem, setHeadItem] = useState(null || userItems[user.head]);
@@ -97,8 +103,8 @@ const Character = ({ navigation }) => {
 
   //grab items if user has items
   useEffect(() => {
-    getUserItems(user.id)
-  }, [])
+    getUserItems(user.id);
+  }, []);
 
   // let currentLevelString = user.currentLevel.toString();
   // console.log(getSession);
@@ -587,7 +593,7 @@ const Character = ({ navigation }) => {
                                 } else if (selectedItem.type === 'weapon') {
                                   setWeaponItem(null);
                                 }
-                                updateUserItems(user.id, -1);
+                                unequipUserItem(user.id, selectedItem.type);
                                 setSelectedItemIsEquipped(false);
                               }}
                             >

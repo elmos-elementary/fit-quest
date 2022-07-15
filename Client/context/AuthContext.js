@@ -196,7 +196,7 @@ export const AuthProvider = ({ children }) => {
       );
       setSummary(data);
       getCurrentOpponent(id);
-      getUserItems(user.id)
+      getUserItems(user.id);
     } catch (err) {
       console.error(err);
     }
@@ -331,11 +331,21 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const unequipUserItem = async (userId, slotName) => {
+    try {
+      const { data } = await axios.put(
+        `https://fitquestapp.herokuapp.com/api/items/unequip/${userId}/${slotName}`
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     isLoggedIn();
     getRoutine();
     if (user) {
-      getUserItems(user.id)
+      getUserItems(user.id);
     }
   }, []);
 
@@ -374,6 +384,7 @@ export const AuthProvider = ({ children }) => {
         confirmUserEmail,
         confirmUser,
         summary,
+        unequipUserItem,
       }}
     >
       {children}
