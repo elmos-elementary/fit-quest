@@ -20,15 +20,19 @@ const Character = ({ navigation }) => {
     getSession,
     userItems,
     getUserItems,
+    getAllItems,
     updateUserItems,
     unequipUserItem,
+    allItems,
   } = useContext(AuthContext);
   const [showInventory, setShowInventory] = useState(false);
-  const [chestItem, setChestItem] = useState(null || userItems[user.chest]);
-  const [headItem, setHeadItem] = useState(null || userItems[user.head]);
-  const [legItem, setLegItem] = useState(null || userItems[user.leg]);
-  const [ringItem, setRingItem] = useState(null || userItems[user.ring]);
-  const [weaponItem, setWeaponItem] = useState(null || userItems[user.weapon]);
+  const [chestItem, setChestItem] = useState(null || allItems[user.chest - 1]);
+  const [headItem, setHeadItem] = useState(null || allItems[user.head - 1]);
+  const [legItem, setLegItem] = useState(null || allItems[user.leg - 1]);
+  const [ringItem, setRingItem] = useState(null || allItems[user.ring - 1]);
+  const [weaponItem, setWeaponItem] = useState(
+    null || allItems[user.weapon - 1]
+  );
   const [combatSkill, setCombatSkill] = useState(0 || user.combatSkill);
   const [abdominalsLevel, setAbdominalsLevel] = useState(
     0 || user.abdominalsCurrentLevel
@@ -104,6 +108,7 @@ const Character = ({ navigation }) => {
   //grab items if user has items
   useEffect(() => {
     getUserItems(user.id);
+    getAllItems();
   }, []);
 
   // let currentLevelString = user.currentLevel.toString();

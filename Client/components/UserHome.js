@@ -20,6 +20,7 @@ const UserHome = ({ navigation }) => {
     getSession,
     getUserItems,
     getCurrentOpponent,
+    getAllItems,
   } = useContext(AuthContext);
 
   const findUserHistory = () => {
@@ -44,6 +45,7 @@ const UserHome = ({ navigation }) => {
     getSession(user.id);
     getCurrentOpponent(user.id);
     getUserHistory(user.id);
+    getAllItems();
   }, []);
 
   let levelCounter = 10;
