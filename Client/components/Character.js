@@ -571,9 +571,45 @@ const Character = ({ navigation }) => {
                             <Text>{selectedItem.name}</Text>
                           </View>
                           {selectedItemIsEquipped ? (
-                            <Text>Click to unequip</Text>
+                            <Text
+                              onPress={() => {
+                                if (selectedItem.type === 'head') {
+                                  setHeadItem(null);
+                                } else if (selectedItem.type === 'chest') {
+                                  setChestItem(null);
+                                } else if (selectedItem.type === 'leg') {
+                                  setLegItem(null);
+                                } else if (selectedItem.type === 'ring') {
+                                  setRingItem(null);
+                                } else if (selectedItem.type === 'weapon') {
+                                  setWeaponItem(null);
+                                }
+                                updateUserItems(user.id, -1);
+                                setSelectedItemIsEquipped(false);
+                              }}
+                            >
+                              Click to unequip
+                            </Text>
                           ) : (
-                            <Text>Click to equip</Text>
+                            <Text
+                              onPress={() => {
+                                if (selectedItem.type === 'head') {
+                                  setHeadItem(selectedItem);
+                                } else if (selectedItem.type === 'chest') {
+                                  setChestItem(selectedItem);
+                                } else if (selectedItem.type === 'leg') {
+                                  setLegItem(selectedItem);
+                                } else if (selectedItem.type === 'ring') {
+                                  setRingItem(selectedItem);
+                                } else if (selectedItem.type === 'weapon') {
+                                  setWeaponItem(selectedItem);
+                                }
+                                updateUserItems(user.id, selectedItem.id);
+                                setSelectedItemIsEquipped(true);
+                              }}
+                            >
+                              Click to equip
+                            </Text>
                           )}
                         </View>
                       ) : (
@@ -589,7 +625,7 @@ const Character = ({ navigation }) => {
                   <ScrollView>
                     <View style={styles.allItemsContainer}>
                       {userItems.length < 1 ? (
-                        <View style={style.modalContainer}>
+                        <View style={styles.modalContainer}>
                           <Text>
                             You have no items. Go workout for a chance to earn
                             them!
