@@ -242,7 +242,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 5,
     overflow: 'hidden',
-    margin: 20,
+    marginBottom: 20,
   },
 
   routineText: {

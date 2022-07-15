@@ -28,36 +28,40 @@ const UserSingleSession = ({ navigation }) => {
 
         {singleSession.sessionExercises.map((exercise) => {
           return (
-            <View key={exercise.id} style={{ margin: 20 }}>
-              <View style={styles.routineContainer}>
-                <Text style={styles.routineName}>{exercise.exercise.name}</Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.routineName}>Set</Text>
-                    <Text>1</Text>
-                    <Text>2</Text>
-                    <Text>3</Text>
-                  </View>
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={styles.routineName}>Weight (lbs)</Text>
-                    <Text>{exercise.weight1}</Text>
-                    <Text>{exercise.weight2}</Text>
-                    <Text>{exercise.weight3}</Text>
-                  </View>
-                  <View style={{ alignItems: 'center', padding: 2 }}>
-                    <Text style={styles.routineName}>Reps</Text>
-                    <Text>{exercise.set1}</Text>
-                    <Text>{exercise.set2}</Text>
-                    <Text>{exercise.set3}</Text>
+            <ScrollView>
+              <View key={exercise.id} style={{ margin: 20 }}>
+                <View style={styles.routineContainer}>
+                  <Text style={styles.routineName}>
+                    {exercise.exercise.name}
+                  </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <View style={{ alignItems: 'center' }}>
+                      <Text style={styles.routineName}>Set</Text>
+                      <Text>1</Text>
+                      <Text>2</Text>
+                      <Text>3</Text>
+                    </View>
+                    <View style={{ alignItems: 'center' }}>
+                      <Text style={styles.routineName}>Weight (lbs)</Text>
+                      <Text>{exercise.weight1}</Text>
+                      <Text>{exercise.weight2}</Text>
+                      <Text>{exercise.weight3}</Text>
+                    </View>
+                    <View style={{ alignItems: 'center', padding: 2 }}>
+                      <Text style={styles.routineName}>Reps</Text>
+                      <Text>{exercise.set1}</Text>
+                      <Text>{exercise.set2}</Text>
+                      <Text>{exercise.set3}</Text>
+                    </View>
                   </View>
                 </View>
               </View>
-            </View>
+            </ScrollView>
           );
         })}
       </ImageBackground>
@@ -78,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    margin: 30,
+    margin: 20,
     opacity: 0.8,
     borderRadius: 5,
   },
@@ -94,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
     opacity: 0.9,
     borderRadius: 5,
-    margin: 30,
+    margin: 20,
   },
 
   routineName: {

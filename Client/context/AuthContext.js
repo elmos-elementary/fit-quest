@@ -332,7 +332,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // isLoggedIn();
+    isLoggedIn();
     getRoutine();
     if (user) {
       getUserItems(user.id)
