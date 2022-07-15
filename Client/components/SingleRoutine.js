@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -22,6 +22,7 @@ const SingleRoutine = ({ navigation }) => {
     getUserHistory,
     getCurrentOpponent,
     getUserAfterComplete,
+    summary
   } = useContext(AuthContext);
 
   const onTouch = (id) => {
@@ -30,40 +31,32 @@ const SingleRoutine = ({ navigation }) => {
     });
   };
 
-  const no = () => {
-    getUserHistory(user.id).then(() => {
-      navigation.navigate('UserHome');
-      getUserAfterComplete(user.id);
-    });
-  };
+  // const no = () => {
+  //   getUserHistory(user.id).then(() => {
+  //     navigation.navigate('UserHome');
+  //     getUserAfterComplete(user.id);
+  //   });
+  // };
 
-  const yes = () => {
-    getRoutine().then(() => {
-      getUserHistory(user.id).then(() => {
-        navigation.navigate('userNoSessionStack', { screen: 'AllRoutines' });
-        getUserAfterComplete(user.id);
-      });
-    });
-  };
+  // const yes = () => {
+  //   getRoutine().then(() => {
+  //     getUserHistory(user.id).then(() => {
+  //       navigation.navigate('userNoSessionStack', { screen: 'AllRoutines' });
+  //       getUserAfterComplete(user.id);
+  //     });
+  //   });
+  // };
 
   const complete = () => {
-    Alert.alert('Good Job!!', 'Want to try some more?', [
-      {
-        text: 'No',
-        onPress: () =>
+
           completeSession(user.id).then(() => {
-            no();
-          }),
-        style: 'cancel',
-      },
-      {
-        text: 'yes',
-        onPress: () =>
-          completeSession(user.id).then(() => {
-            yes();
-          }),
-      },
-    ]);
+            getUserHistory(user.id).then(() => {
+              navigation.navigate('SessionSummary');
+              getUserAfterComplete(user.id);
+
+          })
+        })
+
   };
 
   const date = new Date().toString();
@@ -79,7 +72,6 @@ const SingleRoutine = ({ navigation }) => {
           <Text style={styles.text}>Current Routine: </Text>
           <Text>{date && date.slice(0, 25)}</Text>
         </View>
-
         <ScrollView>
           {singleRoutine.sessionExercises.map((exercise) => {
             return (
