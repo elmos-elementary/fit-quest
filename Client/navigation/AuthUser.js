@@ -9,6 +9,7 @@ import SessionExercise from '../components/SessionExercise';
 import UserHistory from '../components/UserHistory';
 import AllRoutines from '../components/AllRoutines';
 import Character from '../components/Character';
+import SessionSummary from '../components/SessionSummary'
 import UserSingleSession from '../components/UserSingleSession';
 
 const AuthUser = () => {
@@ -16,6 +17,9 @@ const AuthUser = () => {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Home">
         {(props) => <MainTabScreen {...props} />}
+      </Stack.Screen>
+      <Stack.Screen name="SessionSummary">
+        {(props) => <SessionSummary {...props} />}
       </Stack.Screen>
     </Stack.Navigator>
   );
