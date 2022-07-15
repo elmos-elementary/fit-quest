@@ -28,8 +28,8 @@ const UserSingleSession = ({ navigation }) => {
 
         {singleSession.sessionExercises.map((exercise) => {
           return (
-            <ScrollView>
-              <View key={exercise.id} style={{ margin: 20 }}>
+            <ScrollView key={exercise.id}>
+              <View style={{ margin: 20 }}>
                 <View style={styles.routineContainer}>
                   <Text style={styles.routineName}>
                     {exercise.exercise.name}
