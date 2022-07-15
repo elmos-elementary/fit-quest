@@ -47,12 +47,27 @@ const Character = ({ navigation }) => {
   const [shouldersLevelBonus, setShouldersLevelBonus] = useState(0);
   const [stretchingLevelBonus, setStretchingLevelBonus] = useState(0);
   const [selectedItem, setSelectedItem] = useState(-1);
+  const [selectedItemIsEquipped, setSelectedItemIsEquipped] = useState(false);
 
   const showInventoryFunc = () => {
     if (showInventory) {
       setShowInventory(false);
     } else {
       setShowInventory(true);
+    }
+  };
+
+  const isSelectedItemEquipped = (item) => {
+    if (
+      headItem === item ||
+      chestItem === item ||
+      legItem === item ||
+      ringItem === item ||
+      weaponItem === item
+    ) {
+      setSelectedItemIsEquipped(true);
+    } else {
+      setSelectedItemIsEquipped(false);
     }
   };
 
@@ -307,6 +322,7 @@ const Character = ({ navigation }) => {
                   onPress={() => {
                     setShowInventory(true);
                     setSelectedItem(-1);
+                    setSelectedItemIsEquipped(false);
                   }}
                 />
               </View>
@@ -333,6 +349,7 @@ const Character = ({ navigation }) => {
                         onPress={() => {
                           setShowInventory(false);
                           setSelectedItem(-1);
+                          setSelectedItemIsEquipped(false);
                         }}
                       />
                     </View>
@@ -354,6 +371,7 @@ const Character = ({ navigation }) => {
                                 style={styles.emptyInventoryText}
                                 onPress={() => {
                                   setSelectedItem(headItem);
+                                  setSelectedItemIsEquipped(true);
                                 }}
                               >
                                 {headItem.name}
@@ -552,6 +570,11 @@ const Character = ({ navigation }) => {
                           <View style={styles.intentoryTextTitleContainer}>
                             <Text>{selectedItem.name}</Text>
                           </View>
+                          {selectedItemIsEquipped ? (
+                            <Text>Click to unequip</Text>
+                          ) : (
+                            <Text>Click to equip</Text>
+                          )}
                         </View>
                       ) : (
                         <Text>
@@ -599,6 +622,7 @@ const Character = ({ navigation }) => {
                                     style={styles.emptyInventoryText}
                                     onPress={() => {
                                       setSelectedItem(item);
+                                      setSelectedItemIsEquipped(false);
                                       // if (item.type === 'head') {
                                       //   setHeadItem(item);
                                       // } else if (item.type === 'chest') {
