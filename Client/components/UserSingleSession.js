@@ -15,7 +15,7 @@ const UserSingleSession = ({ navigation }) => {
   const { singleSession } = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ImageBackground
         source={require('../../src/assets/background.jpeg')}
         resizeMode="cover"
@@ -61,7 +61,7 @@ const UserSingleSession = ({ navigation }) => {
           );
         })}
       </ImageBackground>
-    </View>
+    </ScrollView>
   );
 };
 
