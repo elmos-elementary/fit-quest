@@ -1,8 +1,11 @@
+const bcrypt = require('bcrypt')
 const router = require('express').Router();
 const {
   models: { User },
 } = require('../db');
 module.exports = router;
+
+const SALT_ROUNDS = 5;
 
 router.get('/', async (req, res, next) => {
   try {
@@ -31,6 +34,36 @@ router.post('/', async (req, res, next) => {
   try {
     const newUser = await User.create(req.body);
     res.json(newUser);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put('/email', async (req, res, next) => {
+  try {
+    console.log('test')
+    const email = req.body.email;
+    const user = await User.findOne({where: {email: email}});
+    if (user) {
+      res.send('User found')
+    }
+    res.send('No user found');
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.put('/check', async (req, res, next) => {
+  try {
+    console.log('test')
+    const email = req.body.email;
+    const password = req.body.password
+    const user = await User.findOne({where: {email: email}});
+    const check = await bcrypt.compare(password, user.password)
+    if (check) {
+      res.send('User found')
+    }
+    res.send('No user found');
   } catch (error) {
     next(error);
   }
