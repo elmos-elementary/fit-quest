@@ -58,9 +58,9 @@ const SessionExercise = ({ navigation }) => {
           <View style={styles.navigationContainer}>
             <View>
               <Text style={styles.routineText}>Set</Text>
-              <TextInput style={styles.textInput1}>1</TextInput>
-              <TextInput style={styles.textInput1}>2</TextInput>
-              <TextInput style={styles.textInput1}>3</TextInput>
+              <Text style={styles.textInput1}>1</Text>
+              <Text style={styles.textInput1}>2</Text>
+              <Text style={styles.textInput1}>3</Text>
             </View>
 
             <View style={{ alignItems: 'center' }}>
