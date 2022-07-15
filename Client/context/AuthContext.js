@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [currentOpponent, setCurrentOpponent] = useState([]);
   const [userItems, setUserItems] = useState([]);
   const [updateItems, setUpdateItems] = useState([]);
-  const [summary, setSummary] = useState(null)
+  const [summary, setSummary] = useState(null);
 
   const login = async (email, password) => {
     try {
@@ -99,6 +99,30 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const confirmUserEmail = async (email) => {
+    try {
+      const { data } = await axios.put(
+        'https://fitquestapp.herokuapp.com/api/users/email',
+        { email }
+      );
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const confirmUser = async (email, password) => {
+    try {
+      const { data } = await axios.put(
+        'https://fitquestapp.herokuapp.com/api/users/check',
+        { email, password }
+      );
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const getRoutine = async () => {
     try {
       const { data } = await axios.get(
@@ -167,10 +191,10 @@ export const AuthProvider = ({ children }) => {
 
   const completeSession = async (id) => {
     try {
-      const {data} = await axios.put(
+      const { data } = await axios.put(
         `https://fitquestapp.herokuapp.com/api/sessions/complete/${id}`
       );
-      setSummary(data)
+      setSummary(data);
       getCurrentOpponent(id);
     } catch (err) {
       console.error(err);
@@ -343,7 +367,9 @@ export const AuthProvider = ({ children }) => {
         userItems,
         updateUserItems,
         getUserAfterComplete,
-        summary
+        confirmUserEmail,
+        confirmUser,
+        summary,
       }}
     >
       {children}

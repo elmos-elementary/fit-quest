@@ -6,7 +6,6 @@ import {
   StyleSheet,
   ImageBackground,
   ScrollView,
-  TouchableOpacity,
   TextInput,
   Image,
   Linking,
