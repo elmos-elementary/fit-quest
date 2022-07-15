@@ -45,14 +45,12 @@ const UserHistory = ({ navigation }) => {
                     onTouch(history.id);
                   }}
                 >
-                  <Text>{history.date}</Text>
-                  <Text>{history.routine.name}</Text>
-                  <View
-                    style={{
-                      borderBottomColor: 'black',
-                      borderBottomWidth: 2,
-                    }}
-                  />
+                  <View style={styles.history}>
+                    <Text>{history.date}</Text>
+                    <Text style={{ fontWeight: 'bold' }}>
+                      {history.routine.name}
+                    </Text>
+                  </View>
                 </TouchableOpacity>
               );
             })}
@@ -76,7 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    // margin: 35,
+    margin: 30,
     opacity: 0.8,
     borderRadius: 5,
     marginTop: 45,
@@ -94,9 +92,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#dddddd',
-    margin: 30,
+    margin: 20,
     opacity: 0.8,
     borderRadius: 5,
+  },
+
+  history: {
+    backgroundColor: 'white',
+    padding: 30,
+    borderRadius: 10,
   },
 });
 

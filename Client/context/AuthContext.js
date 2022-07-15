@@ -331,7 +331,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // isLoggedIn();
+    isLoggedIn();
     getRoutine();
   }, []);
 
