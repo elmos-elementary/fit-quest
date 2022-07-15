@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
   const [singleSession, setSingleSession] = useState([]);
   const [currentOpponent, setCurrentOpponent] = useState([]);
   const [userItems, setUserItems] = useState([]);
+  const [allItems, setAllItems] = useState([]);
   const [updateItems, setUpdateItems] = useState([]);
   const [summary, setSummary] = useState(null);
 
@@ -196,7 +197,8 @@ export const AuthProvider = ({ children }) => {
       );
       setSummary(data);
       getCurrentOpponent(id);
-      getUserItems(user.id)
+      getUserItems(user.id);
+      getAllItems();
     } catch (err) {
       console.error(err);
     }
@@ -319,6 +321,18 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getAllItems = async () => {
+    try {
+      const { data } = await axios.get(
+        `https://fitquestapp.herokuapp.com/api/items/`
+      );
+      setAllItems(data);
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const updateUserItems = async (userId, itemId) => {
     try {
       const { data } = await axios.put(
@@ -331,12 +345,19 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const unequipUserItem = async (userId, slotName) => {
+    try {
+      const { data } = await axios.put(
+        `https://fitquestapp.herokuapp.com/api/items/unequip/${userId}/${slotName}`
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     isLoggedIn();
     getRoutine();
-    if (user) {
-      getUserItems(user.id)
-    }
   }, []);
 
   return (
@@ -374,6 +395,9 @@ export const AuthProvider = ({ children }) => {
         confirmUserEmail,
         confirmUser,
         summary,
+        unequipUserItem,
+        getAllItems,
+        allItems,
       }}
     >
       {children}
