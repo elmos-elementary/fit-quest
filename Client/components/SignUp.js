@@ -22,9 +22,9 @@ const SignUp = ({ navigation }) => {
   const { signUp, confirmUserEmail } = useContext(AuthContext);
 
   const isValid = async (email, password, firstName, lastName) => {
-    if (email) {
+    if (email.toLowerCase()) {
       const validRegex =
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (!email.match(validRegex)) {
         setEmailErrorMessage('Please input a valid email');
         return;
