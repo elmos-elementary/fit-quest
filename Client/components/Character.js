@@ -96,6 +96,9 @@ const Character = ({ navigation }) => {
   }
 
   //grab items if user has items
+  useEffect(() => {
+    getUserItems(user.id)
+  }, [])
 
   // let currentLevelString = user.currentLevel.toString();
   // console.log(getSession);

@@ -172,6 +172,7 @@ export const AuthProvider = ({ children }) => {
       );
       setSummary(data)
       getCurrentOpponent(id);
+      getUserItems(user.id)
     } catch (err) {
       console.error(err);
     }
@@ -309,6 +310,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     isLoggedIn();
     getRoutine();
+    if (user) {
+      getUserItems(user.id)
+    }
   }, []);
 
   return (
