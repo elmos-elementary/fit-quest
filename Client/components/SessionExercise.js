@@ -66,14 +66,17 @@ const SessionExercise = ({ navigation }) => {
             <View style={{ alignItems: 'center' }}>
               <Text style={styles.routineText}>Weight (lbs)</Text>
               <TextInput
+                placeholder="0"
                 onChangeText={(nextValue) => setWeight1(nextValue)}
                 style={styles.textInput}
               ></TextInput>
               <TextInput
+                placeholder="0"
                 onChangeText={(nextValue) => setWeight2(nextValue)}
                 style={styles.textInput}
               ></TextInput>
               <TextInput
+                placeholder="0"
                 onChangeText={(nextValue) => setWeight3(nextValue)}
                 style={styles.textInput}
               ></TextInput>
@@ -82,14 +85,17 @@ const SessionExercise = ({ navigation }) => {
             <View style={{ alignItems: 'center', padding: 2 }}>
               <Text style={styles.routineText}>Reps</Text>
               <TextInput
+                placeholder="0"
                 onChangeText={(nextValue) => setSet1(nextValue)}
                 style={styles.textInput}
               ></TextInput>
               <TextInput
+                placeholder="0"
                 onChangeText={(nextValue) => setSet2(nextValue)}
                 style={styles.textInput}
               ></TextInput>
               <TextInput
+                placeholder="0"
                 onChangeText={(nextValue) => setSet3(nextValue)}
                 style={styles.textInput}
               ></TextInput>
