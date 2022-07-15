@@ -29,44 +29,41 @@ const AllRoutines = ({ navigation }) => {
         imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
-        <View style={styles.textContainer}>
+        <View style={styles.headerContainer}>
           <Text style={styles.text}>Choose Routine</Text>
 
-          <View>
-            <View style={styles.routineContainer}>
-              <ScrollView>
-                {routine ? (
-                  routine.map((routine) => {
-                    return (
-                      <TouchableOpacity
-                        key={routine.id}
-                        style={styles.routine}
-                        onPress={() => {
-                          onTouch(routine.id);
+          <ScrollView>
+            {routine ? (
+              routine.map((routine) => {
+                return (
+                  <View style={styles.routineContainer}>
+                    <TouchableOpacity
+                      key={routine.id}
+                      style={styles.routine}
+                      onPress={() => {
+                        onTouch(routine.id);
+                      }}
+                    >
+                      <Text
+                        style={{
+                          textAlign: 'center',
+                          fontSize: 20,
+                          fontWeight: 'bold',
                         }}
                       >
-                        <Text
-                          style={{
-                            textAlign: 'center',
-                            fontSize: 20,
-                            fontWeight: 'bold',
-                          }}
-                        >
-                          {routine.name}
-                        </Text>
-
-                        {routine.exercises.map((exercise) => {
-                          return <Text key={exercise.id}>{exercise.name}</Text>;
-                        })}
-                      </TouchableOpacity>
-                    );
-                  })
-                ) : (
-                  <Text>No Routines</Text>
-                )}
-              </ScrollView>
-            </View>
-          </View>
+                        {routine.name}
+                      </Text>
+                      {routine.exercises.map((exercise) => {
+                        return <Text key={exercise.id}>{exercise.name}</Text>;
+                      })}
+                    </TouchableOpacity>
+                  </View>
+                );
+              })
+            ) : (
+              <Text>No Routines</Text>
+            )}
+          </ScrollView>
         </View>
       </ImageBackground>
     </View>
@@ -82,25 +79,30 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  textContainer: {
+  headerContainer: {
     flex: 1,
     alignItems: 'center',
-    margin: 10,
   },
   text: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    margin: 30,
+    margin: 20,
+    marginTop: 50,
     opacity: 0.8,
     borderRadius: 5,
     overflow: 'hidden',
     fontSize: 40,
     padding: 10,
   },
+
   routineContainer: {
-    flex: 1,
+    backgroundColor: '#dddddd',
+    opacity: 0.9,
+    borderRadius: 5,
+    margin: 20,
   },
+
   routine: {
     margin: 10,
     backgroundColor: 'white',

@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    margin: 30,
+    margin: 20,
     opacity: 0.8,
     borderRadius: 5,
   },
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#dddddd',
     opacity: 0.9,
     borderRadius: 5,
-    margin: 30,
+    margin: 20,
   },
 
   routineName: {

@@ -172,14 +172,14 @@ const exercise = [
   },
 
   {
-    name: 'Bodyweight Squat',
+    name: 'Barbell Full Squat',
     exerciseType: 'strength',
     bodyPart: 'legs',
     description:
-      'Stand with your feet shoulder width apart. You can place your hands behind your head. This will be your starting position. Begin the movement by flexing your knees and hips, sitting back with your hips. Continue down to full depth if you are able,and quickly reverse the motion until you return to the starting position. As you squat, keep your head and chest up and push your knees out.',
+      'This exercise is best performed inside a squat rack for safety purposes. To begin, first set the bar on a rack just above shoulder level. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.Hold on to the bar using both arms at each side and lift it off the rack by first pushing with your legs and at the same time straightening your torso. Step away from the rack and position your legs using a shoulder-width medium stance with the toes slightly pointed out. Keep your head up at all times and maintain a straight back. This will be your starting position. Begin to slowly lower the bar by bending the knees and sitting back with your hips as you maintain a straight posture with the head up. Continue down until your hamstrings are on your calves. Inhale as you perform this portion of the movement.Begin to raise the bar as you exhale by pushing the floor with the heel or middle of your foot as you straighten the legs and extend the hips to go back to the starting position. Repeat for the recommended amount of repetition',
     image:
-      'https://www.bodybuilding.com/images/2020/xdb/originals/xdb-27a-bodyweight-squat-m2-16x9.jpg',
-    video: 'hhttps://www.youtube.com/watch?v=LyidZ42Iy9Q',
+      'https://www.bodybuilding.com/images/2020/xdb/originals/xdb-50b-barbell-back-squat-f2-16x9.jpg',
+    video: 'https://www.youtube.com/watch?v=XV1X4_bEvpo',
   },
 
   {
@@ -500,7 +500,8 @@ const exercise = [
     bodyPart: 'arms',
     description:
       "Sit down on a bench with back support and grasp a dumbbell with both hands and hold it overhead at arm's length. Keeping your upper arms close to your head (elbows in) and perpendicular to the floor, lower the resistance in a semi-circular motion behind your head until your forearms touch your biceps. Go back to the starting position by using the triceps to raise the dumbbell. Breathe out as you perform this step. Repeat for the recommended amount of repetitions.",
-    image: 'https://www.bodybuilding.com/images/2020/xdb/originals/xdb-54e-seated-triceps-press-m1-16x9.jpg',
+    image:
+      'https://www.bodybuilding.com/images/2020/xdb/originals/xdb-54e-seated-triceps-press-m1-16x9.jpg',
     video: 'https://www.youtube.com/watch?v=YK6zrgVI4GI',
   },
 ];
