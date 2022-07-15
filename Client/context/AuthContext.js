@@ -104,7 +104,19 @@ export const AuthProvider = ({ children }) => {
         'https://fitquestapp.herokuapp.com/api/users/email',
         { email }
       );
-      return data
+      return data;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const confirmUser = async (email, password) => {
+    try {
+      const { data } = await axios.put(
+        'https://fitquestapp.herokuapp.com/api/users/check',
+        { email, password }
+      );
+      return data;
     } catch (err) {
       console.error(err);
     }
@@ -355,6 +367,7 @@ export const AuthProvider = ({ children }) => {
         updateUserItems,
         getUserAfterComplete,
         confirmUserEmail,
+        confirmUser,
       }}
     >
       {children}

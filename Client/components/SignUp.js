@@ -22,7 +22,25 @@ const SignUp = ({ navigation }) => {
   const { signUp, confirmUserEmail } = useContext(AuthContext);
 
   const isValid = async (email, password, firstName, lastName) => {
-    if ((!email, !password, !firstName, !lastName)) {
+    if (email) {
+      const validRegex =
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+      if (!email.match(validRegex)) {
+        setEmailErrorMessage('Please input a valid email');
+        return;
+      }
+    }
+    if (firstName) {
+      setFirstNameErrorMessage('');
+    }
+    if (lastName) {
+      setLastNameErrorMessage('');
+    }
+    if (password) {
+      setPasswordErrorMessage('');
+    }
+
+    if (!email || !password || !firstName || !lastName) {
       {
         if (!firstName) {
           setFirstNameErrorMessage('Please input first name');

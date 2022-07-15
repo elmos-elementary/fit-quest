@@ -15,7 +15,25 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
-  const { login } = useContext(AuthContext);
+  const { login, confirmUser } = useContext(AuthContext);
+
+  const isValid = async (email, password) => {
+    if (email === '' || password === '') {
+      if (email === '') {
+        setEmailErrorMessage('Please input email');
+      }
+      if (password === '') {
+        setPasswordErrorMessage('Please input Password');
+      }
+    } else {
+      if ((await confirmUser(email.toLowerCase(), password)) === 'User found') {
+        login(email.toLowerCase(), password);
+      } else {
+        setEmailErrorMessage('Incorrect email/password');
+        setPasswordErrorMessage('Incorrect email/password');
+      }
+    }
+  };
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'center' }}>
@@ -57,7 +75,7 @@ const Login = ({ navigation }) => {
               secureTextEntry={true}
               onChangeText={(nextValue) => setPassword(nextValue)}
             />
-            <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
+            <Text style={styles.errorMessage}>{passwordErrorMessage}</Text>
           </View>
 
           <View>
@@ -78,16 +96,7 @@ const Login = ({ navigation }) => {
                 title="Log In"
                 color="white"
                 onPress={() => {
-                  if (email === '' || password === '') {
-                    if (email === '') {
-                      setEmailErrorMessage('Please input email');
-                    }
-                    if (password === '') {
-                      setPasswordErrorMessage('Please input Password');
-                    }
-                  } else {
-                    login(email.toLowerCase(), password);
-                  }
+                  isValid(email, password);
                 }}
               />
             </View>
