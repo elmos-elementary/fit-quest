@@ -396,90 +396,41 @@ const Character = ({ navigation }) => {
                 </View>
               )}
             </View>
-            {showInventory ? (
-              <View style={styles.allItemsContainer}>
-                {userItems.length < 1 ? (
-                  <View>
-                    <Text>
-                      You have no items. Go workout for a chance to earn them!
+            <View style={styles.singleItemContainer}>
+              {ringItem ? (
+                <View>
+                  <View style={styles.emptyInventorySlot}>
+                    <Text
+                      style={styles.emptyInventoryText}
+                      onPress={() => {
+                        setRingItem(null);
+                      }}
+                    >
+                      {ringItem.name}
                     </Text>
                   </View>
-                ) : (
-                  userItems.map((item) => {
-                    if (
-                      headItem === item ||
-                      chestItem === item ||
-                      legItem === item ||
-                      ringItem === item ||
-                      weaponItem === item
-                    ) {
-                      return <View key={item.id}></View>;
-                    } else {
-                      return (
-                        <View key={item.id} style={styles.singleItemContainer}>
-                          <View style={styles.emptyInventorySlot}>
-                            <Text
-                              style={styles.emptyInventoryText}
-                              onPress={() => {
-                                if (item.type === 'head') {
-                                  setHeadItem(item);
-                                } else if (item.type === 'chest') {
-                                  setChestItem(item);
-                                } else if (item.type === 'leg') {
-                                  setLegItem(item);
-                                } else if (item.type === 'ring') {
-                                  setRingItem(item);
-                                } else if (item.type === 'weapon') {
-                                  setWeaponItem(item);
-                                }
-                                updateUserItems(user.id, item.id);
-                              }}
-                            >
-                              {item.name}
-                            </Text>
-                          </View>
-                          <View style={styles.intentoryTextTitleContainer}>
-                            <Text>{item.type}</Text>
-                          </View>
-                        </View>
-                      );
-                    }
-                  })
-                )}
-              </View>
-            ) : (
-              <View></View>
-            )}
-            {!showInventory ? (
-              <View style={styles.buttonContainer}>
-                <View style={styles.button}>
-                  <Button
-                    color="white"
-                    title="Inventory"
-                    onPress={() => {
-                      showInventoryFunc();
-                    }}
-                  />
+                  <View style={styles.intentoryTextTitleContainer}>
+                    <Text>Ring</Text>
+                  </View>
                 </View>
-              </View>
-            ) : (
-              <View>
-                <View style={styles.emptyInventorySlot}>
-                  <Text
-                    style={styles.emptyInventoryText}
-                    onPress={() => {
-                      showInventoryFunc();
-                    }}
-                  >
-                    Equip
-                  </Text>
+              ) : (
+                <View>
+                  <View style={styles.emptyInventorySlot}>
+                    <Text
+                      style={styles.emptyInventoryText}
+                      onPress={() => {
+                        showInventoryFunc();
+                      }}
+                    >
+                      Equip
+                    </Text>
+                  </View>
+                  <View style={styles.intentoryTextTitleContainer}>
+                    <Text>Ring</Text>
+                  </View>
                 </View>
-                <View style={styles.intentoryTextTitleContainer}>
-                  <Text>Ring</Text>
-                </View>
-              </View>
-            )}
-
+              )}
+            </View>
             <View style={styles.singleItemContainer}>
               {weaponItem ? (
                 <View>
