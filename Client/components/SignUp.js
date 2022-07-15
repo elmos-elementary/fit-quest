@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Button,
   TextInput,
+  ScrollView,
 } from 'react-native';
 
 const SignUp = ({ navigation }) => {
@@ -18,7 +19,50 @@ const SignUp = ({ navigation }) => {
   const [lastNameErrorMessage, setLastNameErrorMessage] = useState('');
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
-  const { signUp } = useContext(AuthContext);
+  const { signUp, confirmUserEmail } = useContext(AuthContext);
+
+  const isValid = async (email, password, firstName, lastName) => {
+    if (email.toLowerCase()) {
+      const validRegex =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!email.match(validRegex)) {
+        setEmailErrorMessage('Please input a valid email');
+        return;
+      }
+    }
+    if (firstName) {
+      setFirstNameErrorMessage('');
+    }
+    if (lastName) {
+      setLastNameErrorMessage('');
+    }
+    if (password) {
+      setPasswordErrorMessage('');
+    }
+
+    if (!email || !password || !firstName || !lastName) {
+      {
+        if (!firstName) {
+          setFirstNameErrorMessage('Please input first name');
+        }
+        if (!lastName) {
+          setLastNameErrorMessage('Please input last name');
+        }
+        if (!email) {
+          setEmailErrorMessage('Please input email');
+        }
+        if (!password) {
+          setPasswordErrorMessage('Please input Password');
+        }
+      }
+    } else {
+      if ((await confirmUserEmail(email.toLowerCase())) === 'No user found') {
+        signUp(email.toLowerCase(), password, firstName, lastName);
+      } else {
+        setEmailErrorMessage('Email already in use');
+      }
+    }
+  };
 
   return (
     <Layout style={{ flex: 1, justifyContent: 'center' }}>
@@ -28,90 +72,71 @@ const SignUp = ({ navigation }) => {
         imageStyle={{ opacity: 0.9 }}
         style={styles.backgroundImage}
       >
-        <View style={styles.headerContainer}>
-          <Text style={styles.text1}>Create new Account</Text>
-          <Text category="s1">Already Registered?</Text>
-          <Text
-            category="s1"
-            status="primary"
-            onPress={() => {
-              navigation.navigate('Login');
-            }}
-          >
-            log in here.
-          </Text>
-        </View>
-
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputHeader}>FIRST NAME</Text>
-
-          <TextInput
-            placeholder="John"
-            style={styles.textInput}
-            value={firstName}
-            onChangeText={(nextValue) => setFirstName(nextValue)}
-          />
-          <Text style={styles.errorMessage}>{firstNameErrorMessage}</Text>
-          <Text style={styles.inputHeader}>LAST NAME</Text>
-          <TextInput
-            placeholder="Doe"
-            style={styles.textInput}
-            value={lastName}
-            onChangeText={(nextValue) => setLastName(nextValue)}
-          />
-          <Text style={styles.errorMessage}>{lastNameErrorMessage}</Text>
-          <Text style={styles.inputHeader}>EMAIL</Text>
-          <TextInput
-            placeholder="hello@reallygreatsite.com"
-            style={styles.textInput}
-            value={email}
-            onChangeText={(nextValue) => setEmail(nextValue)}
-          />
-          <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
-          <Text style={styles.inputHeader}>PASSWORD</Text>
-
-          <TextInput
-            placeholder="****"
-            style={styles.textInput}
-            value={password}
-            secureTextEntry={true}
-            onChangeText={(nextValue) => setPassword(nextValue)}
-          />
-
-          <Text style={styles.errorMessage}>{passwordErrorMessage}</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button
-              title="sign up"
-              color="white"
+        <ScrollView>
+          <View style={styles.headerContainer}>
+            <Text style={styles.text1}>Create new Account</Text>
+            <Text category="s1">Already Registered?</Text>
+            <Text
+              category="s1"
+              status="primary"
               onPress={() => {
-                if (
-                  firstName === '' ||
-                  lastName === '' ||
-                  email === '' ||
-                  password === ''
-                ) {
-                  if (firstName === '') {
-                    setFirstNameErrorMessage('Please input first name');
-                  }
-                  if (lastName === '') {
-                    setLastNameErrorMessage('Please input last name');
-                  }
-                  if (email === '') {
-                    setEmailErrorMessage('Please input email');
-                  }
-                  if (password === '') {
-                    setPasswordErrorMessage('Please input Password');
-                  }
-                } else {
-                  signUp(email.toLowerCase(), password, firstName, lastName);
-                  navigation.navigate('Login');
-                }
+                navigation.navigate('Login');
               }}
-            />
+            >
+              log in here.
+            </Text>
           </View>
-        </View>
+
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputHeader}>FIRST NAME</Text>
+
+            <TextInput
+              placeholder="John"
+              style={styles.textInput}
+              value={firstName}
+              onChangeText={(nextValue) => setFirstName(nextValue)}
+            />
+            <Text style={styles.errorMessage}>{firstNameErrorMessage}</Text>
+            <Text style={styles.inputHeader}>LAST NAME</Text>
+            <TextInput
+              placeholder="Doe"
+              style={styles.textInput}
+              value={lastName}
+              onChangeText={(nextValue) => setLastName(nextValue)}
+            />
+            <Text style={styles.errorMessage}>{lastNameErrorMessage}</Text>
+            <Text style={styles.inputHeader}>EMAIL</Text>
+            <TextInput
+              placeholder="hello@reallygreatsite.com"
+              style={styles.textInput}
+              value={email}
+              onChangeText={(nextValue) => setEmail(nextValue)}
+            />
+            <Text style={styles.errorMessage}>{emailErrorMessage}</Text>
+            <Text style={styles.inputHeader}>PASSWORD</Text>
+
+            <TextInput
+              placeholder="****"
+              style={styles.textInput}
+              value={password}
+              secureTextEntry={true}
+              onChangeText={(nextValue) => setPassword(nextValue)}
+            />
+
+            <Text style={styles.errorMessage}>{passwordErrorMessage}</Text>
+          </View>
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button
+                title="sign up"
+                color="white"
+                onPress={() => {
+                  isValid(email, password, firstName, lastName);
+                }}
+              />
+            </View>
+          </View>
+        </ScrollView>
       </ImageBackground>
     </Layout>
   );

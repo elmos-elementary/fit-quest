@@ -9,7 +9,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
-import { ProgressBar, MD3Colors } from 'react-native-paper';
 import * as Font from 'expo-font';
 import { Bar } from 'react-native-progress';
 
@@ -69,8 +68,8 @@ const UserHome = ({ navigation }) => {
           >
             <View style={styles.image}>
               <Image
-                source={require('../../src/assets/userImage.png')}
-                style={{ width: 250, height: 300 }}
+                source={{ uri: user.image }}
+                style={{ width: 300, height: 350 }}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -157,17 +156,18 @@ export const styles = StyleSheet.create({
   image: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 20,
+    marginTop: 60,
   },
 
   inputContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    margin: 40,
+    margin: 60,
+    marginTop: 10,
     backgroundColor: 'white',
     borderRadius: 15,
     opacity: 0.8,
-    padding: 30,
+    padding: 20,
   },
 
   button: {
