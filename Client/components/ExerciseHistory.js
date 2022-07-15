@@ -1,14 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  ImageBackground,
-  ScrollView,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 
 const ExerciseHistory = ({ exerciseId }) => {
@@ -19,7 +10,7 @@ const ExerciseHistory = ({ exerciseId }) => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {exerciseHistory.map((exercise, i) => {
         return (
           <View key={i}>
@@ -61,7 +52,7 @@ const ExerciseHistory = ({ exerciseId }) => {
           </View>
         );
       })}
-    </ScrollView>
+    </View>
   );
 };
 
