@@ -36,9 +36,8 @@ const AllRoutines = ({ navigation }) => {
             {routine ? (
               routine.map((routine) => {
                 return (
-                  <View style={styles.routineContainer}>
+                  <View key={routine.id} style={styles.routineContainer}>
                     <TouchableOpacity
-                      key={routine.id}
                       style={styles.routine}
                       onPress={() => {
                         onTouch(routine.id);
