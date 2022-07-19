@@ -370,6 +370,7 @@ const Character = ({ navigation }) => {
                 <View style={styles.topContainerModal}>
                   {/* Currently Equiped */}
                   <View style={styles.allItemsContainerModal}>
+                    <Text style={styles.modalText}>Currently Equiped</Text>
                     <View style={styles.singleItemContainer}>
                       {headItem ? (
                         <View>
@@ -570,6 +571,9 @@ const Character = ({ navigation }) => {
 
                   {/* Currently Selected Item */}
                   <View style={styles.allItemsContainerModal}>
+                    <Text style={styles.modalText}>
+                      Currently Selected Item
+                    </Text>
                     {selectedItem !== -1 ? (
                       <View>
                         <View style={styles.emptyInventorySlot}>
@@ -637,6 +641,7 @@ const Character = ({ navigation }) => {
                 {/* Full Inventory */}
                 <ScrollView>
                   <View style={styles.allItemsContainer}>
+                    <Text style={styles.modalText}>Inventory</Text>
                     {userItems.length < 1 ? (
                       <View style={styles.modalContainer}>
                         <Text>
@@ -702,76 +707,6 @@ const Character = ({ navigation }) => {
               </ImageBackground>
             </View>
           </Modal>
-
-          {/* {showInventory ? (
-              <View style={styles.allItemsContainer}>
-                {userItems.length < 1 ? (
-                  <View>
-                    <Text>
-                      You have no items. Go workout for a chance to earn them!
-                    </Text>
-                  </View>
-                ) : (
-                  userItems.map((item) => {
-                    if (
-                      headItem === item ||
-                      chestItem === item ||
-                      legItem === item ||
-                      ringItem === item ||
-                      weaponItem === item
-                    ) {
-                      return <View key={item.id}></View>;
-                    } else {
-                      return (
-                        <View key={item.id} style={styles.singleItemContainer}>
-                          <View style={styles.emptyInventorySlot}>
-                            <Text
-                              style={styles.emptyInventoryText}
-                              onPress={() => {
-                                if (item.type === 'head') {
-                                  setHeadItem(item);
-                                } else if (item.type === 'chest') {
-                                  setChestItem(item);
-                                } else if (item.type === 'leg') {
-                                  setLegItem(item);
-                                } else if (item.type === 'ring') {
-                                  setRingItem(item);
-                                } else if (item.type === 'weapon') {
-                                  setWeaponItem(item);
-                                }
-                                updateUserItems(user.id, item.id);
-                              }}
-                            >
-                              {item.name}
-                            </Text>
-                          </View>
-                          <View style={styles.intentoryTextTitleContainer}>
-                            <Text>{item.type}</Text>
-                          </View>
-                        </View>
-                      );
-                    }
-                  })
-                )}
-              </View>
-            ) : (
-              <View></View>
-            )}
-            {!showInventory ? (
-              <View style={styles.buttonContainer}>
-                <View style={styles.button}>
-                  <Button
-                    color="white"
-                    title="Inventory"
-                    onPress={() => {
-                      showInventoryFunc();
-                    }}
-                  />
-                </View>
-              </View>
-            ) : (
-              <View></View>
-            )} */}
         </View>
       </ImageBackground>
     </View>
@@ -924,6 +859,13 @@ export const styles = StyleSheet.create({
   },
   topContainerModal: {
     flexDirection: 'row',
+  },
+  modalText: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 14,
+    fontFamily: Font.helvetica,
+    fontWeight: 'bold'
   },
 });
 
